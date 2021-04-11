@@ -31,8 +31,7 @@ const ExchangeItem = styled.div`
 const GridWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%
-  align-items: center;
+  width: 100%;
   justify-content: space-between;
   gap: 0.8rem 0rem;
   margin-top: 1rem;
@@ -44,7 +43,7 @@ const ExchangeInput = styled.input`
   text-align: ${props => props.isBuyButton?'right':'center'};
   padding: 0rem .2rem;
   border: .1rem solid ${props => props.theme.colors.bgNormal};
-  border-radis: ${adjustedRadius};
+  border-radius: ${adjustedRadius};
   color: ${props => props.isBuyButton? props.theme.colors.txtPrimary:props.theme.colors.txtSecondary};
   font-size: .8rem;
   box-sizing: border-box;
@@ -98,7 +97,7 @@ const MaxLabel = styled.span`
 
 const SwapHeader = styled.header`
   font-size: 0.8rem;
-  color: ${props => props.theme.colors.txtPrimary}};
+  color: ${props => props.theme.colors.txtPrimary};
   margin: 1rem 0rem;
   height: 3rem;
   line-height: 3rem;
