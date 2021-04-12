@@ -48,6 +48,9 @@ const VerticalLine = styled.div`
   width: 0.15rem;
   background-color: ${(props) => props.theme.colors.bgHighlightBorder};
   height: 90%;
+  @media only screen and (max-width: ${responsive.smartphone}) {
+    display: none;
+  }
 `
 
 const HeaderWrapper = styled.div`

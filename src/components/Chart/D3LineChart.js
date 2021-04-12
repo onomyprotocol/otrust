@@ -66,8 +66,8 @@ console.log('w', width, height)
       .curve(curveCardinal)
 
     const tickSize = (height) => {
-      const main = height>=324? "15":"12";
-      const minor = height>= 324? "10": "8";
+      const main = height>=324? "16":"12";
+      const minor = height>= 324? "11": "8";
       return {main, minor};
     }
 
@@ -173,7 +173,7 @@ console.log('w', width, height)
     // Here,  we use a base line with same color as the background to cover the x-axis horizontal line, but leave the end tick visible
     const xAxisLine = svgContent.append("line")
       .attr("stroke", `${theme.colors.bgDarken}`)
-      .attr("stroke-width", "0.1rem")
+      .attr("stroke-width", "0.11rem")
       .attr("x1", margin.left)
       .attr("y1", height-margin.bottom+0.4)
       .attr("x2", width-margin.right)

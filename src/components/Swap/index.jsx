@@ -19,6 +19,11 @@ const ExchangeItem = styled.div`
   @media screen and (max-width: ${responsive.laptop}) {
     padding: 0 24px;
   }
+
+  @media screen and (max-width: ${responsive.smartphone}) {
+    padding: 0 6px;
+  }
+
   > strong {
     margin-bottom: 12px;
     font-size: 16px;
