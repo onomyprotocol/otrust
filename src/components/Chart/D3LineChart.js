@@ -18,7 +18,7 @@ import { useResizeObserver } from "./utils";
 const StyledSVG = styled.svg`
     display: block;
     width: 100%;
-    height: 90%;
+    height: 100%;
     overflow: visible;
 `
 
@@ -40,7 +40,7 @@ function LineChart({ data, areaData, labelData: { priceAvg }, id = "bondingChart
     const svgContent = svg.select(".content");
     const { width, height } =
       dimensions || wrapperRef.current.getBoundingClientRect();
-
+console.log('w', width, height)
     function xValue(d) { return d.x; }      // accessors
     function yValue(d) { return d.y; }
 
@@ -52,7 +52,7 @@ function LineChart({ data, areaData, labelData: { priceAvg }, id = "bondingChart
 
     const yScale = scaleLinear()
       .domain(extent(data, yValue))
-      .range([height - margin.top - margin.bottom, 0]);
+      .range([height - margin.bottom, margin.top]);
 
     const lineGenerator = line()
       .x(d => xScale(d.x))
@@ -65,6 +65,11 @@ function LineChart({ data, areaData, labelData: { priceAvg }, id = "bondingChart
       .y1(d => yScale(d.y))
       .curve(curveCardinal)
 
+    const tickSize = (height) => {
+      const main = height>=324? "15":"12";
+      const minor = height>= 324? "10": "8";
+      return {main, minor};
+    }
 
     // base line
     svgContent
@@ -123,13 +128,13 @@ function LineChart({ data, areaData, labelData: { priceAvg }, id = "bondingChart
 
     // X Axis main
     const xAxis = axisBottom(xScale)
-      .tickSize("15")
+      .tickSize(tickSize(height).main)
       .ticks(5)
       .tickFormat(d => d / 1000000 + "m");
 
     const xComplex = svg
       .select(".x-axis")
-      .attr("transform", `translate(0, ${height - margin.bottom - margin.top})`)
+      .attr("transform", `translate(0, ${height - margin.bottom })`)
       .style('color', `${theme.colors.bgHighlight}`)
       .attr("stroke-width", "0.10rem")
       .call(xAxis);
@@ -147,13 +152,13 @@ function LineChart({ data, areaData, labelData: { priceAvg }, id = "bondingChart
 
     //x Axis minor
     const xAxis1 = axisBottom(xScale)
-      .tickSize("10")
+      .tickSize(tickSize(height).minor)
       .ticks(25)
       .tickFormat([]);
 
     const xComplex1 = svg
       .select(".x-axis1")
-      .attr("transform", `translate(0, ${height - margin.bottom - margin.top})`)
+      .attr("transform", `translate(0, ${height - margin.bottom})`)
       .style('color', `${theme.colors.bgHighlight}`)
       .call(xAxis1);
 
@@ -166,13 +171,13 @@ function LineChart({ data, areaData, labelData: { priceAvg }, id = "bondingChart
     // the end tick of x-axis comes from the x-axis, not the ticks
     // To hide the x-axis horizontal line, but still make the end tick show up, we cannot just remove or hide the x-axis
     // Here,  we use a base line with same color as the background to cover the x-axis horizontal line, but leave the end tick visible
-    svgContent.append("line")
+    const xAxisLine = svgContent.append("line")
       .attr("stroke", `${theme.colors.bgDarken}`)
-      .attr("stroke-width", "0.12rem")
+      .attr("stroke-width", "0.1rem")
       .attr("x1", margin.left)
-      .attr("y1", yScale(0) + 0.5)
-      .attr("x2", width - margin.right)
-      .attr("y2", yScale(0) + 0.5);
+      .attr("y1", height-margin.bottom+0.4)
+      .attr("x2", width-margin.right)
+      .attr("y2", height-margin.bottom+0.4);
 
 
     // y Axis and gridlines
@@ -189,11 +194,15 @@ function LineChart({ data, areaData, labelData: { priceAvg }, id = "bondingChart
 
     yComplex.selectAll(".tick line")
     .style("color", `${theme.colors.bgNormal}`)
+   
 
+    return () => {
+      xAxisLine.remove();
+    }
   }, [priceAvg, areaData, data, dimensions, theme]);
 
   return (
-    <div ref={wrapperRef} style={{ marginTop: "1rem", height: "90%" }}>
+    <div ref={wrapperRef} style={{ height: "100%", height: "90%"}}>
       <StyledSVG ref={svgRef}>
         <defs>
           <clipPath id={id}>
