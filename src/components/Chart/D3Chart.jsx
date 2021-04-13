@@ -4,23 +4,13 @@ import styled from "styled-components";
 import { useQuery } from "@apollo/client";
 import { gql } from "apollo-boost";
 
-import { NOMsupplyETH, priceAtSupply, supplyAtPrice } from "utils/bonding";
+import { priceAtSupply } from "utils/bonding";
 import { useSwap } from "context/SwapContext";
 import { ChainContext } from 'context/chain/ChainContext';
-import {
-  leftHeaderDefault,
-  historicalHeaderDefault,
-  candelHeaderDefault,
-} from "./defaultChartData";
 import { responsive } from "theme/constants";
-
+import D3ChartComplex from './D3ChartComplex';
 import { Panel } from "components/UI";
 import Swap from "components/Swap";
-import LineChart from "./D3LineChart";
-import HistoricalChart from "./D3HistoricalChart";
-import CandelChart from "./D3CandelChart";
-import MenuButtons from '../MenuButtons';
-
 
 const ContentLayout = styled.div`
   display: grid;
@@ -29,13 +19,11 @@ const ContentLayout = styled.div`
     grid-template-rows: 400px auto;
   }
 `
-
 const ChartWrapper = styled.div`
   padding: 20px;
   background-color: ${(props) => props.theme.colors.bgDarken};
   border-radius: 4px;
 `
-
 const ExchangeWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
@@ -43,7 +31,6 @@ const ExchangeWrapper = styled.div`
     justify-content: center;
     padding: 24px 0;
 `
-
 const VerticalLine = styled.div`
   width: 0.15rem;
   background-color: ${(props) => props.theme.colors.bgHighlightBorder};
@@ -51,12 +38,6 @@ const VerticalLine = styled.div`
   @media only screen and (max-width: ${responsive.smartphone}) {
     display: none;
   }
-`
-
-const HeaderWrapper = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
 `
 
 function supplyToArray(supBegin, supEnd) {
@@ -71,13 +52,6 @@ function supplyToArray(supBegin, supEnd) {
   }
 
   return dataArray;
-}
-
-function labelArray(supBegin, supEnd) {
-  const paymentETH = NOMsupplyETH(supEnd, supBegin);
-  const priceAvg = paymentETH / (supEnd - supBegin);
-  const supAvg = supplyAtPrice(priceAvg);
-  return { paymentETH, supAvg, priceAvg };
 }
 
 const TRANSACTIONS_QUERY = gql`
@@ -96,13 +70,12 @@ const TRANSACTIONS_QUERY = gql`
 `
 
 
-export default function D3Chart(onButtonChange) {
+export default function D3Chart() {
  
   const { swapSupply } = useSwap();
   const [data, setData] = useState(supplyToArray(0, 100000000));
   const [areaData, setAreaData] = useState(supplyToArray(0, 100000000));
-  const [labelData, setLabelData] = useState("");
-
+ 
   useEffect(() => {
     if (swapSupply[1]) {
       var digitsUpper = Math.floor(Math.log10(swapSupply[1]));
@@ -112,7 +85,6 @@ export default function D3Chart(onButtonChange) {
       const lowerBound = 0;
       setData(supplyToArray(lowerBound, upperBound));
       setAreaData(supplyToArray(swapSupply[0], swapSupply[1]));
-      setLabelData(labelArray(swapSupply[0], swapSupply[1]));
     }
   }, [swapSupply]);
 
@@ -121,45 +93,11 @@ export default function D3Chart(onButtonChange) {
   const txQuery = useQuery(TRANSACTIONS_QUERY)
   // Here is console.log of the historical tx data
   useEffect(() => {
-    console.log("Data: ", txQuery.data)
+    //console.log("Data: ", txQuery.data)
   }, [txQuery.data])
-
-
-  //Menu Header Buttons (Left Header and right Header)
-  const [leftHeader, setLeftHeader] = useState(leftHeaderDefault)
  
-  const [historicalHeader, setHistoricalHeader] = useState(historicalHeaderDefault)
 
-  const [candelHeader, setCandelHeader] = useState(candelHeaderDefault)
-
-  const handleLeftHeader = (leftHeader) => {
-    setLeftHeader(leftHeader)
-  }
-
-  const handleHistoricalHeader = (headerbuttons) => {
-    console.log('historical', headerbuttons)
-    setHistoricalHeader(headerbuttons)
-  }
-
-  const handleCandelHeader = (headerbuttons) => {
-    console.log('candel', headerbuttons)
-    setCandelHeader(headerbuttons)
-  }
-
-  const MenuHeader = () => {
-    return (
-      <HeaderWrapper>
-        <MenuButtons onButtonChange={handleLeftHeader} menuButtons={leftHeader} />
-
-        {leftHeader.data[1] && leftHeader.data[1].status && <MenuButtons onButtonChange={handleHistoricalHeader} menuButtons={historicalHeader} />}
-
-        {leftHeader.data[2] && leftHeader.data[2].status && <MenuButtons onButtonChange={handleCandelHeader} menuButtons={candelHeader} />}
-      </HeaderWrapper>
-    )    
-  }
-
-
-  //BuySellComponents
+  //BuySellComponents for NOM trading
   const [isBuyButton, setIsBuyButton] = useState(true)
   const { theme } = useContext(ChainContext);
  
@@ -169,24 +107,29 @@ export default function D3Chart(onButtonChange) {
   const handleBtnClick = (value) => {
     value === 'ETH' ? setIsBuyButton(true) : setIsBuyButton(false)
   }
-
-
+ 
+  
   return (
     <Panel>
       <ContentLayout>
         <ChartWrapper>
-          <MenuHeader />
-          {leftHeader.data[0] && leftHeader.data[0].status && <LineChart data={data} areaData={areaData} labelData={labelData} />}
-
-          {leftHeader.data[1] && leftHeader.data[1].status && <HistoricalChart historicalHeader={historicalHeader} />}
-
-          {leftHeader.data[2] && leftHeader.data[2].status && <CandelChart candelHeader={candelHeader} />}
+          <D3ChartComplex 
+          data={data}
+          areaData={areaData}
+          />
         </ChartWrapper>
 
         <ExchangeWrapper >
-          <Swap colorGradient={btnBuyGradient} text='Buy NOM' isBuyButton={isBuyButton} onInputChange={handleBtnClick} />
+          <Swap 
+           colorGradient={btnBuyGradient} text='Buy NOM' 
+           isBuyButton={isBuyButton} 
+           onInputChange={handleBtnClick} 
+          />
           <VerticalLine />
-          <Swap colorGradient={btnSellGradient} text='Sell NOM' isBuyButton={!isBuyButton} onInputChange={handleBtnClick} />
+          <Swap 
+           colorGradient={btnSellGradient} text='Sell NOM' 
+           isBuyButton={!isBuyButton} onInputChange={handleBtnClick} 
+          />
         </ExchangeWrapper>
       </ContentLayout>
     </Panel>
