@@ -25,38 +25,65 @@ const StyledSVG = styled.svg`
 /**
  * Component that renders a ZoomableLineChart
  */
-function LineChart({ data, areaData, labelData: { priceAvg }, id = "bondingChart" }) {
+function LineChart({ data, areaData, id = "bondingChart" }) {
   const svgRef = useRef();
   const wrapperRef = useRef();
   const dimensions = useResizeObserver(wrapperRef);
-
   const { theme } = useContext(ChainContext);
+  
+
+  const tickSize = (height) => {
+    const main = height>=324? "16":"12";
+    const minor = height>= 324? "11": "8";
+    return {main, minor};
+  }
+
+ useEffect(()=> {
+  const svg = select(svgRef.current);
+  const svgContent = svg.select(".content");
+  const linearGradient = svgContent
+  .append("linearGradient")
+  .attr("id", "linear-gradient")
+  .attr("gradientUnits", "userSpaceOnUse")
+  .attr("x1", "0%")
+  .attr("y1", "100%")
+  .attr("x2", "0%")
+  .attr("y2", "0%")
+
+  linearGradient
+    .append("stop")
+    .attr("offset", "0%")
+    .attr("stop-color", `${theme.colors.lnHighlight}`)
+    .attr("stop-opacity", 0)
+
+  linearGradient
+    .append("stop")
+    .attr("offset", "100%")
+    .attr("stop-color", `${theme.colors.lnHighlight}`)
+    .attr("stop-opacity", 0.5)
+ },[theme])
 
 
   // charts and xAxis and yAxis
-  useEffect(() => {
-    const margin = { top: 20, right: 60, bottom: 40, left: 20 }
+  useEffect(() => { 
     const svg = select(svgRef.current);
     const svgContent = svg.select(".content");
+    const margin = { top: 20, right: 60, bottom: 40, left: 20 }
     const { width, height } =
       dimensions || wrapperRef.current.getBoundingClientRect();
-console.log('w', width, height)
-    function xValue(d) { return d.x; }      // accessors
-    function yValue(d) { return d.y; }
-
 
     // scales + line/area generators
     const xScale = scaleLinear()
-      .domain(extent(data, xValue))
+      .domain(extent(data, d => d.x))
       .range([margin.left, width - margin.right]);
 
     const yScale = scaleLinear()
-      .domain(extent(data, yValue))
+      .domain(extent(data, d => d.y))
       .range([height - margin.bottom, margin.top]);
 
     const lineGenerator = line()
       .x(d => xScale(d.x))
-      .y(d => yScale(d.y)) // apply the y scale to the y data
+      .y(d => yScale(d.y)) 
       .curve(curveCardinal);
 
     const areaGenerator = area()
@@ -65,11 +92,6 @@ console.log('w', width, height)
       .y1(d => yScale(d.y))
       .curve(curveCardinal)
 
-    const tickSize = (height) => {
-      const main = height>=324? "16":"12";
-      const minor = height>= 324? "11": "8";
-      return {main, minor};
-    }
 
     // base line
     svgContent
@@ -83,28 +105,7 @@ console.log('w', width, height)
       .attr("d", lineGenerator);
 
 
-    //highlited line and highlited area with linearGradient
-    const linearGradient = svgContent
-      .append("linearGradient")
-      .attr("id", "linear-gradient")
-      .attr("gradientUnits", "userSpaceOnUse")
-      .attr("x1", "0%")
-      .attr("y1", "100%")
-      .attr("x2", "0%")
-      .attr("y2", "0%");
-
-    linearGradient
-      .append("stop")
-      .attr("offset", "0%")
-      .attr("stop-color", `${theme.colors.lnHighlight}`)
-      .attr("stop-opacity", 0)
-
-    linearGradient
-      .append("stop")
-      .attr("offset", "100%")
-      .attr("stop-color", `${theme.colors.lnHighlight}`)
-      .attr("stop-opacity", 0.5);
-
+    //highlited bonding curve area with linearGradient
     svgContent
       .selectAll(".selectedArea")
       .data([areaData])
@@ -115,6 +116,8 @@ console.log('w', width, height)
       .attr("fill", "url(#linear-gradient")
       .attr("d", areaGenerator)
 
+
+    //highlighted bonding curve line
     svgContent
       .selectAll(".selectedLine")
       .data([areaData])
@@ -183,6 +186,7 @@ console.log('w', width, height)
     // y Axis and gridlines
     const gridlinesSize = width - margin.right - margin.left;
     const yAxis = axisRight(yScale).tickSizeInner(-gridlinesSize);
+
     const yComplex = svg
       .select(".y-axis")
       .attr("transform",  `translate(${width - margin.right}, 0)`)
@@ -194,15 +198,15 @@ console.log('w', width, height)
 
     yComplex.selectAll(".tick line")
     .style("color", `${theme.colors.bgNormal}`)
-   
 
     return () => {
       xAxisLine.remove();
     }
-  }, [priceAvg, areaData, data, dimensions, theme]);
+  }, [areaData, data, dimensions, theme]);
 
+  
   return (
-    <div ref={wrapperRef} style={{ height: "100%", height: "90%"}}>
+    <div ref={wrapperRef} style={{ height: "90%"}}>
       <StyledSVG ref={svgRef}>
         <defs>
           <clipPath id={id}>
