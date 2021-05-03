@@ -43,6 +43,7 @@ function SwapProvider({ children }) {
             switch (true) {
                 case swapBuyAmount && parseFloat(swapBuyAmount) && parseFloat(swapBuyAmount).toString() === swapBuyAmount:
                     {
+
                         const amountNOMRaw = await bondContract.buyQuoteETH(parseEther(swapBuyAmount)) 
                         const amountNOM = parseFloat(formatEther(amountNOMRaw))
                         const supplyTop = supplyNOM + amountNOM
@@ -52,14 +53,18 @@ function SwapProvider({ children }) {
                     }
                     break
                 case swapSellAmount && parseFloat(swapSellAmount) && parseFloat(swapSellAmount).toString() === swapSellAmount:
-                    {
+                    
+                    if (swapSellAmount < supplyNOM) {
                         const amountETHRaw = await bondContract.sellQuoteNOM(parseEther(swapSellAmount));
                         const amountETH = parseFloat(formatEther(amountETHRaw))
                         const supplyBot = supplyNOM - swapSellAmount
 
                         setSwapSellResult(amountETH)
                         setSwapSupply([supplyBot, supplyNOM])
+                    } else {
+                        setSwapSellResult("Too much NOM")
                     }
+                    
                     break
                 default:
                     {
