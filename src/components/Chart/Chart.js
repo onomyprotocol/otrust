@@ -7,8 +7,8 @@ import BondLineChart from "components/Chart/BondLineChart";
 import HistoricalChart from "components/Chart/D3HistoricalChart";
 import CandelChart from "components/Chart/D3CandelChart";
 
-// import { useQuery } from "@apollo/client";
-// import { gql } from "apollo-boost";
+import { useQuery } from "@apollo/client";
+import { gql } from "apollo-boost";
 
 import {
   historicalHeaderDefault,
@@ -52,7 +52,26 @@ const ChartTypeBtn = styled.button`
   }
 `;
 
+const TRANSACTIONS_QUERY = gql`
+    query transactions {
+        transactionRecords {
+            id
+            senderAddress
+            amountNOM
+            amountETH
+            price
+            supply
+            buyOrSell
+            slippage
+            timestamp
+        }
+    }
+`
+
 export default function Chart() {
+    // useQuery Apollo Client Hook to get data from TheGraph
+    const { error, loading, bondData } = useQuery(TRANSACTIONS_QUERY)
+
     const [chartType, setChartType] = useState("bondingCurve");
 
     const [historicalHeaderId] = useState("1");
@@ -68,6 +87,9 @@ export default function Chart() {
             <HistoricalChart
                 historicalHeader={historicalHeader}
                 historicalHeaderId={historicalHeaderId}
+                bondData={bondData}
+                error={error}
+                loading={loading}
             />
             );
         case "candleView":

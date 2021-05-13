@@ -73,7 +73,6 @@ function LineChart({ id = "bondingChart" }) {
       setAreaData(supplyToArray(swapSupply[0], swapSupply[1]));
       setLabelData(labelArray(swapSupply[0], swapSupply[1]));
     }
-    console.log("SwapSupply: ", swapSupply)
   }, [swapSupply]);
   
   // charts and xAxis and yAxis
@@ -230,9 +229,6 @@ function LineChart({ id = "bondingChart" }) {
 
     yComplex.selectAll(".tick line")
       .style("color", `${theme.colors.bgNormal}`)
-    // console.log("Area Data: ", areaData);
-    // console.log("Data: ", data)
-    // console.log("Label Data: ", labelData)
   }, [areaData, data, dimensions, labelData, theme]);
 
   return (

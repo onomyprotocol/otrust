@@ -112,21 +112,16 @@ const RightIcon = styled.img`
 export default function Landing({connectWallet}) {
   
   const onWalletClick = (wallet) => {
-    console.log("Wallet: ", wallet.title)
     Object.values(SUPPORTED_WALLETS).forEach(
       sWallet => {
-        console.log(sWallet)
         if (sWallet.name === wallet.title) {
-          console.log(sWallet.connector)
             if(sWallet.name === 'Injected') {
               if (typeof web3 !== 'undefined') {
-                console.log("Metamask Connector: ", sWallet.connector)
                 connectWallet(sWallet.connector)
               } else {
                 window.open('https://metamask.io/download.html');
               }
             } else {
-              console.log(sWallet.connector)
               connectWallet(sWallet.connector)
             }
         }

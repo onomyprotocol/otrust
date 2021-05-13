@@ -151,10 +151,6 @@ export default function D3Chart(onButtonChange) {
   const { swapSupply } = useSwap()
 
 
-  // useQuery Apollo Client Hook to get data from TheGraph
-  const txQuery = useQuery(TRANSACTIONS_QUERY)
-
-
   const [data, setData] = useState(supplyToArray(0, 100000000))
   const [areaData, setAreaData] = useState(supplyToArray(0, 100000000))
 
@@ -173,6 +169,7 @@ export default function D3Chart(onButtonChange) {
   const [isBuyButton, setIsBuyButton] = useState(true)
 
   useEffect(() => {
+    
     if (swapSupply[1]) {
       var digitsUpper = Math.floor(Math.log10(swapSupply[1]))
       // upperBound = 10**(digitsUpper + 1)
@@ -188,12 +185,6 @@ export default function D3Chart(onButtonChange) {
       setLabelData(labelArray(swapSupply[0], swapSupply[1]))
     }
   }, [swapSupply])
-
-
-  // Here is console.log of the historical tx data
-  useEffect(() => {
-    console.log("Data: ", txQuery.data)
-  }, [txQuery.data])
 
 
   //When clicking Header buttons
