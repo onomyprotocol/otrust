@@ -61,7 +61,7 @@ export default function TransactionCompletedModal({ type, amount, result, closeM
             </>
           ) : (
             <Modal.ExchangeApproveText>
-              Onomy blockchain confired access for selling.
+              Onomy blockchain confirmed access for selling.
             </Modal.ExchangeApproveText>
           )
         }

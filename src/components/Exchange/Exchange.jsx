@@ -1,5 +1,4 @@
 import React, { useCallback, useState, useEffect } from "react";
-import { MaxUint256 } from "@ethersproject/constants";
 import { parseEther } from "@ethersproject/units";
 import { useAsyncFn } from "lib/use-async-fn";
 import { chopFloat } from "utils/math"
@@ -21,7 +20,7 @@ import { Dimmer } from "components/UI/Dimmer";
 
 import { useSwap, useUpdateSwap } from "context/SwapContext";
 import { useChain, useUpdateChain } from "context/chain/ChainContext";
-import { useAllowance } from "context/useAllowance";
+// import { useAllowance } from "context/useAllowance";
 import TransactionCompletedModal from "components/Modals/TransactionCompletedModal";
 import OnomyConfirmationModal from "components/Modals/OnomyConfirmationModal";
 import TransactionFailedModal from "components/Modals/TransactionFailedModal";
@@ -30,7 +29,7 @@ import PendingModal from "components/Modals/PendingModal";
 export default function Exchange() {
   const { swapBuyAmount, swapBuyResult, swapSellAmount, swapSellResult, swapDenom } = useSwap();
   const { setSwapBuyAmount, setSwapBuyResult, setSwapSellAmount, setSwapSellResult, setSwapDenom } = useUpdateSwap();
-  const allowance = useAllowance();
+  // const allowance = useAllowance();
   const [confirmModal, setConfirmModal] = useState(false);
   const [approveModal, setApproveModal] = useState(false);
   const [completedModal, setCompletedModal] = useState('');
@@ -41,7 +40,7 @@ export default function Exchange() {
   const [failedModal, setFailedModal] = useState(null);
   
   const [pendingModal, setPendingModal] = useState(false);
-  const { bondContract, NOMcontract, ETHbalance, NOMbalance, pendingTx } = useChain();
+  const { bondContract, NOMallowance, NOMcontract, ETHbalance, NOMbalance, pendingTx } = useChain();
   const { setPendingTx } = useUpdateChain();
   
   const onBuyNOMTextChange = useCallback(
@@ -90,6 +89,7 @@ export default function Exchange() {
         setCompletedResult(denom === 'ETH' ? swapBuyResult : swapSellResult);
         setPendingModal(true);
         setSwapBuyAmount("");
+        setSwapSellAmount("");
       } catch (e) {
         // eslint-disable-next-line no-console
         console.error(e.code, e.message.message);
@@ -108,7 +108,8 @@ export default function Exchange() {
       setPendingTx,
       slippage,
       setCompletedAmount,
-      setCompletedResult
+      setCompletedResult,
+      setSwapSellAmount
     ]
   );
 
@@ -142,25 +143,31 @@ export default function Exchange() {
     setSwapDenom('NOM');
     setConfirmModal('NOM');
   }
-
-  const onApprove = async () => {
-    try {
-      setApproveModal(false);
-      setSwapDenom('APPROVE')
-      let tx = await NOMcontract.approve(
-        bondContract.address,
-        MaxUint256
-      );
-      setPendingModal(true);
-      setPendingTx(tx);
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      // console.error(e.code, e.message.message);
-      // alert(e.message)
-      setFailedModal(e.code + '\n' + e.message.slice(0,80) + '...')
-      // setSwapBuyAmount(swapBuyAmount);
+  
+  const onApprove = async (value) => {
+    if(value <= NOMbalance) {
+      try {
+        setApproveModal(false);
+        setPendingModal(true);
+        setSwapDenom('APPROVE')
+        let tx = await NOMcontract.increaseAllowance(
+          bondContract.address,
+          parseEther(value).toString()
+        );
+        setPendingTx(tx);
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        // console.error(e.code, e.message.message);
+        // alert(e.message)
+        setFailedModal(e.code + '\n' + e.message.slice(0,80) + '...')
+        // setSwapBuyAmount(swapBuyAmount);
+      }    
+    } else {
+      setFailedModal('NOM Balance too low')
     }
-  }
+  } 
+  
+  
 
   const [onSubmit, error] = useAsyncFn(submitTrans);
 
@@ -196,7 +203,7 @@ export default function Exchange() {
           <Dimmer>
             <OnomyConfirmationModal
               closeModal={() => setApproveModal(false)}
-              onConfirm={onApprove}
+              onConfirm={() => onApprove(swapSellAmount)}
             />
           </Dimmer>
       }
@@ -271,11 +278,11 @@ export default function Exchange() {
         </Receiving>
         <div>
           {
-            allowance && allowance.eq && !allowance.eq(0) ? (
-              <SellBtn onClick={onSell}>Sell NOM</SellBtn>
-            ) : (
-              <SellBtn onClick={() => setApproveModal(true)}>Approve</SellBtn>
-            )
+            NOMallowance > swapSellAmount && NOMbalance > swapSellAmount ? (
+              <SellBtn onClick={onSell}>Sell NOM</SellBtn>) : 
+                  NOMbalance > swapSellAmount ? (
+                    <SellBtn onClick={() => setApproveModal(true)}>Approve</SellBtn>
+                  ) : <SellBtn>Not enough NOM</SellBtn>
           }
         </div>
       </ExchangeItem>
@@ -284,32 +291,3 @@ export default function Exchange() {
     </ExchangeWrapper>
   );
 }
-
-/* <form onSubmit={onSubmit}>
-  <SwapHeader>Swap</SwapHeader>
-  <GridWrapper>
-    <LeftComponentWrapper>From:</LeftComponentWrapper>
-    {error ? error : null}
-    <StyledInput
-      type="text"
-      value={swapBuyAmount}
-      onChange={onTextChange}
-      onTextAreaKeyDown={onTextAreaKeyDown}
-      placeholder={isWorking ? "Confirming" : "Enter amount"}
-    />
-    <Dropdown denom={swapDenom} setDenom={setSwapDenom} />
-    <LeftComponentWrapper>To:</LeftComponentWrapper>
-    <MiddleComponentWrapper>
-      {swapSellAmount
-        ? parseFloat(swapSellAmount).toPrecision(10)
-        : null}
-    </MiddleComponentWrapper>
-    <RightComponentWrapper>
-      {swapDenom === "NOM" ? "ETH" : "NOM"}
-    </RightComponentWrapper>
-  </GridWrapper>
-
-  <RowWrapper>
-    <Button type="submit">Execute</Button>
-  </RowWrapper>
-</form> */

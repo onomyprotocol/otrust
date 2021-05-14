@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useWeb3React } from "@web3-react/core"
+import { formatEther } from "@ethersproject/units";
 
 import { useChain } from "context/chain/ChainContext";
-import addrs from './chain/NOMAddrs.json';
-import BigNumber from 'bignumber.js';
+import addrs from 'context/chain/NOMAddrs.json';
 
 export const getAllowance = async (
   contract,
@@ -11,6 +11,7 @@ export const getAllowance = async (
 ) => {
   try {
     const allowance = await contract.allowance(account, addrs.BondingNOM)
+    console.log(parseFloat(formatEther(allowance)))
     return allowance
   } catch (e) {
     return '0'
@@ -18,14 +19,14 @@ export const getAllowance = async (
 }
 
 export const useAllowance = () => {
-  const [allowance, setAllowance] = useState(new BigNumber(0));
+  const [allowance, setAllowance] = useState(0);
   const { account } = useWeb3React()
   const { NOMcontract } = useChain();
 
   useEffect(() => {
     const fetchAllowance = async () => {
       const res = await getAllowance(NOMcontract, account)
-      setAllowance(res)
+      setAllowance(parseFloat(formatEther(res)))
     }
 
     if (account && NOMcontract) {
