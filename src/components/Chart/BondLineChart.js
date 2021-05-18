@@ -62,6 +62,8 @@ function LineChart({ id = "bondingChart" }) {
 
   const { swapSupply } = useSwap();
 
+  //test Bryony change
+
   useEffect(() => {
     if (swapSupply[1]) {
       var digitsUpper = Math.floor(Math.log10(swapSupply[1]));
