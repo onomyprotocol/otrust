@@ -320,6 +320,7 @@ function LineChart(props) {
                   .attr("y2",yScale(data[highest][y_var]));
             }
           });
+      //test
     }
 
 
