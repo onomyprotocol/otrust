@@ -33,8 +33,19 @@ let dot_index = 0;
 
 function LineChart(props) {
 
-    //i've copied this rom BondLineChart. seems to work well once loaded.
+    //Questions
+    //time periods - at some point we need to set up functionality for these
+    //wireframe = Day, Week, Month, Quartal, Year, All Time
+    //so that I can make sure the right ticks are appearing on the x axis
+
+    //size
+    //font size is "0.7rem" - copied from BondLineChart
+    //do you want the two rectangles (yellow on x axis, 50% opacity under dot) to be rem sized too?  Currently they are
+    //exact pixels on the wireframe
+
+    //i've copied this from BondLineChart. seems to work well once loaded.
     const id = "historicalChart";
+    const lineGradient = "historicalChartGradient";
     const margin = { top: 20, right: 20, bottom: 40, left: 60 };
     const svgRef = useRef();
     const wrapperRef = useRef();
@@ -84,6 +95,29 @@ function LineChart(props) {
               .x(d => xScale(d[x_var]))
               .y(d => yScale(d[y_var]));
 
+        //highlited line and highlited area with linearGradient
+        const linearGradient = select("#" + lineGradient)
+            .attr("gradientUnits", "userSpaceOnUse")
+            .attr("x1", "0%")
+            .attr("y1", "0%")
+            .attr("x2", "100%")
+            .attr("y2", "0%");
+
+        linearGradient
+            .append("stop")
+            .attr("offset", "0%")
+            .attr("stop-color", theme.colors.bgDarken); //
+
+        linearGradient
+            .append("stop")
+            .attr("offset", "20%")
+            .attr("stop-color", theme.colors.highlightYellow); //
+
+        linearGradient
+            .append("stop")
+            .attr("offset", "100%")
+            .attr("stop-color", theme.colors.highlightYellow);
+
           //mouse move rect position
           select("#" + id).select("rect").style("height",height).style("width",width);
           //mouse move objects (start hidden)
@@ -91,6 +125,7 @@ function LineChart(props) {
           //highlight Rect (defined in render) - rect behind dot which moves
           select(".highlightRect")
               .attr("visibility","hidden")
+              .attr("pointer-events","none")
               .attr("stroke",0)
               .attr("fill", theme.colors.bgHighlight)
               .attr("fill-opacity",0.5)
@@ -114,9 +149,9 @@ function LineChart(props) {
               .attr("transform","translate(0,-12.5)");
         //highlightYRect (defined in render) - text on rect on Y axis with value
           select(".highlightYText")
-              .attr("font-size",10)
               .attr("visibility","hidden")
               .attr("text-anchor","middle")
+              .style("font-size", "0.7rem")
               .attr("dy",2.5)
               .attr("x", - 28.5 + margin.left)
               .attr("y",0);
@@ -141,7 +176,7 @@ function LineChart(props) {
 
         //data dependents
         //background baseLine - all values
-        svgContent.select(".baselineGroup")
+        var baseline = svgContent.select(".baselineGroup")
               .selectAll(".baseLine")
               .data([data])
               .join("path")
@@ -150,16 +185,30 @@ function LineChart(props) {
               .attr("stroke-width", "0.16rem")
               .attr("fill", "none")
               .attr("d", lineGenerator);
+
+        const pathLength = baseline.node().getTotalLength();
+
+
+        svgContent.select(".highlightLineGroup")
+            .selectAll(".linePathInvisible")
+            .data([])
+            .join("path")
+            .attr("class", "linePathInvisible")
+            .attr("stroke", "none")
+            .attr("fill", "none");
+
         //highlight line - defaults to not visible
         svgContent.select(".highlightLineGroup")
-              .selectAll(".linePath")
-              .data([[]])
-              .join("path")
-              .attr("class", "linePath")
-              .attr("stroke", theme.colors.highlightYellow)
-              .attr("stroke-width",3)
-              .attr("fill", "none")
-              .attr("d", lineGenerator);
+            .selectAll(".linePath")
+            .data([data])
+            .join("path")
+            .attr("class", "linePath")
+            .attr("stroke", "url(#" + lineGradient + ")")
+            .attr("stroke-dasharray",pathLength + " " + pathLength)
+            .attr("stroke-dashoffset",pathLength)
+            .attr("stroke-width",3)
+            .attr("fill", "none")
+            .attr("d", lineGenerator);
 
         //hide axis paths (horizontal lines)
         select(".x-axis path").style("display","none");
@@ -205,7 +254,6 @@ function LineChart(props) {
           .style('stroke-width', '0.1rem')
           .style("color", `${theme.colors.bgHighlight}`);
 
-
       // y Axis and gridlines
       const gridlinesSize = width - margin.right - margin.left;
       const yAxis = axisLeft(yScale).tickSizeInner(-gridlinesSize);
@@ -239,7 +287,7 @@ function LineChart(props) {
             var right = filtered_last === data.length - 1 ? filtered_last : filtered_last + 1;
             var count_left = timeMinute.count(data[left][x_var],mouse_date);
             var count_right = timeMinute.count(mouse_date,data[right][x_var]);
-              if(count_left > count_right){
+              if(count_left > count_right  && count_right > 0){
                 filtered_last += 1;
               }
             //if the position needs to change
@@ -280,14 +328,22 @@ function LineChart(props) {
                     });
 
                 //move other items
-                svgContent
-                  .selectAll(".linePath")
+                var pathInvisible = svgContent
+                  .selectAll(".linePathInvisible")
                   .data([data.filter((f,i) => i <= highest)])
                   .join("path")
-                  .attr("class", "linePath")
-                  .transition()
-                  .duration(500 * difference)
+                  .attr("class", "linePathInvisible")
+                    .attr("stroke", "none")
+                    .attr("fill", "none")
                   .attr("d", lineGenerator);
+
+                const pathInvisibleLength = pathInvisible.node().getTotalLength();
+
+                select(".linePath")
+                    .interrupt()
+                    .transition()
+                    .duration(500 * difference)
+                    .attr("stroke-dashoffset",pathLength - pathInvisibleLength);
 
                 select(".highlightRect")
                   .attr("visibility","visible")
@@ -338,6 +394,7 @@ return (
           <g className="x-axis1" />
           <g className="x-axis" />
           <g className="content" clipPath={`url(#${id})`}>
+              <linearGradient id={lineGradient}/>
             <g className="baselineGroup" />
             <rect className="highlightRect" />
             <line className="highlightLine" />
