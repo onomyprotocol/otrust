@@ -23,7 +23,7 @@ const StyledSVG = styled.svg`
     width: 100%;
     height: 400px;
     overflow: visible;
-`
+`;
 function supplyToArray(supBegin, supEnd) {
   var dataArray = [];
   const dif = supEnd - supBegin;
@@ -55,10 +55,10 @@ function LineChart({ id = "bondingChart" }) {
 
   const { theme } = useContext(ChainContext);
 
-  const [data, setData] = useState(supplyToArray(0, 100000000))
-  const [areaData, setAreaData] = useState(supplyToArray(0, 100000000))
+  const [data, setData] = useState(supplyToArray(0, 100000000));
+  const [areaData, setAreaData] = useState(supplyToArray(0, 100000000));
 
-  const [labelData, setLabelData] = useState('') 
+  const [labelData, setLabelData] = useState('');
 
   const { swapSupply } = useSwap();
 
@@ -77,7 +77,7 @@ function LineChart({ id = "bondingChart" }) {
   
   // charts and xAxis and yAxis
   useEffect(() => {
-    const margin = { top: 20, right: 20, bottom: 40, left: 60 }
+    const margin = { top: 20, right: 20, bottom: 40, left: 60 };
     const svg = select(svgRef.current);
     const svgContent = svg.select(".content");
     const { width, height } =
@@ -85,7 +85,6 @@ function LineChart({ id = "bondingChart" }) {
 
     function xValue(d) { return d.x; }      // accessors
     function yValue(d) { return d.y; }
-
 
     // scales + line/area generators
     const xScale = scaleLinear()
@@ -105,7 +104,7 @@ function LineChart({ id = "bondingChart" }) {
       .x(d => xScale(d.x))
       .y0(yScale(0))
       .y1(d => yScale(d.y))
-      .curve(curveCardinal)
+      .curve(curveCardinal);
 
 
     // base line
@@ -148,7 +147,7 @@ function LineChart({ id = "bondingChart" }) {
       .attr("stroke", `${theme.colors.areaTop}`)
       .attr("stroke-width", "0.03rem")
       .attr("fill", "url(#linear-gradient")
-      .attr("d", areaGenerator)
+      .attr("d", areaGenerator);
 
     svgContent
       .selectAll(".selectedLine")
@@ -182,7 +181,7 @@ function LineChart({ id = "bondingChart" }) {
 
     xComplex
       .selectAll(".tick line")
-      .style("color", `${theme.colors.bgHighlight}`)
+      .style("color", `${theme.colors.bgHighlight}`);
 
 
     //x Axis minor
@@ -200,7 +199,7 @@ function LineChart({ id = "bondingChart" }) {
     xComplex1
       .selectAll(".tick line")
       .style('stroke-width', '0.1rem')
-      .style("color", `${theme.colors.bgHighlight}`)
+      .style("color", `${theme.colors.bgHighlight}`);
 
 
     // the end tick of x-axis comes from the x-axis, not the ticks
@@ -225,7 +224,7 @@ function LineChart({ id = "bondingChart" }) {
       .call(yAxis);
 
     yComplex.selectAll(".tick text")
-      .style("color", `${theme.colors.txtThirdly}`)
+      .style("color", `${theme.colors.txtThirdly}`);
 
     yComplex.selectAll(".tick line")
       .style("color", `${theme.colors.bgNormal}`)

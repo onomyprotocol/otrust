@@ -4,6 +4,8 @@ import { lighten } from "polished";
 import { useWeb3React } from "@web3-react/core";
 import useInterval from '@use-it/interval';
 import LoadingBar from 'components/Modals/LoadingBar'
+import { BigNumber } from 'bignumber.js'
+import { format18 } from 'utils/math'
 
 import { useChain } from 'context/chain/ChainContext'
 import { Close, Metamask } from "./Icons";
@@ -115,6 +117,9 @@ const limitOptions = [
 
 export default function ConfirmTransactionModal({ closeModal, type, amount, result, onConfirm, slippage, setSlippage }) {
   // const [limit, setLimit] = useState(0);
+  console.log("Amount: ", amount)
+  console.log("Result: ", result)
+  console.log("Slippage: ", slippage)
   const { account } = useWeb3React();
   const { currentETHPrice, currentNOMPrice } = useChain()
   const [count, setCount] = useState(60);
@@ -143,13 +148,20 @@ export default function ConfirmTransactionModal({ closeModal, type, amount, resu
 
         <Modal.ExchangeResult>
           <Modal.ExchangeResultDescription>You're receiving</Modal.ExchangeResultDescription>
-          ~ {result} <sup>{type === 'ETH' ? 'NOM' : 'ETH'}</sup>
+          ~ {BigNumber.isBigNumber(result) ? format18(result).toFixed(6) : ""} <sup>{type === 'ETH' ? 'NOM' : 'ETH'}</sup>
         </Modal.ExchangeResult>
 
         <TransactionDetailsRow>
           <span>Current Exchange Rate</span>
 
-          <strong>1 {type} = {type === 'ETH' ? currentETHPrice : currentNOMPrice} {type === 'ETH' ? 'NOM' : 'ETH'}</strong>
+          <strong>
+            1 {type} = {
+                type === 'ETH' ? 
+                  format18(currentETHPrice).toFixed(6) : 
+                  format18(currentNOMPrice).toFixed(6)
+              } 
+            {type === 'ETH' ? 'NOM' : 'ETH'}
+          </strong>
         </TransactionDetailsRow>
         <TransactionDetailsRow>
           <span>You're Sending</span>

@@ -1,9 +1,8 @@
 import React, { useCallback, useState, useEffect } from "react";
-import { parseEther } from "@ethersproject/units";
 import { useAsyncFn } from "lib/use-async-fn";
-import { chopFloat } from "utils/math"
+import { BigNumber } from 'bignumber.js'
+import { format18, parse18 } from 'utils/math'
 
-import ExchangeModals from "./ExchangeModals";
 import {
   ExchangeWrapper,
   ExchangeItem,
@@ -15,54 +14,138 @@ import {
   SellBtn,
   ExchangeButton,
 } from "./exchangeStyles";
+
 import ConfirmTransactionModal from '../Modals/ConfirmTransactionModal';
 import { Dimmer } from "components/UI/Dimmer";
 
+import ExchangeModals from "./ExchangeModals";
+import { useModal, useUpdateModal } from 'context/ModalContext'
 import { useSwap, useUpdateSwap } from "context/SwapContext";
 import { useChain, useUpdateChain } from "context/chain/ChainContext";
-// import { useAllowance } from "context/useAllowance";
+
 import TransactionCompletedModal from "components/Modals/TransactionCompletedModal";
 import OnomyConfirmationModal from "components/Modals/OnomyConfirmationModal";
 import TransactionFailedModal from "components/Modals/TransactionFailedModal";
 import PendingModal from "components/Modals/PendingModal";
 
 export default function Exchange() {
-  const { swapBuyAmount, swapBuyResult, swapSellAmount, swapSellResult, swapDenom } = useSwap();
-  const { setSwapBuyAmount, setSwapBuyResult, setSwapSellAmount, setSwapSellResult, setSwapDenom } = useUpdateSwap();
-  // const allowance = useAllowance();
-  const [confirmModal, setConfirmModal] = useState(false);
-  const [approveModal, setApproveModal] = useState(false);
-  const [completedModal, setCompletedModal] = useState('');
+  const {
+    approveModal,
+    completedModal,
+    confirmModal,
+    failedModal,
+    pendingModal
+  } = useModal();
+
+  const {
+    setApproveModal,
+    setCompletedModal,
+    setConfirmModal,
+    setFailedModal,
+    setPendingModal
+  } = useUpdateModal()
+
+  const { 
+    swapBuyAmount, 
+    swapBuyResult,
+    swapBuyValue,
+    swapSellAmount, 
+    swapSellResult,
+    swapSellValue, 
+    swapDenom 
+  } = useSwap();
+  
+  const { 
+    setSwapBuyAmount, 
+    setSwapBuyResult, 
+    setSwapBuyValue, 
+    setSwapSellAmount, 
+    setSwapSellResult,
+    setSwapSellValue, 
+    setSwapDenom 
+  } = useUpdateSwap();
+
+  const { 
+    bondContract, 
+    NOMallowance, 
+    NOMcontract, 
+    ETHbalance, 
+    NOMbalance, 
+    pendingTx 
+  } = useChain();
+  
+  const { setPendingTx } = useUpdateChain();
+  
   const [completedAmount, setCompletedAmount] = useState(null);
   const [completedResult, setCompletedResult] = useState(null);
   const [slippage, setSlippage] = useState(1);
   const [previousTx, setPreviousTx] = useState(null);
-  const [failedModal, setFailedModal] = useState(null);
-  
-  const [pendingModal, setPendingModal] = useState(false);
-  const { bondContract, NOMallowance, NOMcontract, ETHbalance, NOMbalance, pendingTx } = useChain();
-  const { setPendingTx } = useUpdateChain();
  
   const onBuyNOMTextChange = useCallback(
     (evt) => {
+      evt.preventDefault()
+      setSwapBuyValue(evt.target.value)
       setSwapSellAmount('')
       setSwapSellResult('')
+      setSwapSellValue('')
       setSwapDenom('ETH')
-      
-      setSwapBuyAmount(evt.target.value)
+      if (BigNumber.isBigNumber(evt.target.value)) {
+        setSwapBuyAmount('')
+        setSwapBuyResult('')
+      } else {
+        try {
+          setSwapBuyAmount(
+            parse18(
+              new BigNumber(
+                evt.target.value
+                )
+                )
+                )
+                  
+        } catch {
+          setSwapBuyAmount(new BigNumber(0))
+        }
+        
+      }
     },
-    [setSwapBuyAmount, setSwapDenom, setSwapSellAmount, setSwapSellResult]
+    [
+      setSwapBuyAmount,
+      setSwapBuyResult,
+      setSwapBuyValue,
+      setSwapDenom, 
+      setSwapSellAmount,
+      setSwapSellResult
+    ]
   );
   
   const onSellNOMTextChange = useCallback(
     (evt) => {
+      evt.preventDefault()
+      setSwapSellValue(evt.target.value)
       setSwapBuyAmount('')
       setSwapBuyResult('')
       setSwapDenom('NOM')
 
-      setSwapSellAmount(evt.target.value)
+      if (!evt.target.value) {
+        setSwapSellAmount('')
+        setSwapSellResult('')
+      } else {
+        try {
+          setSwapSellAmount(parse18(new BigNumber(evt.target.value)))
+        } catch {
+          setSwapSellAmount(new BigNumber(0))
+        }
+        
+      }
     },
-    [setSwapSellAmount, setSwapDenom, setSwapBuyAmount, setSwapBuyResult]
+    [
+      setSwapBuyAmount, 
+      setSwapBuyResult,
+      setSwapDenom,
+      setSwapSellAmount,
+      setSwapSellResult,
+      setSwapSellValue
+    ]
   );
 
   const submitTrans = useCallback(
@@ -72,14 +155,14 @@ export default function Exchange() {
         let tx;
         if (denom === "ETH") {
           tx = await bondContract.buyNOM(
-            parseEther(swapBuyResult.toString()),
+            swapBuyResult,
             slippage * 100,
-            { value: parseEther(swapBuyAmount.toString()) }
+            { value: swapBuyAmount }
           );
         } else {
           tx = await bondContract.sellNOM(
-            parseEther(swapSellAmount.toString()),
-            parseEther(swapSellResult.toString()),
+            swapSellAmount,
+            swapSellResult,
             slippage * 100,
           );
         }
@@ -99,38 +182,41 @@ export default function Exchange() {
       }
     },
     [
+      bondContract,
+      setCompletedAmount,
+      setCompletedResult,
+      setConfirmModal,
+      setFailedModal,
+      setPendingModal,
+      setPendingTx,
+      setSwapSellAmount,
+      setSwapBuyAmount,
+      slippage,
       swapBuyAmount,
       swapBuyResult,
       swapSellAmount,
-      swapSellResult,
-      bondContract,
-      setSwapBuyAmount,
-      setPendingTx,
-      slippage,
-      setCompletedAmount,
-      setCompletedResult,
-      setSwapSellAmount
+      swapSellResult
     ]
   );
 
   useEffect(() => {
     if (pendingTx) {
-      // setWaitModal(true)
       pendingTx.wait().then(() => {
         setPreviousTx(pendingTx);
         setCompletedModal(swapDenom);
         setPendingTx(null);
         setPendingModal(false);
-        // setWaitModal(false);
       })
     }
   }, [
     pendingTx,
-    swapDenom,
+    setCompletedModal,
+    setPendingModal,
     setPendingTx,
     swapBuyAmount,
-    swapSellAmount,
     swapBuyResult,
+    swapDenom,
+    swapSellAmount,
     swapSellResult,
   ])
 
@@ -152,7 +238,7 @@ export default function Exchange() {
         setSwapDenom('APPROVE')
         let tx = await NOMcontract.increaseAllowance(
           bondContract.address,
-          parseEther(value).toString()
+          value
         );
         setPendingTx(tx);
       } catch (e) {
@@ -241,7 +327,7 @@ export default function Exchange() {
           <ExchangeInput
             type="text"
             onChange={onBuyNOMTextChange}
-            value={swapBuyAmount.toString()}
+            value={swapBuyValue}
           />
           ETH
           <MaxBtn onClick={onEthMax}>Max</MaxBtn>
@@ -249,7 +335,11 @@ export default function Exchange() {
         <Receiving>
           <strong>I'm receiving</strong>
           <ReceivingValue>
-            {chopFloat(swapBuyResult,6)} NOM
+            {
+              BigNumber.isBigNumber(swapBuyResult) ? 
+              format18(swapBuyResult).toFixed(4) : 
+              ''
+            } NOM
           </ReceivingValue>
         </Receiving>
         <div>
@@ -264,7 +354,7 @@ export default function Exchange() {
           <ExchangeInput
             type="text"
             onChange={onSellNOMTextChange}
-            value={swapSellAmount.toString()}
+            value={swapSellValue}
           />
           NOM
           <MaxBtn onClick={onNOMMax}>Max</MaxBtn>
@@ -272,7 +362,11 @@ export default function Exchange() {
         <Receiving>
           <strong>I'm receiving</strong>
           <ReceivingValue>
-            {chopFloat(swapSellResult,6)} ETH
+            {
+              BigNumber.isBigNumber(swapSellResult) ? 
+              format18(swapSellResult).toFixed(4) : 
+              ''
+            } ETH
           </ReceivingValue>
         </Receiving>
         <div>

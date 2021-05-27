@@ -1,12 +1,12 @@
 import React, { useState, useEffect, createContext, useContext, useCallback } from 'react'
-import { formatEther, parseEther } from '@ethersproject/units'
+import { parse18 } from 'utils/math'
 import { useWeb3React } from "@web3-react/core"
 import ApolloClient, { InMemoryCache } from 'apollo-boost'
 import { ApolloProvider } from '@apollo/client'
 
 import { NOMCont, BondingCont } from './contracts'
 import addrs from 'context/chain/NOMAddrs.json';
-import BigNumber from 'bignumber.js';
+import { BigNumber } from 'bignumber.js';
 
 export const ChainContext = createContext()
 export const useChain = () => useContext(ChainContext)
@@ -14,22 +14,22 @@ export const useChain = () => useContext(ChainContext)
 export const UpdateChainContext = createContext()
 export const useUpdateChain = () => useContext(UpdateChainContext)
 
+const big1e18 = parse18(new BigNumber(1))
+
 function ChainProvider({ theme, children }) {
     const { account, library } = useWeb3React()
     const [blockNumber, setBlockNumber] = useState()
-    const [ETHbalance, setETHBalance] = useState(0)
-    const [NOMbalance, setNOMBalance] = useState(0)
-    const [NOMallowance, setNOMAllowance] = useState(0)
-    const [supplyNOM, setSupplyNOM] = useState()
-    const [bondPrice, setBondPrice] = useState()
-    // const [ETHUSD, setETHUSD] = useState()
-    const bondContract = BondingCont(library)
-    const NOMcontract = NOMCont(library)
+    const [ETHbalance, setETHBalance] = useState(new BigNumber(0))
+    const [NOMbalance, setNOMBalance] = useState(new BigNumber(0))
+    const [NOMallowance, setNOMAllowance] = useState(new BigNumber(0))
+    const [supplyNOM, setSupplyNOM] = useState(new BigNumber(0))
     const [pendingTx, setPendingTx] = useState()
-    // const [waitModal, setWaitModal] = useState(false)
     const [currentETHPrice, setCurrentETHPrice] = useState(new BigNumber(0))
     const [currentNOMPrice, setCurrentNOMPrice] = useState(new BigNumber(0))
 
+    const bondContract = BondingCont(library)
+    const NOMcontract = NOMCont(library)
+    
     if (!process.env.REACT_APP_GRAPHQL_ENDPOINT) {
         throw new Error('REACT_APP_GRAPHQL_ENDPOINT environment variable not defined')
     }
@@ -41,10 +41,10 @@ function ChainProvider({ theme, children }) {
 
     const getCurrentPrice = useCallback(async () => {
         let amount;
-        amount = await bondContract.buyQuoteETH(parseEther('1'));
-        setCurrentETHPrice(parseFloat(formatEther(amount)));
-        amount = await bondContract.sellQuoteNOM(parseEther('1'));
-        setCurrentNOMPrice(parseFloat(formatEther(amount)));
+        amount = await bondContract.buyQuoteETH(parse18('1'));
+        setCurrentETHPrice(amount);
+        amount = await bondContract.sellQuoteNOM(parse18('1'));
+        setCurrentNOMPrice(amount);
     },[bondContract])
 
     useEffect(() => {
@@ -58,19 +58,25 @@ function ChainProvider({ theme, children }) {
                         NOMcontract.balanceOf(account),
                         NOMcontract.allowance(account, addrs.BondingNOM),
                         bondContract.getSupplyNOM(),
-                        bondContract.buyQuoteETH(parseEther('1')),
+                        bondContract.buyQuoteETH(big1e18.toString()),
+                        bondContract.sellQuoteNOM(big1e18.toString())
+                        
                         // UniSwapCont.getReserves(),
-                        getCurrentPrice()  
+
                     ]
                 ).then((values) => {
-                    setETHBalance(parseFloat(formatEther(values[0])))
-                    setNOMBalance(parseFloat(formatEther(values[1])))
-                    setNOMAllowance(parseFloat(formatEther(values[2])))
-                    setSupplyNOM(parseFloat(formatEther(values[3])))
-                    setBondPrice(parseFloat(formatEther(values[4])))
-                    // setETHUSD(values[5])
+                    setETHBalance(new BigNumber(values[0].toString()))
+                    setNOMBalance(new BigNumber(values[1].toString()))
+                    setNOMAllowance(new BigNumber(values[2].toString()))
+                    setSupplyNOM(new BigNumber(values[3].toString()))
+                    setCurrentETHPrice(new BigNumber(values[4].toString()))
+                    setCurrentNOMPrice(new BigNumber(values[5].toString()))
+                    
+                    // setETHUSD(new BigNumber(values[6]))
+
                 }).catch((err) => { console.log(err) })
             })
+
             // remove listener when the component is unmounted
             return () => {
                 library.removeAllListeners('block')
@@ -83,7 +89,6 @@ function ChainProvider({ theme, children }) {
     const contextValue = {
         blockNumber,
         bondContract,
-        bondPrice,
         currentETHPrice,
         currentNOMPrice,
         ETHbalance,

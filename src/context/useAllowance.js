@@ -11,7 +11,6 @@ export const getAllowance = async (
 ) => {
   try {
     const allowance = await contract.allowance(account, addrs.BondingNOM)
-    console.log(parseFloat(formatEther(allowance)))
     return allowance
   } catch (e) {
     return '0'
@@ -26,7 +25,7 @@ export const useAllowance = () => {
   useEffect(() => {
     const fetchAllowance = async () => {
       const res = await getAllowance(NOMcontract, account)
-      setAllowance(parseFloat(formatEther(res)))
+      setAllowance(BigNumber(formatEther(res)))
     }
 
     if (account && NOMcontract) {
