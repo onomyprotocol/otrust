@@ -34,17 +34,16 @@ import { format18, parse18 } from 'utils/math'
 import { useWeb3React } from "@web3-react/core";
 // import { validate } from "graphql";
 
-
 export default function ExchangeQuote({strength}) {
-  
+
   const { strongBalance, weakBalance } = useChain()
   const { handleModal } = useModal()
   const { library } = useWeb3React()
-  
+
   const bondContract = BondingCont(library)
   const NOMcontract = NOMCont(library)
 
-  const { 
+  const {
     askAmount,
     bidAmount,
     bidDenom,
@@ -53,23 +52,23 @@ export default function ExchangeQuote({strength}) {
     strong,
     weak
   } = useExchange();
-  
+
   useEffect(() => {
     console.log("Input: ", input)
     console.log("Output: ", output)
   })
 
-  const { 
+  const {
     objDispatch,
     strDispatch
   } = useUpdateExchange();
 
   const onMax = () => {
-      (strength === 'strong') ? 
+      (strength === 'strong') ?
           strDispatch({
             type: 'input',
             value: format18(strongBalance).toString()
-          }) : 
+          }) :
           strDispatch({
             type: 'input',
             value: format18(weakBalance).toString()
@@ -78,7 +77,6 @@ export default function ExchangeQuote({strength}) {
 
   const getAskAmount = useCallback(async (askAmountState, bidAmountUpdate, textStrength) => {
     var askAmountUpdate = askAmountState
-        
     switch (textStrength) {
         case 'strong':
             console.log('Strong: ', bidAmountUpdate.toFixed(0))
@@ -106,11 +104,9 @@ export default function ExchangeQuote({strength}) {
       handleModal(
         <PendingModal />
       );
-      
       try {
-        
         strDispatch({
-          type: 'status', 
+          type: 'status',
           value: 'APPROVE'
         })
 
@@ -141,7 +137,7 @@ export default function ExchangeQuote({strength}) {
             error={e.code + '\n' + e.message.slice(0,80) + '...'}
           />
         )
-      }    
+      }
     } else {
       handleModal(
             <TransactionFailedModal
@@ -167,7 +163,7 @@ export default function ExchangeQuote({strength}) {
                 tx = await bondContract.buyNOM(
                   askAmount.toFixed(0),
                   slippage.toFixed(0),
-                  { 
+                  {
                     value: bidAmount.toFixed(0) }
                   )
 
@@ -184,7 +180,6 @@ export default function ExchangeQuote({strength}) {
                 {}
             }
             break
-          
           case 'weak':
             switch (weak) {
               case 'wNOM':
@@ -206,7 +201,6 @@ export default function ExchangeQuote({strength}) {
                 {}
             }
             break
-          
           default:
             console.log()
         }
@@ -237,19 +231,19 @@ export default function ExchangeQuote({strength}) {
         handleModal(
           <RequestFailedModal
             error = "Please enter amount"
-          />  
+          />
         )
         break
       case (strength === 'strong' && strongBalance.gte(bidAmount)):
         handleModal(
-          <ConfirmTransactionModal 
+          <ConfirmTransactionModal
             submitTrans = {submitTrans}
           />
         )
         break
       case (strength === 'weak' && weakBalance.gte(bidAmount)):
         handleModal(
-          <ConfirmTransactionModal 
+          <ConfirmTransactionModal
             submitTrans = {submitTrans}
           />
         )
@@ -263,6 +257,9 @@ export default function ExchangeQuote({strength}) {
     }
   }
 
+  // eslint-disable-next-line
+  const floatRegExp = new RegExp(/(^(?=.+)(?:[1-9]\d*|0)?(?:\.\d+)?$)|(^\d\.$)|(\.)/)
+
   const onTextChange = useCallback(
     async (evt, textStrength) => {
       evt.preventDefault()
@@ -270,9 +267,11 @@ export default function ExchangeQuote({strength}) {
       console.log("Text Strength: ", textStrength)
       console.log("Bid Denom: ", bidDenom)
       let strUpdate = new Map()
+      const eventValue = evt.target.value
       switch (true) {
-        case (bidDenom === strength && input === evt.target.value.toString()): break
-        case (evt.target.value === '' || Number(evt.target.value) === 0) || evt.target.value === '.':
+        case (bidDenom === strength && input === eventValue):
+          break
+        case (eventValue === ''):
           {
             let objUpdate = new Map()
 
@@ -280,7 +279,6 @@ export default function ExchangeQuote({strength}) {
               'askAmount',
               new BigNumber(0)
             )
-            
             objUpdate = objUpdate.set(
               'bidAmount',
               new BigNumber(0)
@@ -291,7 +289,6 @@ export default function ExchangeQuote({strength}) {
               value: objUpdate
             })
           }
-          
           strUpdate = strUpdate.set(
             'bidDenom',
             strength
@@ -301,34 +298,30 @@ export default function ExchangeQuote({strength}) {
             'input',
             evt.target.value.toString()
           )
-          
           strUpdate = strUpdate.set(
             'output',
             ''
           )
 
           strDispatch({
-            type: 'update', 
+            type: 'update',
             value: strUpdate
-          })
+          });
 
-          break
-        case (
-            Number(evt.target.value) > 0 &&
-            parseFloat(evt.target.value) > 0
-        ):
-          console.log("Input after test", evt.target.value)
+          break;
+        case (floatRegExp.test(eventValue)):
+          console.log("Input after test", eventValue)
+          let newEventValue = eventValue === '.' ? 0 : eventValue
           const bidAmountUpdate = parse18(new BigNumber(
-              parseFloat(evt.target.value).toString()
+              parseFloat(newEventValue).toString()
             )
           )
 
-          const inputUpdate = evt.target.value.toString()
-          
+          const inputUpdate = evt.target.value
           if (bidDenom !== strength) {
             strUpdate = strUpdate.set(
               'bidDenom',
-              strength          
+              strength
             )
           }
 
@@ -354,7 +347,6 @@ export default function ExchangeQuote({strength}) {
             'askAmount',
             new BigNumber(askAmountUpdate.toString())
           )
-          
           objUpdate = objUpdate.set(
             'bidAmount',
             bidAmountUpdate
@@ -369,14 +361,13 @@ export default function ExchangeQuote({strength}) {
             'input',
             inputUpdate
           )
-          
           strUpdate = strUpdate.set(
             'output',
             format18(new BigNumber(askAmountUpdate.toString())).toFixed(8)
           )
 
           strDispatch({
-            type: 'update', 
+            type: 'update',
             value: strUpdate
           })
 
@@ -389,7 +380,7 @@ export default function ExchangeQuote({strength}) {
           )
       }
   },
-  [ 
+  [
     askAmount,
     bidDenom,
     getAskAmount,
@@ -397,7 +388,8 @@ export default function ExchangeQuote({strength}) {
     input,
     objDispatch,
     strDispatch,
-    strength
+    strength,
+    floatRegExp
   ]
   );
 
@@ -422,8 +414,8 @@ export default function ExchangeQuote({strength}) {
                     {(strength === 'strong') ? weak : strong}
                 </ReceivingValue>
             </Receiving>
-            { 
-              (strength === 'strong') ? 
+            {
+              (strength === 'strong') ?
               (
                 bidDenom === 'weak' ?
                   <ExchangeButton>
@@ -436,7 +428,7 @@ export default function ExchangeQuote({strength}) {
                         <ExchangeButton>
                           Input Value
                         </ExchangeButton> :
-                        <ExchangeButton 
+                        <ExchangeButton
                           onClick={onBid}>
                           Buy {(strength === 'strong') ? weak : strong}
                         </ExchangeButton>
