@@ -1,16 +1,16 @@
-import React from "react";
-import styled from "styled-components";
-import { useWeb3React } from "@web3-react/core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import { faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import React from 'react';
+import styled from 'styled-components';
+import { useWeb3React } from '@web3-react/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCog, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import BigNumber from 'bignumber.js';
 
-import { Panel } from "components/UI";
-import { useChain } from "context/chain/ChainContext"
-import { useExchange } from "context/exchange/ExchangeContext"
-import { responsive } from "theme/constants";
-import { format18 } from "utils/math"
-import BigNumber from "bignumber.js";
+import { Panel } from 'components/UI';
+import { useChain } from 'context/chain/ChainContext';
+import { useExchange } from 'context/exchange/ExchangeContext';
+import { responsive } from 'theme/constants';
+import { format18 } from 'utils/math';
 
 const SidebarLayout = styled.div`
   display: flex;
@@ -46,7 +46,7 @@ const Header = styled.header`
   height: 240px;
   padding: 40px 48px;
 
-  background-color: ${(props) => props.theme.colors.bgDarken};
+  background-color: ${props => props.theme.colors.bgDarken};
   border-radius: 4px;
 
   @media screen and (max-width: ${responsive.laptop}) {
@@ -73,8 +73,8 @@ const Header = styled.header`
 
     height: 100px;
 
-    background-color: ${(props) => props.theme.colors.bgNormal};
-    border-bottom: 1px solid ${(props) => props.theme.colors.bgHighlightBorder};
+    background-color: ${props => props.theme.colors.bgNormal};
+    border-bottom: 1px solid ${props => props.theme.colors.bgHighlightBorder};
     border-radius: 0;
   }
 
@@ -101,7 +101,7 @@ const Avatar = styled.img`
   width: 72px;
 
   border-radius: 12px;
-  border: 3px solid ${(props) => props.theme.colors.bgHighlightBorder};
+  border: 3px solid ${props => props.theme.colors.bgHighlightBorder};
 
   @media screen and (max-width: ${responsive.laptop}) {
     height: 56px;
@@ -145,7 +145,7 @@ const AccountNumber = styled.div`
   span {
     font-size: 16px;
     font-weight: 500;
-    color: ${(props) => props.theme.colors.textSecondary};
+    color: ${props => props.theme.colors.textSecondary};
 
     @media screen and (max-width: ${responsive.laptop}) {
       font-size: 14px;
@@ -159,7 +159,7 @@ const Balances = styled.div`
 
   padding: 40px;
 
-  border-bottom: 1px solid ${(props) => props.theme.colors.bgHighlightBorder};
+  border-bottom: 1px solid ${props => props.theme.colors.bgHighlightBorder};
 
   @media screen and (max-width: ${responsive.laptop}) {
     padding: 24px;
@@ -180,11 +180,11 @@ const Balances = styled.div`
     margin-bottom: 12px;
 
     font-weight: 400;
-    color: ${(props) => props.theme.colors.textSecondary};
+    color: ${props => props.theme.colors.textSecondary};
   }
 
   span {
-    font-family: "Bebas Neue", sans-serif;
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 28px;
 
     @media screen and (max-width: ${responsive.laptop}) {
@@ -226,7 +226,7 @@ const ConnectionRow = styled.div`
 
   > strong {
     font-weight: 400;
-    color: ${(props) => props.theme.colors.textSecondary};
+    color: ${props => props.theme.colors.textSecondary};
   }
 
   > span {
@@ -239,11 +239,11 @@ export const ConnectionStatus = styled.div`
   align-items: center;
   gap: 8px;
 
-  color: ${(props) => props.theme.colors.highlightGreen};
+  color: ${props => props.theme.colors.highlightGreen};
   font-weight: 500;
 
   &:before {
-    content: "";
+    content: '';
     display: block;
 
     width: 12px;
@@ -273,7 +273,7 @@ const Info = styled.footer`
   @media screen and (max-width: ${responsive.smartphoneLarge}) {
     padding: 24px 20px;
 
-    background-color: ${(props) => props.theme.colors.bgDarken};
+    background-color: ${props => props.theme.colors.bgDarken};
   }
 `;
 
@@ -281,7 +281,7 @@ const Link = styled.a`
   display: block;
   margin-right: auto;
 
-  color: ${(props) => props.theme.colors.textSecondary};
+  color: ${props => props.theme.colors.textSecondary};
   text-decoration: none;
 `;
 
@@ -293,12 +293,12 @@ const ControlsBtn = styled.a`
   height: 44px;
   width: 44px;
 
-  background-color: ${(props) => props.theme.colors.bgDarken};
-  border: 1px solid ${(props) => props.theme.colors.bgHighlightBorder};
+  background-color: ${props => props.theme.colors.bgDarken};
+  border: 1px solid ${props => props.theme.colors.bgHighlightBorder};
   border-radius: 8px;
 
   font-size: 16px;
-  color: ${(props) => props.theme.colors.iconsNormal};
+  color: ${props => props.theme.colors.iconsNormal};
 
   cursor: pointer;
 
@@ -334,11 +334,11 @@ const SocialBtn = styled.a`
   height: 40px;
   width: 40px;
 
-  background-color: ${(props) => props.theme.colors.bgHighlightBorder};
+  background-color: ${props => props.theme.colors.bgHighlightBorder};
   border-radius: 8px;
 
   font-size: 20px;
-  color: ${(props) => props.theme.colors.iconsSecondary};
+  color: ${props => props.theme.colors.iconsSecondary};
 
   cursor: pointer;
 
@@ -351,10 +351,10 @@ const SocialBtn = styled.a`
 `;
 
 export default function AcctDash() {
-  const { active, error, chainId, account } = useWeb3React()
-  const { blockNumber, strongBalance, weakBalance } = useChain()
-  const { strong, weak } = useExchange()
-  
+  const { active, error, chainId, account } = useWeb3React();
+  const { blockNumber, strongBalance, weakBalance } = useChain();
+  const { strong, weak } = useExchange();
+
   return (
     <Panel>
       <SidebarLayout>
@@ -370,52 +370,36 @@ export default function AcctDash() {
             <p>My Account</p>
             <span>
               {account === null
-                ? "-"
+                ? '-'
                 : account
-                ? `${account.substring(0, 6)}...${account.substring(
-                    account.length - 4
-                  )}`
-                : ""}
+                ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}`
+                : ''}
             </span>
           </AccountNumber>
         </Header>
         <Balances>
           <div>
             <strong>{strong} Balance</strong>
-            <span>
-              {
-                BigNumber.isBigNumber(strongBalance)
-                  ? `${format18(strongBalance).toFixed(6)}`
-                  : 'Loading'
-              }
-            </span>
+            <span>{BigNumber.isBigNumber(strongBalance) ? `${format18(strongBalance).toFixed(6)}` : 'Loading'}</span>
           </div>
           <div>
             <strong>{weak} Balance</strong>
-            <span>
-              {
-                BigNumber.isBigNumber(weakBalance)
-                  ? `${format18(weakBalance).toFixed(6)}`
-                  : 'Loading'
-              }
-            </span>
+            <span>{BigNumber.isBigNumber(weakBalance) ? `${format18(weakBalance).toFixed(6)}` : 'Loading'}</span>
           </div>
           {/* <Balance /> */}
         </Balances>
         <Connection>
           <ConnectionRow>
             <strong>Connection</strong>
-            <ConnectionStatus>
-              {active ? "Connected" : error ? "Error" : "Loading"}
-            </ConnectionStatus>
+            <ConnectionStatus>{active ? 'Connected' : error ? 'Error' : 'Loading'}</ConnectionStatus>
           </ConnectionRow>
           <ConnectionRow>
             <strong>Chain Id</strong>
-            <span>{chainId ?? ""}</span>
+            <span>{chainId ?? ''}</span>
           </ConnectionRow>
           <ConnectionRow>
             <strong>Block Number</strong>
-            <span>{(blockNumber) ? blockNumber.toFixed(0) : ''}</span>
+            <span>{blockNumber ? blockNumber.toFixed(0) : ''}</span>
           </ConnectionRow>
         </Connection>
         <Info>

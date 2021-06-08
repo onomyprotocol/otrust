@@ -1,17 +1,17 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import { Close, Fail } from "../Icons";
-import * as Modal from "../styles";
-import { responsive } from "theme/constants";
-import { useModal } from 'context/modal/ModalContext'
+import { Close, Fail } from '../Icons';
+import * as Modal from '../styles';
+import { responsive } from 'theme/constants';
+import { useModal } from 'context/modal/ModalContext';
 
 const FailIconWrapper = styled(Modal.ModalIconWrapper)`
-  background-color: ${(props) => props.theme.colors.highlightRed};
+  background-color: ${props => props.theme.colors.highlightRed};
   border-color: #412a33;
 
   svg * {
-    fill: ${(props) => props.theme.colors.textPrimary};
+    fill: ${props => props.theme.colors.textPrimary};
   }
 `;
 
@@ -23,10 +23,10 @@ const Message = styled.div`
   padding: 32px;
   margin: 32px 0 24px;
 
-  background-color: ${(props) => props.theme.colors.bgDarken};
+  background-color: ${props => props.theme.colors.bgDarken};
   border-radius: 8px;
 
-  color: ${(props) => props.theme.colors.textSecondary};
+  color: ${props => props.theme.colors.textSecondary};
   text-align: center;
 
   @media screen and (max-width: ${responsive.laptop}) {
@@ -40,7 +40,7 @@ const Message = styled.div`
 `;
 
 export default function RequestFailedModal({ error }) {
-  const { handleModal } = useModal()
+  const { handleModal } = useModal();
 
   return (
     <Modal.Wrapper>
@@ -54,9 +54,7 @@ export default function RequestFailedModal({ error }) {
         </FailIconWrapper>
         <Modal.Caption>Request Failed</Modal.Caption>
 
-        <Message>
-          {error.toString()}
-        </Message>
+        <Message>{error.toString()}</Message>
       </main>
       <footer>
         <FooterControls>

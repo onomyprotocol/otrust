@@ -1,51 +1,49 @@
-import React, { useEffect} from 'react'
-import Landing from '../pages/Landing'
-import { useWeb3React, UnsupportedChainIdError } from '@web3-react/core'
+import React, { useEffect } from 'react';
+import { useWeb3React, UnsupportedChainIdError } from '@web3-react/core';
 
-import { useEagerConnect } from '../hooks/useEagerConnect'
-import { useInactiveListener } from '../hooks/useInactiveListener'
+import Landing from '../pages/Landing';
+import { useEagerConnect } from '../hooks/useEagerConnect';
+import { useInactiveListener } from '../hooks/useInactiveListener';
 
+export function AutoLogin({ children }) {
+  const {
+    activate,
+    active,
+    // account,
+    connector,
+  } = useWeb3React();
 
-export function AutoLogin({children}) {
-
-    const {
-        activate,
-        active,
-        // account,
-        connector
-    } = useWeb3React()
-    
-    const connectWallet = (con) => {
-      try {
-        activate(con, undefined, true).catch(error => {
-            if (error instanceof UnsupportedChainIdError) {
-                console.log(error)
-                activate(connector) // a little janky...can't use setError because the connector isn't set
-            } else {
-                // setPendingError(true)
-            }
-        })
-      } catch (error) {
-          alert('Failed to connect.');
+  const connectWallet = con => {
+    try {
+      activate(con, undefined, true).catch(error => {
+        if (error instanceof UnsupportedChainIdError) {
           console.log(error);
-      }
-    } 
-        
-    // handle logic to recognize the connector currently being activated
-    const [activatingConnector, setActivatingConnector] = React.useState()
-    
-    useEffect(() => {
-        console.log("activating connector: ", activatingConnector)
-        if (activatingConnector && activatingConnector === connector) {
-            setActivatingConnector(undefined)
+          activate(connector); // a little janky...can't use setError because the connector isn't set
+        } else {
+          // setPendingError(true)
         }
-    }, [activatingConnector, connector])
+      });
+    } catch (error) {
+      alert('Failed to connect.');
+      console.log(error);
+    }
+  };
 
-    // mount only once or face issues :P
-    const triedEager = useEagerConnect()
-    useInactiveListener(!triedEager || !!activatingConnector)
+  // handle logic to recognize the connector currently being activated
+  const [activatingConnector, setActivatingConnector] = React.useState();
 
-    /**
+  useEffect(() => {
+    console.log('activating connector: ', activatingConnector);
+    if (activatingConnector && activatingConnector === connector) {
+      setActivatingConnector(undefined);
+    }
+  }, [activatingConnector, connector]);
+
+  // mount only once or face issues :P
+  const triedEager = useEagerConnect();
+  useInactiveListener(!triedEager || !!activatingConnector);
+
+  /**
     const connectKeplr = async () => {
       const chainId = "ochain-testnet";
       if(window.keplr) {
@@ -107,41 +105,36 @@ export function AutoLogin({children}) {
       }
     }
      */
-    
 
-    // const sendInKeplr = async (recipient, amount) => {
-    //   // See above.
-    //   const chainId = "cosmoshub-3";
-    //   await window.keplr.enable(chainId);
-    //   const offlineSigner = window.getOfflineSigner(chainId);
+  // const sendInKeplr = async (recipient, amount) => {
+  //   // See above.
+  //   const chainId = "cosmoshub-3";
+  //   await window.keplr.enable(chainId);
+  //   const offlineSigner = window.getOfflineSigner(chainId);
 
-    //   const accounts = await offlineSigner.getAccounts();
+  //   const accounts = await offlineSigner.getAccounts();
 
-    //   // Initialize the gaia api with the offline signer that is injected by Keplr extension.
-    //   const cosmJS = new SigningCosmosClient(
-    //       "https://node-cosmoshub-3.keplr.app/rest",
-    //       accounts[0].address,
-    //       offlineSigner
-    //   );
+  //   // Initialize the gaia api with the offline signer that is injected by Keplr extension.
+  //   const cosmJS = new SigningCosmosClient(
+  //       "https://node-cosmoshub-3.keplr.app/rest",
+  //       accounts[0].address,
+  //       offlineSigner
+  //   );
 
-    //   const result = await cosmJS.sendTokens(recipient, [{
-    //       denom: "uatom",
-    //       amount: amount.toString(),
-    //   }]);
+  //   const result = await cosmJS.sendTokens(recipient, [{
+  //       denom: "uatom",
+  //       amount: amount.toString(),
+  //   }]);
 
-    //   console.log(result);
+  //   console.log(result);
 
-    //   if (result.code !== undefined &&
-    //       result.code !== 0) {
-    //       alert("Failed to send tx: " + result.log || result.rawLog);
-    //   } else {
-    //       alert("Succeed to send tx");
-    //   }
-    // }
-    
-    return (
-        <>
-            { active ? children : <Landing connectWallet={connectWallet} /> }
-        </>
-    )
+  //   if (result.code !== undefined &&
+  //       result.code !== 0) {
+  //       alert("Failed to send tx: " + result.log || result.rawLog);
+  //   } else {
+  //       alert("Succeed to send tx");
+  //   }
+  // }
+
+  return <>{active ? children : <Landing connectWallet={connectWallet} />}</>;
 }

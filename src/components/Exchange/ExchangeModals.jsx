@@ -1,22 +1,11 @@
-import React, { useState } from "react";
-import Modal from "react-modal";
-import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronLeft,
-  faExchangeAlt,
-} from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from 'react';
+import Modal from 'react-modal';
+import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 
-import { responsive } from "theme/constants";
-import {
-  SellBtn,
-  ExchangeButton,
-  Sending,
-  ExchangeInput,
-  MaxBtn,
-  Receiving,
-  ReceivingValue,
-} from "./exchangeStyles";
+import { responsive } from 'theme/constants';
+import { SellBtn, ExchangeButton, Sending, ExchangeInput, MaxBtn, Receiving, ReceivingValue } from './exchangeStyles';
 
 const ModalTrigger = styled.div`
   display: none;
@@ -32,12 +21,12 @@ const ExchangeModalWrapper = styled.div`
   width: 100%;
   height: 100%;
 
-  background-color: ${(props) => props.theme.colors.bgDarkest};
+  background-color: ${props => props.theme.colors.bgDarkest};
 
   header {
     padding: 20px 20px 0;
 
-    background-color: ${(props) => props.theme.colors.bgNormal};
+    background-color: ${props => props.theme.colors.bgNormal};
   }
 `;
 
@@ -78,7 +67,7 @@ const HeaderInfoItem = styled.div`
   }
 
   > strong {
-    color: ${(props) => props.theme.colors.textThirdly};
+    color: ${props => props.theme.colors.textThirdly};
     font-weight: 400;
 
     @media screen and (max-width: ${responsive.smartphoneLarge}) {
@@ -98,8 +87,8 @@ const HeaderInfoItemValue = styled.div`
   > strong {
     margin-right: 12px;
 
-    color: ${(props) => props.theme.colors.textPrimary};
-    font-family: "Bebas Neue", sans-serif;
+    color: ${props => props.theme.colors.textPrimary};
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 24px;
 
     @media screen and (max-width: ${responsive.laptop}) {
@@ -118,7 +107,7 @@ const ModalInfo = styled.div`
 
   padding: 32px 20px;
 
-  background-color: ${(props) => props.theme.colors.bgNormal};
+  background-color: ${props => props.theme.colors.bgNormal};
 `;
 
 const ModalBtn = styled.button`
@@ -127,7 +116,7 @@ const ModalBtn = styled.button`
 
   border-radius: 8px;
   border: none;
-  background-color: ${(props) => props.theme.colors.bgHighlightBorder};
+  background-color: ${props => props.theme.colors.bgHighlightBorder};
 
   color: #84809a;
 
@@ -137,7 +126,7 @@ const ModalBtn = styled.button`
 const modalOverride = {
   content: {
     padding: 0,
-    border: "none",
+    border: 'none',
     borderRadius: 0,
 
     top: 0,
@@ -153,17 +142,11 @@ export default function ExchangeModals() {
 
   return (
     <ModalTrigger>
-      <ExchangeButton onClick={() => setBuyModalOpen(true)}>
-        Buy NOM
-      </ExchangeButton>
+      <ExchangeButton onClick={() => setBuyModalOpen(true)}>Buy NOM</ExchangeButton>
 
       <SellBtn onClick={() => setSellModalOpen(true)}>Sell NOM</SellBtn>
 
-      <Modal
-        isOpen={buyModalOpen}
-        style={modalOverride}
-        onRequestClose={() => setBuyModalOpen(false)}
-      >
+      <Modal isOpen={buyModalOpen} style={modalOverride} onRequestClose={() => setBuyModalOpen(false)}>
         <ExchangeModalWrapper>
           <ModalHeader>
             <ModalBtn onClick={() => setBuyModalOpen(false)}>
@@ -225,11 +208,7 @@ export default function ExchangeModals() {
         </ExchangeModalWrapper>
       </Modal>
 
-      <Modal
-        isOpen={sellModalOpen}
-        style={modalOverride}
-        onRequestClose={() => setSellModalOpen(false)}
-      >
+      <Modal isOpen={sellModalOpen} style={modalOverride} onRequestClose={() => setSellModalOpen(false)}>
         <ExchangeModalWrapper>
           <ModalHeader>
             <ModalBtn onClick={() => setSellModalOpen(false)}>

@@ -1,20 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Web3ReactProvider } from '@web3-react/core';
-import reportWebVitals from './reportWebVitals';
-import { Web3Provider } from '@ethersproject/providers'
-import Modal from 'react-modal'
+import { Web3Provider } from '@ethersproject/providers';
+import Modal from 'react-modal';
 
+import reportWebVitals from './reportWebVitals';
 import App from './App';
 import './index.css';
 
 function getLibrary(provider) {
-  const library = new Web3Provider(provider)
-  library.pollingInterval = 12000
-  return library
+  const library = new Web3Provider(provider);
+  library.pollingInterval = 12000;
+  return library;
 }
 
-Modal.setAppElement("#root")
+Modal.setAppElement('#root');
 
 ReactDOM.render(
   <React.StrictMode>
@@ -22,7 +22,7 @@ ReactDOM.render(
       <App />
     </Web3ReactProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function

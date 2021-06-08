@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import { responsive } from "theme/constants";
+import styled from 'styled-components';
+
+import { responsive } from 'theme/constants';
 
 export const Container = styled.div`
   max-width: 100%;

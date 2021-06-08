@@ -1,35 +1,35 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react';
 
 export function useAsyncFn(fn) {
   const [{ isWorking, error }, setState] = useState({
     error: null,
-    isWorking: false
-  })
+    isWorking: false,
+  });
 
   const cb = useCallback(
     async (...args) => {
-      let result
+      let result;
       setState({
         error: null,
-        isWorking: true
-      })
+        isWorking: true,
+      });
       try {
-        result = await fn(...args)
+        result = await fn(...args);
         setState({
           error: null,
-          isWorking: false
-        })
+          isWorking: false,
+        });
       } catch (error) {
         setState({
           error,
-          isWorking: false
-        })
-        throw error
+          isWorking: false,
+        });
+        throw error;
       }
-      return result
+      return result;
     },
-    [fn]
-  )
+    [fn],
+  );
 
-  return [cb, isWorking, error]
+  return [cb, isWorking, error];
 }

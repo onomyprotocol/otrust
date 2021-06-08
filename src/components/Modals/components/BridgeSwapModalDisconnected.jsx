@@ -1,13 +1,12 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import { Close } from "../Icons";
-import * as Modal from "../styles";
-import { responsive } from "theme/constants";
-
-import oneWayBridgeImg from "./assets/one-way-bridge.svg";
-import whyBridgeImg from "./assets/why-bridge.svg";
-import bridgeCurveImg from "./assets/icon-bridge-curve.svg";
+import { Close } from '../Icons';
+import * as Modal from '../styles';
+import { responsive } from 'theme/constants';
+import oneWayBridgeImg from './assets/one-way-bridge.svg';
+import whyBridgeImg from './assets/why-bridge.svg';
+import bridgeCurveImg from './assets/icon-bridge-curve.svg';
 
 const ConnectWalletWrapper = styled.div`
   display: flex;
@@ -18,7 +17,7 @@ const ConnectWalletWrapper = styled.div`
   padding: 100px 32px;
 
   border-radius: 8px;
-  background-color: ${(props) => props.theme.colors.bgDarken};
+  background-color: ${props => props.theme.colors.bgDarken};
 
   @media screen and (max-width: ${responsive.tabletSmall}) {
     padding: 24px;
@@ -78,11 +77,11 @@ export default function BridgeSwapModalDisconnected() {
 
               <Modal.Desc>
                 Choose to bridge when you are ready to do so to finalize your
-                purchase of NOM!{" "}
+                purchase of NOM!{' '}
                 <strong>
                   After bridging, you can no longer sell back to the bonding
                   curve or bridge back for wNOM.
-                </strong>{" "}
+                </strong>{' '}
                 There are no guarantees of liquid markets.
               </Modal.Desc>
             </div>
@@ -97,14 +96,14 @@ export default function BridgeSwapModalDisconnected() {
               <Modal.List>
                 <li>You must hold NOM to participate in the Onomy Network. </li>
                 <li>
-                  Early stakers of NOM take advantage of larger staking yield.{" "}
+                  Early stakers of NOM take advantage of larger staking yield.{' '}
                 </li>
                 <li>
                   NOM is used for governance, staking, and collateral to mint
                   stablecoins.
                 </li>
                 <li>
-                  All bridged wNOM is burned from the bonding curve supply.{" "}
+                  All bridged wNOM is burned from the bonding curve supply.{' '}
                 </li>
                 <li>NOM would be listed on exchanges rather than wNOM. </li>
               </Modal.List>

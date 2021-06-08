@@ -2,66 +2,77 @@ export const leftHeaderDefault = [
   {
     id: 'BondingCurve',
     text: 'Bonding Curve Chart',
-    status: true
-  }, {
+    status: true,
+  },
+  {
     id: 'HistoricalChart',
     text: 'Historical Chart',
-    status: false
-  }, {
+    status: false,
+  },
+  {
     id: 'CandelView',
     text: 'Candel View',
-    status: false
-  }
-]
+    status: false,
+  },
+];
 
 export const lineHeaderDefault = [
   {
     id: 'Day',
     text: 'Day',
-    status: true
-  }, {
+    status: true,
+  },
+  {
     id: 'Week',
     text: 'Week',
-    status: false
-  }, {
+    status: false,
+  },
+  {
     id: 'Month',
     text: 'Month',
-    status: false
-  }, {
+    status: false,
+  },
+  {
     id: 'Quarter',
     text: 'Year',
-    status: false
-  }, {
+    status: false,
+  },
+  {
     id: 'AllTime',
     text: 'All Time',
-    status: false
-  }
-]
+    status: false,
+  },
+];
 
 export const candelHeaderDefault = [
   {
     id: '15m',
     text: '15m',
     status: true,
-  }, {
+  },
+  {
     id: '1H',
     text: '1H',
-    status: false
-  }, {
+    status: false,
+  },
+  {
     id: '4H',
     text: '4H',
-    status: false
-  }, {
+    status: false,
+  },
+  {
     id: '1D',
     text: '1D',
-    status: false
-  }, {
+    status: false,
+  },
+  {
     id: '3D',
     text: '3D',
-    status: false
-  }, {
+    status: false,
+  },
+  {
     id: '1W',
     text: '1W',
-    status: false
-  }
-]
+    status: false,
+  },
+];

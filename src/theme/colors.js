@@ -48,6 +48,6 @@ export const darkNew = {
     bgHighlightBorder: '#302E3D',
     bgNormal: '#1F1D29',
     bgDarken: '#1A1723',
-    bgDarkest: '#06060f'
-  }
-}
+    bgDarkest: '#06060f',
+  },
+};

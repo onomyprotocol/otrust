@@ -1,11 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import Exchange from 'components/Exchange/Exchange';
 
-import { responsive } from "theme/constants";
-
-import { Panel } from "components/UI";
-import Chart from "components/Chart/Chart";
-import Exchange from "components/Exchange/Exchange"
-
+import { responsive } from 'theme/constants';
+import { Panel } from 'components/UI';
+import Chart from 'components/Chart/Chart';
 
 const ContentLayout = styled.div`
   display: grid;
@@ -17,7 +15,6 @@ const ContentLayout = styled.div`
 `;
 
 export default function Bonding() {
-
   return (
     <Panel>
       <ContentLayout>

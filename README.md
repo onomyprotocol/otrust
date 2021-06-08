@@ -1,11 +1,12 @@
 # Onomy Trust (OTRUST) Bonding Curve Front-End
 
-wNOM will be continuously distributed through a bonding curve until all 100,000,000 wNOM ERC20 have been bridged. 
+wNOM will be continuously distributed through a bonding curve until all 100,000,000 wNOM ERC20 have been bridged.
 
 ## Prerequisites
-1) Ganache https://www.trufflesuite.com/docs/ganache/quickstart
-2) Truffle https://www.trufflesuite.com/docs/truffle/getting-started/installation
-3) Metamask https://metamask.io/
+
+1. Ganache https://www.trufflesuite.com/docs/ganache/quickstart
+2. Truffle https://www.trufflesuite.com/docs/truffle/getting-started/installation
+3. Metamask https://metamask.io/
 
 ## Available Scripts
 
@@ -73,3 +74,17 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Linting
+
+For those using VSCode the following setting is recommended:
+
+ESLint by Dirk Baeumer extension and setting in VScode config
+
+```json
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
+```

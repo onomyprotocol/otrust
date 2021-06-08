@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { darken, lighten } from "polished";
+import styled from 'styled-components';
+import { darken, lighten } from 'polished';
 
-import { responsive } from "theme/constants";
+import { responsive } from 'theme/constants';
 
 export const Wrapper = styled.div`
   width: 500px;
@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
   top: 50%;
   left: 50%;
 
-  background-color: ${(props) => props.theme.colors.bgNormal};
+  background-color: ${props => props.theme.colors.bgNormal};
   border-radius: 8px;
 
   transform: translate(-50%, -50%);
@@ -43,7 +43,7 @@ export const Wrapper = styled.div`
   footer {
     padding: 32px 36px 0;
 
-    background-color: ${(props) => props.theme.colors.bgDarken};
+    background-color: ${props => props.theme.colors.bgDarken};
 
     @media screen and (max-width: ${responsive.laptop}) {
       padding: 24px 24px 0;
@@ -75,12 +75,12 @@ export const CloseIcon = styled.button`
   border: none;
 
   svg {
-    fill: ${(props) => props.theme.colors.textThirdly};
+    fill: ${props => props.theme.colors.textThirdly};
   }
 
   &:hover {
     svg {
-      fill: ${(props) => lighten(0.1, props.theme.colors.textThirdly)};
+      fill: ${props => lighten(0.1, props.theme.colors.textThirdly)};
     }
   }
 `;
@@ -89,11 +89,11 @@ export const PrimaryButton = styled.button`
   width: 170px;
   height: 50px;
 
-  background-color: ${(props) => props.theme.colors.textPrimary};
+  background-color: ${props => props.theme.colors.textPrimary};
   border: none;
   border-radius: 8px;
 
-  color: ${(props) => props.theme.colors.bgDarken};
+  color: ${props => props.theme.colors.bgDarken};
   font-weight: 600;
   font-size: 14px;
 
@@ -109,28 +109,25 @@ export const PrimaryButton = styled.button`
   }
 
   &:hover {
-    background-color: ${(props) =>
-    lighten(0.1, props.theme.colors.textPrimary)};
+    background-color: ${props => lighten(0.1, props.theme.colors.textPrimary)};
   }
 
   &:active {
-    background-color: ${(props) => darken(0.1, props.theme.colors.textPrimary)};
+    background-color: ${props => darken(0.1, props.theme.colors.textPrimary)};
   }
 `;
 
 export const SecondaryButton = styled(PrimaryButton)`
-  background-color: ${(props) => props.theme.colors.bgHighlightBorder};
+  background-color: ${props => props.theme.colors.bgHighlightBorder};
 
-  color: ${(props) => props.theme.colors.textPrimary};
+  color: ${props => props.theme.colors.textPrimary};
 
   &:hover {
-    background-color: ${(props) =>
-    lighten(0.05, props.theme.colors.bgHighlightBorder)};
+    background-color: ${props => lighten(0.05, props.theme.colors.bgHighlightBorder)};
   }
 
   &:active {
-    background-color: ${(props) =>
-    darken(0.05, props.theme.colors.bgHighlightBorder)};
+    background-color: ${props => darken(0.05, props.theme.colors.bgHighlightBorder)};
   }
 `;
 
@@ -144,7 +141,7 @@ export const ExchangeResult = styled.div`
   padding: 32px;
   margin: 32px 0 24px;
 
-  background-color: ${(props) => props.theme.colors.bgDarken};
+  background-color: ${props => props.theme.colors.bgDarken};
   border-radius: 8px;
 
   font-size: 28px;
@@ -174,7 +171,7 @@ export const ExchangeRateWrapper = styled.div`
 
   span {
     font-weight: 400;
-    color: ${(props) => props.theme.colors.textThirdly};
+    color: ${props => props.theme.colors.textThirdly};
   }
 
   strong {
@@ -229,7 +226,7 @@ export const ModalIconWrapper = styled.div`
   width: 88px;
   margin: 0 auto 16px;
 
-  background-color: ${(props) => props.theme.colors.highlightGreen};
+  background-color: ${props => props.theme.colors.highlightGreen};
   border-radius: 50%;
   border: 6px solid #324946;
 
@@ -257,7 +254,7 @@ export const DetailsButton = styled.button`
   border: none;
   background: transparent;
 
-  color: ${(props) => props.theme.colors.textSecondary};
+  color: ${props => props.theme.colors.textSecondary};
   font-size: 14px;
 
   @media screen and (max-width: ${responsive.laptop}) {
@@ -272,7 +269,7 @@ export const DetailsButton = styled.button`
     width: 20px;
     height: 20px;
 
-    transform: ${(props) => (props.active ? "rotate(180deg)" : "rotate(0deg)")};
+    transform: ${props => (props.active ? 'rotate(180deg)' : 'rotate(0deg)')};
     transition: 0.1s ease;
 
     @media screen and (max-width: ${responsive.laptop}) {
@@ -282,28 +279,28 @@ export const DetailsButton = styled.button`
   }
 
   &:hover {
-    color: ${(props) => lighten(0.05, props.theme.colors.textSecondary)};
+    color: ${props => lighten(0.05, props.theme.colors.textSecondary)};
   }
 
   &:active {
-    color: ${(props) => darken(0.05, props.theme.colors.textSecondary)};
+    color: ${props => darken(0.05, props.theme.colors.textSecondary)};
   }
 `;
 
 export const Spent = styled.div`
-  color: ${(props) => props.theme.colors.textThirdly};
+  color: ${props => props.theme.colors.textThirdly};
 `;
 
 export const DetailsSeparator = styled.span`
   margin: 0 20px;
 
-  color: ${(props) => props.theme.colors.iconsNormal};
+  color: ${props => props.theme.colors.iconsNormal};
 `;
 
 export const FooterDetails = styled.div`
   padding: 32px 0;
 
-  border-top: 1px solid ${(props) => props.theme.colors.bgHighlightBorder};
+  border-top: 1px solid ${props => props.theme.colors.bgHighlightBorder};
 `;
 
 export const FooterDetailsRow = styled.div`
@@ -316,7 +313,7 @@ export const FooterDetailsRow = styled.div`
   }
 
   span {
-    color: ${(props) => props.theme.colors.textThirdly};
+    color: ${props => props.theme.colors.textThirdly};
   }
 
   strong {
@@ -348,19 +345,19 @@ export const BridgeModalWrapper = styled(Wrapper)`
     width: 600px;
 
     top: 50px;
-    transform: translate( -50%, 0);
+    transform: translate(-50%, 0);
   }
 
   @media screen and (max-width: ${responsive.smartphoneLarge}) {
     display: none;
- }
+  }
 `;
 
 export const Info = styled.aside`
   padding: 40px;
 
   border-radius: 8px;
-  background-color: ${(props) => props.theme.colors.bgDarken};
+  background-color: ${props => props.theme.colors.bgDarken};
 
   @media screen and (max-width: ${responsive.laptop}) {
     padding: 24px;
@@ -413,7 +410,7 @@ export const ConnectionItem = styled.div`
   padding: 20px;
 
   border-radius: 8px;
-  background-color: ${(props) => props.theme.colors.bgDarken};
+  background-color: ${props => props.theme.colors.bgDarken};
 
   @media screen and (max-width: ${responsive.laptop}) {
     gap: 20px;
@@ -430,7 +427,7 @@ export const InfoImgWrapper = styled.div`
   padding: 40px 50px;
 
   border-radius: 8px;
-  background-color: ${(props) => props.theme.colors.bgNormal};
+  background-color: ${props => props.theme.colors.bgNormal};
 
   @media screen and (max-width: ${responsive.laptop}) {
     padding: 40px;
@@ -458,8 +455,8 @@ export const ConnectionItemIcon = styled.div`
   height: 56px;
 
   border-radius: 50%;
-  border: 3px solid ${(props) => props.theme.colors.bgHighlightBorder};
-  background-color: ${(props) => props.theme.colors.bgNormal};
+  border: 3px solid ${props => props.theme.colors.bgHighlightBorder};
+  background-color: ${props => props.theme.colors.bgNormal};
 
   @media screen and (max-width: ${responsive.laptop}) {
     width: 48px;
@@ -485,7 +482,7 @@ export const ConnectionItemContent = styled.div`
   > span {
     font-size: 16px;
     font-weight: 500;
-    color: ${(props) => props.theme.colors.textSecondary};
+    color: ${props => props.theme.colors.textSecondary};
 
     @media screen and (max-width: ${responsive.laptop}) {
       font-size: 14px;
@@ -504,7 +501,7 @@ export const Balance = styled.div`
   > strong {
     font-size: 12px;
     font-weight: 400;
-    color: ${(props) => props.theme.colors.textSecondary};
+    color: ${props => props.theme.colors.textSecondary};
     white-space: nowrap;
 
     @media screen and (max-width: ${responsive.laptop}) {
@@ -533,12 +530,9 @@ export const ConnectionStatus = styled.div`
   position: relative;
 
   border-radius: 8px;
-  background-color: ${(props) => (props.disconnected ? "#30232e" : "#2a3438")};
+  background-color: ${props => (props.disconnected ? '#30232e' : '#2a3438')};
 
-  color: ${(props) =>
-    props.disconnected
-      ? props.theme.colors.highlightRed
-      : props.theme.colors.highlightGreen};
+  color: ${props => (props.disconnected ? props.theme.colors.highlightRed : props.theme.colors.highlightGreen)};
   white-space: nowrap;
 
   @media screen and (max-width: ${responsive.tabletSmall}) {
@@ -555,7 +549,7 @@ export const ConnectionStatus = styled.div`
 
   &::before,
   &::after {
-    content: "";
+    content: '';
 
     display: block;
     width: 1px;
@@ -565,10 +559,8 @@ export const ConnectionStatus = styled.div`
     top: -30px;
     left: 50%;
 
-    background-color: ${(props) =>
-    props.disconnected
-      ? props.theme.colors.highlightRed
-      : props.theme.colors.highlightGreen};
+    background-color: ${props =>
+      props.disconnected ? props.theme.colors.highlightRed : props.theme.colors.highlightGreen};
 
     @media screen and (max-width: ${responsive.tabletSmall}) {
       display: none;
@@ -579,13 +571,10 @@ export const ConnectionStatus = styled.div`
     top: auto;
     bottom: -30px;
 
-    background-color: ${(props) =>
-    props.disconnected
-      ? props.theme.colors.bgHighlightBorder
-      : props.theme.colors.highlightGreen};
+    background-color: ${props =>
+      props.disconnected ? props.theme.colors.bgHighlightBorder : props.theme.colors.highlightGreen};
   }
 `;
-
 
 export const BridgeLayout = styled.div`
   display: grid;
@@ -609,20 +598,20 @@ export const Desc = styled.p`
   max-width: 600px;
   margin-bottom: 40px;
 
-  color: ${(props) => props.theme.colors.textSecondary};
+  color: ${props => props.theme.colors.textSecondary};
 
   strong {
     font-weight: 500;
-    color: ${(props) => props.theme.colors.textPrimary};
+    color: ${props => props.theme.colors.textPrimary};
   }
 `;
 export const List = styled.ol`
   padding-left: 1em;
 
-  color: ${(props) => props.theme.colors.textSecondary};
+  color: ${props => props.theme.colors.textSecondary};
 
   li::marker {
-    color: ${(props) => props.theme.colors.textPrimary};
+    color: ${props => props.theme.colors.textPrimary};
   }
 
   li + li {
@@ -647,5 +636,4 @@ export const BridgeContent = styled.div`
     grid-template-rows: 1fr 1fr;
     gap: 24px;
   }
-  
-`
+`;
