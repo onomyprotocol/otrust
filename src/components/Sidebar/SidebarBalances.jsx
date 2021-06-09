@@ -131,7 +131,7 @@ export default function SidebarBalances({
           <strong>{strong} Balance</strong>
           <BalanceNumber>
             {strongBalance}
-            <small> = 16,208.04 $</small>
+            <small> = $16,208.04</small>
           </BalanceNumber>
         </BalancePrice>
         <BalanceHint>
@@ -143,7 +143,7 @@ export default function SidebarBalances({
           <strong>{weak} Balance</strong>
           <BalanceNumber strong>
             {weakBalance}
-            <small> = 16,208.04 $</small>
+            <small> = $16,208.04</small>
             <Approved>
               <span>1,042 approved</span>
               <CloseIcon onClick={() => {}} />
