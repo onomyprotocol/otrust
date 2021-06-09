@@ -6,7 +6,7 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 import { responsive } from "theme/constants";
 import { Sending, ExchangeInput, MaxBtn } from "../../Exchange/exchangeStyles";
-import { ConnectionStatus } from "../../AcctDash";
+import { ConnectionStatus } from "../../Sidebar/Sidebar";
 import * as Modal from "../styles";
 
 import oneWayBridgeImg from "./assets/one-way-bridge.svg";

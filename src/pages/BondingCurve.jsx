@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 // Components
-import AcctDash from "components/AcctDash";
+import Sidebar from "components/Sidebar/Sidebar";
 import Bonding from "components/Bonding";
 import { Container } from "components/UI";
 import { responsive } from "theme/constants";
@@ -40,7 +40,7 @@ export default function BondingCurve() {
     <Container>
       <BondingCurveLayout>
         <Bonding />
-        <AcctDash />
+        <Sidebar />
       </BondingCurveLayout>
     </Container>
   );
