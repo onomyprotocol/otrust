@@ -27,9 +27,6 @@ const StyledSVG = styled.svg`
 `
 function supplyToArray([supBegin, supEnd]) {
   
-  console.log("Supply Begin: ", supBegin)
-  console.log("Supply End: ", supEnd)
-  
   var dataArray = [];
   const dif = supEnd - supBegin;
   const n = 100;
@@ -40,7 +37,6 @@ function supplyToArray([supBegin, supEnd]) {
         });
   }
 
-  console.log("Data Array: ", dataArray)
   return dataArray;
 }
 
@@ -70,9 +66,6 @@ export function bounds(formatSupply) {
   } catch (err) {
     console.log(err)
   }
-
-  console.log("Upper Bound: ", upperBound)
-  console.log("Lower Bound: ", lowerBound)
   
   return { lowerBound, upperBound }
 }
@@ -114,9 +107,6 @@ function LineChart({ id = "bondingChart" }) {
   const data = supplyToArray([lowerBound, upperBound])
 
   const labelData = labelArray(formatSupply)
-  
-  console.log("Data: ", data)
-  console.log("Area Data: ", areaData)
   
   // charts and xAxis and yAxis
   useEffect(() => {

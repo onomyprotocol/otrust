@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { lighten } from "polished";
 import useInterval from "@use-it/interval";
@@ -12,6 +12,7 @@ import * as Modal from "components/Modals/styles";
 import "components/Modals/loadingBar.css";
 import { useWeb3React } from "@web3-react/core";
 import { useExchange } from "context/exchange/ExchangeContext";
+import { useChain } from 'context/chain/ChainContext'
 
 const TransactionDetailsRow = styled.div`
   display: flex;
@@ -121,28 +122,15 @@ const limitOptions = [
   },
 ];
 
-const gasOptions = [
-  {
-    id: 0,
-    text: "0 (Standard)",
-  },
-  {
-    id: 1,
-    text: "0 (Fast)",
-  },
-  {
-    id: 2,
-    text: "0 (Instant)",
-  },
-];
-
 export default function ConfirmTransactionModal({ submitTrans }) {
   const [slippage, setSlippage] = useState(0);
-  const [gasFee, setGasFee] = useState(0);
   const { handleModal } = useModal();
   const { account } = useWeb3React();
+  const { gasOptions } = useChain();
 
   const { askAmount, bidAmount, bidDenom, strong, weak } = useExchange();
+
+  const [gasFee, setGasFee] = useState();
 
   const [count, setCount] = useState(60);
   const [delay, setDelay] = useState(1000);
@@ -155,22 +143,6 @@ export default function ConfirmTransactionModal({ submitTrans }) {
       setCount(count - 1);
     }
   };
-
-
-	const getGasPrices = async () => {
-		const prices = await fetch('https://www.gasnow.org/api/v3/gas/price?utm_source=onomy');
-		const result = await prices.json();
-    gasOptions[0].text = result.data.standard / 1e9 + " (Standard)";
-    gasOptions[1].text = result.data.fast / 1e9 + " (Fast)";
-    gasOptions[2].text = result.data.rapid / 1e9 + " (Instant)";
-    gasOptions[0].gas = result.data.standard / 1e9;
-    gasOptions[1].gas = result.data.fast / 1e9;
-    gasOptions[2].gas = result.data.rapid / 1e9;
-	}
-
-  useEffect(() => {
-    getGasPrices();
-  }, [])
 
   useInterval(increaseCount, delay);
 

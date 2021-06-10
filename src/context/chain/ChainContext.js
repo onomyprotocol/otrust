@@ -21,6 +21,20 @@ function ChainProvider({ theme, children }) {
         blockNumber: new BigNumber(0),
         currentETHPrice: new BigNumber(0),
         currentNOMPrice: new BigNumber(0),
+        gasOptions: [
+            {
+            id: 0,
+            text: "0 (Standard)",
+            },
+            {
+            id: 1,
+            text: "0 (Fast)",
+            },
+            {
+            id: 2,
+            text: "0 (Instant)",
+            },
+        ],
         NOMallowance: new BigNumber(0),
         strongBalance: new BigNumber(0),
         supplyNOM: new BigNumber(0),
@@ -35,6 +49,38 @@ function ChainProvider({ theme, children }) {
         uri: process.env.REACT_APP_GRAPHQL_ENDPOINT,
         cache: new InMemoryCache(),
     })
+
+    const getGasOptions = async () => {
+        const prices = await fetch('https://www.gasnow.org/api/v3/gas/price?utm_source=onomy');
+            const result = await prices.json();
+        
+        let gasOptions = [
+            {
+                id: 0,
+                text: "0 (Standard)",
+                gas: new BigNumber(0)
+            },
+            {
+                id: 1,
+                text: "0 (Fast)",
+                gas: new BigNumber(0)
+            },
+            {
+                id: 2,
+                text: "0 (Instant)",
+                gas: new BigNumber(0)
+            }
+        ]
+                    
+        gasOptions[0].text = result.data.standard / 1e9 + " (Standard)";
+        gasOptions[1].text = result.data.fast / 1e9 + " (Fast)";
+        gasOptions[2].text = result.data.rapid / 1e9 + " (Instant)";
+        gasOptions[0].gas = new BigNumber((result.data.standard / 1e9).toString())
+        gasOptions[1].gas = new BigNumber((result.data.fast / 1e9).toString())
+        gasOptions[2].gas = new BigNumber((result.data.rapid / 1e9).toString())
+
+        return gasOptions
+    }
 
     useEffect(() => {
         // listen for changes on an Ethereum address
@@ -53,7 +99,8 @@ function ChainProvider({ theme, children }) {
                             bondContract.getSupplyNOM(),
                             // Weak Balance (May need to move these to Exchange)
                             NOMContract.balanceOf(account),
-                            number
+                            number,
+                            getGasOptions()
                             // UniSwap Pricing
                             // UniSwapCont.getReserves(),
                         ]
@@ -105,6 +152,12 @@ function ChainProvider({ theme, children }) {
                                     update = update.set(
                                         'blockNumber', 
                                         new BigNumber(number.toString())
+                                    )
+                                    break
+                                case 6:
+                                    update = update.set(
+                                        'gasOptions', 
+                                        values[6]
                                     )
                                     break
                                 default: break

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { useExchange } from 'context/exchange/ExchangeContext'
 import { useChain } from 'context/chain/ChainContext'
@@ -16,11 +16,6 @@ export default function NOMButton({ onBid, onApprove }) {
       input,
       weak
     } = useExchange()
-
-    useEffect(() => {
-      console.log("Bid Amount: ", bidAmount)
-      console.log("NOM Allowance: ", NOMallowance)
-    }, [NOMallowance, bidAmount])
     
     return (
       <> 

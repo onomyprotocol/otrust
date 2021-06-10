@@ -23,6 +23,16 @@ export function reducer(state, action) {
             for (let [key, value] of action.value.entries()) {
                 if(state[key]) { 
                     switch (key) {
+                        case 'gasOptions':
+                            try { 
+                                update = {
+                                    [key]: value,
+                                    ...update
+                                }
+                            } catch(e) {
+                                console.log(e)
+                            }
+                            break
                         case 'currentETHPrice':
                             try { 
                                 update = reducerCallback(

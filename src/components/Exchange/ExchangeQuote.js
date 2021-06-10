@@ -38,7 +38,7 @@ import { utils } from "ethers";
 
 export default function ExchangeQuote({strength}) {
   
-  const { strongBalance, weakBalance } = useChain()
+  const { gasOptions, strongBalance, weakBalance } = useChain()
   const { handleModal } = useModal()
   const { library } = useWeb3React()
   
@@ -54,34 +54,28 @@ export default function ExchangeQuote({strength}) {
     strong,
     weak
   } = useExchange();
-  
-  useEffect(() => {
-    console.log("Input: ", input)
-    console.log("Output: ", output)
-  })
 
   const { 
     objDispatch,
     strDispatch
   } = useUpdateExchange();
 
+  
+
   const getAskAmount = useCallback(async (askAmountState, bidAmountUpdate, textStrength) => {
     var askAmountUpdate = askAmountState
         
     switch (textStrength) {
         case 'strong':
-            console.log('Strong: ', bidAmountUpdate.toFixed(0))
             askAmountUpdate = await bondContract.buyQuoteETH(
                 bidAmountUpdate.toFixed(0)
             )
-            console.log('Pull Strong Ask Amount', askAmountUpdate)
             break
 
         case 'weak':
             askAmountUpdate = await bondContract.sellQuoteNOM(
                 bidAmountUpdate.toFixed(0)
             )
-            console.log('Pull Weak Ask Amount', askAmountUpdate)
             break
 
         default:
@@ -273,11 +267,13 @@ export default function ExchangeQuote({strength}) {
     );
 
     let askAmountUpdate
-
+    
+    console.log("Gas Option 2: ", gasOptions[2].gas)
+    console.log("Bid Amount: ", (bidAmountUpdate.minus(gasOptions[2].gas)).toFixed(0))
     try {
         askAmountUpdate = await getAskAmount(
           askAmount,
-          bidAmountUpdate,
+          bidAmountUpdate.minus(gasOptions[2].gas),
           strength
         );
       } catch (err) {
@@ -295,7 +291,7 @@ export default function ExchangeQuote({strength}) {
     
     objUpdate = objUpdate.set(
       'bidAmount',
-      bidAmountUpdate
+      bidAmountUpdate.minus(gasOptions[2].gas)
     )
 
     objDispatch({
@@ -319,9 +315,6 @@ export default function ExchangeQuote({strength}) {
     async (evt, textStrength) => {
       evt.preventDefault()
       const floatRegExp = new RegExp(/(^(?=.+)(?:[1-9]\d*|0)?(?:\.\d+)?$)|(^\d\.$)/)
-      console.log("Component Strength: ", strength)
-      console.log("Text Strength: ", textStrength)
-      console.log("Bid Denom: ", bidDenom)
       let strUpdate = new Map()
       switch (true) {
         case (bidDenom === strength && input === evt.target.value.toString()): break

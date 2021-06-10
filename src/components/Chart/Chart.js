@@ -80,12 +80,6 @@ export default function Chart() {
     const [candelHeaderId] = useState("1");
     const [candelHeader] = useState(candelHeaderDefault);
 
-    useEffect(() => {
-      console.log("Error: ", error)
-      console.log("Loading: ", loading)
-      console.log("Bond Data: ", data)
-    }, [error, loading, data])
-
     const renderChart = (type) => {
         switch (type) {
         case "lineChart":
