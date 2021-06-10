@@ -152,7 +152,7 @@ export default function ExchangeQuote({strength}) {
                   slippage.toFixed(0),
                   { 
                     value: bidAmount.toFixed(0),
-                    gasPrice: utils.parseUnits((gasPrice || '30').toString(), 'gwei')
+                    gasPrice: ((gasPrice || '30').toString(), 'wei')
                   })
 
                   tx.wait().then(() => {

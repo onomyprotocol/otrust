@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
+=======
+import React, { useCallback, useEffect, useState } from "react";
+>>>>>>> 5d718cca79cbea269f431bd507c422384079ecc1
 import styled from "styled-components";
 import { lighten } from "polished";
 import useInterval from "@use-it/interval";
@@ -11,8 +15,13 @@ import { Close, Metamask } from "components/Modals/Icons";
 import * as Modal from "components/Modals/styles";
 import "components/Modals/loadingBar.css";
 import { useWeb3React } from "@web3-react/core";
+<<<<<<< HEAD
 import { useExchange } from "context/exchange/ExchangeContext";
 import { useChain } from 'context/chain/ChainContext'
+=======
+import { useExchange, useUpdateExchange } from "context/exchange/ExchangeContext";
+
+>>>>>>> 5d718cca79cbea269f431bd507c422384079ecc1
 
 const TransactionDetailsRow = styled.div`
   display: flex;
@@ -129,6 +138,7 @@ export default function ConfirmTransactionModal({ submitTrans }) {
   const { gasOptions } = useChain();
 
   const { askAmount, bidAmount, bidDenom, strong, weak } = useExchange();
+  const { objDispatch } = useUpdateExchange();
 
   const [gasFee, setGasFee] = useState();
 
