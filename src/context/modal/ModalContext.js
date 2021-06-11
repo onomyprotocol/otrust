@@ -1,12 +1,12 @@
-import React, { useState, createContext, useContext } from 'react'
-import Modal from "context/modal/modal";
+import React, { useState, createContext, useContext } from 'react';
 
-export const ModalContext = createContext()
-export const useModal = () => useContext(ModalContext)
+import Modal from 'context/modal/modal';
 
-export const UpdateModalContext = createContext()
-export const useUpdateModal = () => useContext(UpdateModalContext)
+export const ModalContext = createContext();
+export const useModal = () => useContext(ModalContext);
 
+export const UpdateModalContext = createContext();
+export const useUpdateModal = () => useContext(UpdateModalContext);
 
 let ModalProvider = ({ children }) => {
   let [modal, updateModal] = useState(false);
@@ -23,21 +23,21 @@ let ModalProvider = ({ children }) => {
     handleModal,
     modal,
     modalContent,
-  }
+  };
 
   const updateValue = {
     updateModal,
-    updateModalContent
-  }
+    updateModalContent,
+  };
 
   return (
     <UpdateModalContext.Provider value={updateValue}>
-        <ModalContext.Provider value={contextValue} >
-            <Modal />
-            {children}
-        </ModalContext.Provider>
+      <ModalContext.Provider value={contextValue}>
+        <Modal />
+        {children}
+      </ModalContext.Provider>
     </UpdateModalContext.Provider>
-  )
-}
+  );
+};
 
-export default ModalProvider
+export default ModalProvider;

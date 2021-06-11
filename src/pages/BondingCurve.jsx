@@ -1,10 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import Sidebar from 'components/Sidebar/Sidebar';
+import Bonding from 'components/Bonding';
 
-// Components
-import Sidebar from "components/Sidebar/Sidebar";
-import Bonding from "components/Bonding";
-import { Container } from "components/UI";
-import { responsive } from "theme/constants";
+import { Container } from 'components/UI';
+import { responsive } from 'theme/constants';
 
 const BondingCurveLayout = styled.div`
   display: grid;

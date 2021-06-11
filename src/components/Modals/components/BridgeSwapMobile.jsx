@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import ReactModal from "react-modal";
-import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from 'react';
+import ReactModal from 'react-modal';
+import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
-import { responsive } from "theme/constants";
-import { Sending, ExchangeInput, MaxBtn } from "../../Exchange/exchangeStyles";
-import { ConnectionStatus } from "../../Sidebar/Sidebar";
-import * as Modal from "../styles";
-
-import oneWayBridgeImg from "./assets/one-way-bridge.svg";
-import whyBridgeImg from "./assets/why-bridge.svg";
+import { responsive } from 'theme/constants';
+import { Sending, ExchangeInput, MaxBtn } from '../../Exchange/exchangeStyles';
+import { ConnectionStatus } from '../../Sidebar/Sidebar';
+import * as Modal from '../styles';
+import oneWayBridgeImg from './assets/one-way-bridge.svg';
+import whyBridgeImg from './assets/why-bridge.svg';
 
 const BridgeSwapModalWrapper = styled.div`
   @media screen and (min-width: 701px) {
@@ -22,12 +21,12 @@ const BridgeSwapModal = styled.div`
   width: 100%;
   height: 100%;
 
-  background-color: ${(props) => props.theme.colors.bgDarkest};
+  background-color: ${props => props.theme.colors.bgDarkest};
 
   header {
     padding: 20px 20px 0;
 
-    background-color: ${(props) => props.theme.colors.bgNormal};
+    background-color: ${props => props.theme.colors.bgNormal};
   }
 `;
 
@@ -68,7 +67,7 @@ const HeaderInfoItem = styled.div`
   }
 
   > strong {
-    color: ${(props) => props.theme.colors.textThirdly};
+    color: ${props => props.theme.colors.textThirdly};
     font-weight: 400;
 
     @media screen and (max-width: ${responsive.smartphoneLarge}) {
@@ -88,8 +87,8 @@ const HeaderInfoItemValue = styled.div`
   > strong {
     margin-right: 12px;
 
-    color: ${(props) => props.theme.colors.textPrimary};
-    font-family: "Bebas Neue", sans-serif;
+    color: ${props => props.theme.colors.textPrimary};
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 24px;
 
     @media screen and (max-width: ${responsive.laptop}) {
@@ -108,7 +107,7 @@ const ModalInfo = styled.div`
 
   padding: 32px 20px;
 
-  background-color: ${(props) => props.theme.colors.bgNormal};
+  background-color: ${props => props.theme.colors.bgNormal};
 `;
 
 const ModalBtn = styled.button`
@@ -117,7 +116,7 @@ const ModalBtn = styled.button`
 
   border-radius: 8px;
   border: none;
-  background-color: ${(props) => props.theme.colors.bgHighlightBorder};
+  background-color: ${props => props.theme.colors.bgHighlightBorder};
 
   color: #84809a;
 
@@ -127,7 +126,7 @@ const ModalBtn = styled.button`
 const modalOverride = {
   content: {
     padding: 0,
-    border: "none",
+    border: 'none',
     borderRadius: 0,
 
     top: 0,
@@ -162,10 +161,9 @@ export default function BridgeSwapMobile() {
               <h2>What is Onomy Bridge?</h2>
 
               <Modal.Desc>
-                The Onomy Bonding Curve platform is a gateway into the Onomy
-                Network. This is achieved by participants purchasing
-                wrapped-NOM, an ERC-20 token on the Ethereum Network, and
-                swapping for NOM on the Onomy Network.
+                The Onomy Bonding Curve platform is a gateway into the Onomy Network. This is achieved by participants
+                purchasing wrapped-NOM, an ERC-20 token on the Ethereum Network, and swapping for NOM on the Onomy
+                Network.
               </Modal.Desc>
 
               <Modal.InfoRow>
@@ -173,12 +171,10 @@ export default function BridgeSwapMobile() {
                   <Modal.InfoSubCaption>One Way Bridge</Modal.InfoSubCaption>
 
                   <Modal.Desc>
-                    Choose to bridge when you are ready to do so to finalize
-                    your purchase of NOM!{" "}
+                    Choose to bridge when you are ready to do so to finalize your purchase of NOM!{' '}
                     <strong>
-                      After bridging, you can no longer sell back to the bonding
-                      curve or bridge back for wNOM.
-                    </strong>{" "}
+                      After bridging, you can no longer sell back to the bonding curve or bridge back for wNOM.
+                    </strong>{' '}
                     There are no guarantees of liquid markets.
                   </Modal.Desc>
                 </div>
@@ -191,20 +187,10 @@ export default function BridgeSwapMobile() {
                   <Modal.InfoSubCaption>Why Bridge?</Modal.InfoSubCaption>
 
                   <Modal.List>
-                    <li>
-                      You must hold NOM to participate in the Onomy Network.{" "}
-                    </li>
-                    <li>
-                      Early stakers of NOM take advantage of larger staking
-                      yield.{" "}
-                    </li>
-                    <li>
-                      NOM is used for governance, staking, and collateral to
-                      mint stablecoins.
-                    </li>
-                    <li>
-                      All bridged wNOM is burned from the bonding curve supply.{" "}
-                    </li>
+                    <li>You must hold NOM to participate in the Onomy Network. </li>
+                    <li>Early stakers of NOM take advantage of larger staking yield. </li>
+                    <li>NOM is used for governance, staking, and collateral to mint stablecoins.</li>
+                    <li>All bridged wNOM is burned from the bonding curve supply. </li>
                     <li>NOM would be listed on exchanges rather than wNOM. </li>
                   </Modal.List>
                 </div>
@@ -261,7 +247,7 @@ export default function BridgeSwapMobile() {
 
             <Modal.FullWidthButton>Swap wNOM for NOM</Modal.FullWidthButton>
             <Modal.SecondaryButton
-              style={{ width: "100%" }}
+              style={{ width: '100%' }}
               onClick={() => {
                 setInfoModal(true);
                 setSwapModal(false);

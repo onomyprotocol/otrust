@@ -1,17 +1,17 @@
-import React from "react";
-import styled from "styled-components";
-import { useWeb3React } from "@web3-react/core";
-import BigNumber from "bignumber.js";
+import React from 'react';
+import styled from 'styled-components';
+import { useWeb3React } from '@web3-react/core';
+import BigNumber from 'bignumber.js';
 
-import { Panel } from "components/UI";
-import { useChain } from "context/chain/ChainContext";
-import { useExchange } from "context/exchange/ExchangeContext";
-import { responsive } from "theme/constants";
-import { format18 } from "utils/math";
-import SidebarHeader from "./SidebarHeader";
-import SidebarBalances from "./SidebarBalances";
-import SidebarFooter from "./SidebarFooter";
-import SidebarConnection from "./SidebarConnection";
+import { Panel } from 'components/UI';
+import { useChain } from 'context/chain/ChainContext';
+import { useExchange } from 'context/exchange/ExchangeContext';
+import { responsive } from 'theme/constants';
+import { format18 } from 'utils/math';
+import SidebarHeader from './SidebarHeader';
+import SidebarBalances from './SidebarBalances';
+import SidebarFooter from './SidebarFooter';
+import SidebarConnection from './SidebarConnection';
 
 const SidebarLayout = styled.div`
   display: flex;
@@ -48,23 +48,10 @@ export default function AcctDash() {
         <SidebarBalances
           strong={strong}
           weak={weak}
-          strongBalance={
-            BigNumber.isBigNumber(strongBalance)
-              ? `${format18(strongBalance).toFixed(6)}`
-              : "Loading"
-          }
-          weakBalance={
-            BigNumber.isBigNumber(weakBalance)
-              ? `${format18(weakBalance).toFixed(6)}`
-              : "Loading"
-          }
+          strongBalance={BigNumber.isBigNumber(strongBalance) ? `${format18(strongBalance).toFixed(6)}` : 'Loading'}
+          weakBalance={BigNumber.isBigNumber(weakBalance) ? `${format18(weakBalance).toFixed(6)}` : 'Loading'}
         />
-        <SidebarConnection
-          active={active}
-          error={error}
-          chainId={chainId}
-          blockNumber={blockNumber}
-        />
+        <SidebarConnection active={active} error={error} chainId={chainId} blockNumber={blockNumber} />
         <SidebarFooter />
       </SidebarLayout>
     </Panel>

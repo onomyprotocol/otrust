@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 const StyledContainer = styled.div`
   width: 80vw;
@@ -7,7 +7,7 @@ const StyledContainer = styled.div`
   margin: 0 auto;
 
   box-sizing: border-box;
-`
+`;
 
 const FullBackgroundStyledContainer = styled.div`
   height: 100vh;
@@ -20,12 +20,12 @@ const FullBackgroundStyledContainer = styled.div`
   background-repeat: no-repeat;
   background-position: top center;
   background-size: cover;
-`
+`;
 
 export function Container({ children }) {
-  return <StyledContainer>{children}</StyledContainer>
+  return <StyledContainer>{children}</StyledContainer>;
 }
 
 export function FullBackgroundContainer({ img, children }) {
-  return <FullBackgroundStyledContainer img={img}>{children}</FullBackgroundStyledContainer>
+  return <FullBackgroundStyledContainer img={img}>{children}</FullBackgroundStyledContainer>;
 }

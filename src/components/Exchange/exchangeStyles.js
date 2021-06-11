@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { responsive } from "theme/constants";
+import { responsive } from 'theme/constants';
 
 export const ExchangeWrapper = styled.div`
   display: grid;
@@ -13,12 +13,11 @@ export const ExchangeWrapper = styled.div`
 
   @media screen and (max-width: ${responsive.smartphoneLarge}) {
     grid-template-columns: 1fr;
-    background-color: ${(props) => props.theme.colors.bgDarken};
+    background-color: ${props => props.theme.colors.bgDarken};
 
     padding: 24px 20px;
   }
 `;
-
 
 export const ExchangeItem = styled.div`
   display: flex;
@@ -47,7 +46,7 @@ export const ExchangeItem = styled.div`
   }
 
   & + & {
-    border-left: 2px solid ${(props) => props.theme.colors.bgHighlightBorder};
+    border-left: 2px solid ${props => props.theme.colors.bgHighlightBorder};
   }
 `;
 
@@ -60,11 +59,11 @@ export const Sending = styled.div`
   height: 50px;
   padding: 16px;
 
-  border: 1px solid ${(props) => props.theme.colors.bgHighlightBorder};
+  border: 1px solid ${props => props.theme.colors.bgHighlightBorder};
   border-radius: 6px;
 
   strong {
-    color: ${(props) => props.theme.colors.textSecondary};
+    color: ${props => props.theme.colors.textSecondary};
     margin-right: auto;
     font-weight: 500;
     white-space: nowrap;
@@ -84,12 +83,12 @@ export const Receiving = styled.div`
   height: 50px;
   padding: 16px;
 
-  background-color: ${(props) => props.theme.colors.bgDarken};
-  border: 1px solid ${(props) => props.theme.colors.bgDarken};
+  background-color: ${props => props.theme.colors.bgDarken};
+  border: 1px solid ${props => props.theme.colors.bgDarken};
   border-radius: 6px;
 
   strong {
-    color: ${(props) => props.theme.colors.textSecondary};
+    color: ${props => props.theme.colors.textSecondary};
     margin-right: auto;
     font-weight: 500;
 
@@ -105,7 +104,7 @@ export const MaxBtn = styled.button`
   border: none;
   background: none;
 
-  color: ${(props) => props.theme.colors.highlightYellow};
+  color: ${props => props.theme.colors.highlightYellow};
   font-weight: 500;
   text-transform: uppercase;
   cursor: pointer;
@@ -117,7 +116,7 @@ export const ExchangeInput = styled.input`
   background: none;
   border: none;
 
-  color: ${(props) => props.theme.colors.textPrimary};
+  color: ${props => props.theme.colors.textPrimary};
   font-weight: 500;
   text-align: right;
 
@@ -136,7 +135,7 @@ export const ReceivingValue = styled.span`
   margin-left: auto;
 
   font-weight: 500;
-  color: ${(props) => props.theme.colors.textPrimary};
+  color: ${props => props.theme.colors.textPrimary};
 
   @media screen and (max-width: ${responsive.tabletSmall}) {
     font-size: 12px;
@@ -155,7 +154,7 @@ export const ExchangeButton = styled.button`
   border: none;
   border-radius: 6px;
 
-  color: ${(props) => props.theme.colors.textPrimary};
+  color: ${props => props.theme.colors.textPrimary};
   text-shadow: 0 6px 3px rgba(0, 0, 0, 0.03);
   font-weight: 600;
 
@@ -181,5 +180,5 @@ export const ExchangeModalWrapper = styled.div`
   height: 100%;
   padding: 20px;
 
-  background-color: ${(props) => props.theme.colors.bgNormal};
+  background-color: ${props => props.theme.colors.bgNormal};
 `;

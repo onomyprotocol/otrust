@@ -1,2 +1,1 @@
-export * from './HavenTheme'
-
+export * from './HavenTheme';

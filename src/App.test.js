@@ -14,10 +14,10 @@ describe('Given an App component', () => {
 
     it('should match the snapshot', async () => {
       await act(async () => {
-        render(<App />,  container );
+        render(<App />, container);
       });
 
-      expect(container).toMatchSnapshot();;
+      expect(container).toMatchSnapshot();
     });
   });
 });

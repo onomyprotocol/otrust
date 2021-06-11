@@ -1,10 +1,9 @@
-import { PrimaryButton } from "components/Modals/styles";
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import { responsive } from "theme/constants";
-
-import { CloseIcon } from "./SidebarIcons";
+import { PrimaryButton } from 'components/Modals/styles';
+import { responsive } from 'theme/constants';
+import { CloseIcon } from './SidebarIcons';
 
 const Balances = styled.div`
   display: flex;
@@ -13,7 +12,7 @@ const Balances = styled.div`
 
   padding: 40px;
 
-  border-bottom: 1px solid ${(props) => props.theme.colors.bgHighlightBorder};
+  border-bottom: 1px solid ${props => props.theme.colors.bgHighlightBorder};
 
   @media screen and (max-width: ${responsive.laptop}) {
     padding: 24px;
@@ -34,20 +33,20 @@ const Balances = styled.div`
     margin-bottom: 10px;
 
     font-weight: 400;
-    color: ${(props) => props.theme.colors.textSecondary};
+    color: ${props => props.theme.colors.textSecondary};
   }
 `;
 
 const BalanceNumber = styled.div`
-  font-family: "Bebas Neue", sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   font-size: 28px;
-  font-weight: ${(props) => (props.strong ? 700 : 400)};
+  font-weight: ${props => (props.strong ? 700 : 400)};
 
   > small {
     margin-left: 5px;
 
-    font-family: "Poppins", sans-serif;
-    color: ${(props) => props.theme.colors.textSecondary};
+    font-family: 'Poppins', sans-serif;
+    color: ${props => props.theme.colors.textSecondary};
     font-size: 11px;
   }
 
@@ -73,12 +72,12 @@ const SecondaryIcon = styled.a`
   height: 40px;
   width: 40px;
 
-  background-color: ${(props) => props.theme.colors.bgHighlightBorder};
+  background-color: ${props => props.theme.colors.bgHighlightBorder};
   border-radius: 8px;
 
   font-size: 20px;
   font-weight: 500;
-  color: ${(props) => props.theme.colors.iconsSecondary};
+  color: ${props => props.theme.colors.iconsSecondary};
 
   cursor: pointer;
 
@@ -101,7 +100,7 @@ const Approved = styled.div`
   background-color: #2a303f;
   border-radius: 6px;
 
-  color: ${(props) => props.theme.colors.highlightBlue};
+  color: ${props => props.theme.colors.highlightBlue};
   font-size: 10px;
   font-weight: 400;
   font-family: Poppins, sans-serif;
@@ -118,12 +117,7 @@ const Approved = styled.div`
   }
 `;
 
-export default function SidebarBalances({
-  strong,
-  weak,
-  strongBalance,
-  weakBalance,
-}) {
+export default function SidebarBalances({ strong, weak, strongBalance, weakBalance }) {
   return (
     <Balances>
       <Balance>
@@ -156,7 +150,7 @@ export default function SidebarBalances({
       </Balance>
 
       <div style={{ marginTop: 20 }}>
-        <PrimaryButton style={{ width: "100%" }}>Withdraw wNOM</PrimaryButton>
+        <PrimaryButton style={{ width: '100%' }}>Withdraw wNOM</PrimaryButton>
       </div>
     </Balances>
   );

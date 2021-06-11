@@ -6,4 +6,4 @@ export const responsive = {
   smartphoneLarge: '700px',
   smartphone: '480px',
   smartphoneSmall: '375px',
-}
+};

@@ -1,9 +1,9 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 
-import BebasNeueBold from 'assets/fonts/BebasNeueBold.ttf'
-import BebasNeueBook from 'assets/fonts/BebasNeueBook.ttf'
-import BebasNeueRegular from 'assets/fonts/BebasNeueRegular.ttf'
-import { responsive } from './constants'
+import BebasNeueBold from 'assets/fonts/BebasNeueBold.ttf';
+import BebasNeueBook from 'assets/fonts/BebasNeueBook.ttf';
+import BebasNeueRegular from 'assets/fonts/BebasNeueRegular.ttf';
+import { responsive } from './constants';
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -61,4 +61,4 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-`
+`;

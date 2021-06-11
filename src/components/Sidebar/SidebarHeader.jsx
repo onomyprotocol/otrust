@@ -1,9 +1,9 @@
-import React from "react";
-import { faCog, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from 'react';
+import { faCog, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { responsive } from "theme/constants";
+import { responsive } from 'theme/constants';
 
 const PrimaryIcon = styled.a`
   display: flex;
@@ -13,12 +13,12 @@ const PrimaryIcon = styled.a`
   height: 44px;
   width: 44px;
 
-  background-color: ${(props) => props.theme.colors.bgDarken};
-  border: 1px solid ${(props) => props.theme.colors.bgHighlightBorder};
+  background-color: ${props => props.theme.colors.bgDarken};
+  border: 1px solid ${props => props.theme.colors.bgHighlightBorder};
   border-radius: 8px;
 
   font-size: 16px;
-  color: ${(props) => props.theme.colors.iconsNormal};
+  color: ${props => props.theme.colors.iconsNormal};
 
   cursor: pointer;
 
@@ -57,7 +57,7 @@ const Header = styled.header`
   height: 240px;
   padding: 40px 48px;
 
-  background-color: ${(props) => props.theme.colors.bgDarken};
+  background-color: ${props => props.theme.colors.bgDarken};
   border-radius: 4px;
 
   @media screen and (max-width: ${responsive.laptop}) {
@@ -84,8 +84,8 @@ const Header = styled.header`
 
     height: 100px;
 
-    background-color: ${(props) => props.theme.colors.bgNormal};
-    border-bottom: 1px solid ${(props) => props.theme.colors.bgHighlightBorder};
+    background-color: ${props => props.theme.colors.bgNormal};
+    border-bottom: 1px solid ${props => props.theme.colors.bgHighlightBorder};
     border-radius: 0;
   }
 
@@ -112,7 +112,7 @@ const Avatar = styled.img`
   width: 72px;
 
   border-radius: 12px;
-  border: 3px solid ${(props) => props.theme.colors.bgHighlightBorder};
+  border: 3px solid ${props => props.theme.colors.bgHighlightBorder};
 
   @media screen and (max-width: ${responsive.laptop}) {
     height: 56px;
@@ -156,7 +156,7 @@ const AccountNumber = styled.div`
   span {
     font-size: 16px;
     font-weight: 500;
-    color: ${(props) => props.theme.colors.textSecondary};
+    color: ${props => props.theme.colors.textSecondary};
 
     @media screen and (max-width: ${responsive.laptop}) {
       font-size: 14px;
@@ -178,12 +178,10 @@ export default function SidebarHeader({ account }) {
         <p>My Account</p>
         <span>
           {account === null
-            ? "-"
+            ? '-'
             : account
-            ? `${account.substring(0, 6)}...${account.substring(
-                account.length - 4
-              )}`
-            : ""}
+            ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}`
+            : ''}
         </span>
       </AccountNumber>
     </Header>

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export function Close() {
   return (
@@ -45,11 +45,7 @@ export function Caret() {
 
 export function Fail() {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="35.222"
-      viewBox="0 0 35.222 35.222"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="35.222" viewBox="0 0 35.222 35.222">
       <g transform="translate(1.826 2.834)">
         <path
           d="M14.337.628a2.146 2.146 0 013.242 2.794l-.208.241L3.663 17.372a2.146 2.146 0 01-3.242-2.794l.208-.241z"
@@ -76,12 +72,7 @@ export function Metamask() {
         strokeLinejoin="round"
         d="M242.3 0l-99.5 73.9 18.4-43.6z"
       ></path>
-      <g
-        fill="#E4761B"
-        stroke="#E4761B"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
+      <g fill="#E4761B" stroke="#E4761B" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12.6 0l98.7 74.6-17.5-44.3zm193.9 171.3L180 211.9l56.7 15.6 16.3-55.3zm-204.4.9l16.2 55.3L75 211.9l-26.5-40.6z"></path>
         <path d="M71.8 102.7L56 126.6l56.3 2.5-2-60.5zm111.3 0l-39-34.8-1.3 61.2 56.2-2.5zM75 211.9l33.8-16.5-29.2-22.8zm71.1-16.5l33.9 16.5-4.7-39.3z"></path>
       </g>
