@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given the AccentButton component and width is not provided in the props when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-gtsrHT fPQymE"
+  />
+</DocumentFragment>
+`;
+
+exports[`Given the AccentButton component and width is provided in the props when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-gtsrHT kDVoAK"
+    width="50"
+  />
+</DocumentFragment>
+`;
+
+exports[`Given the Button component and width is not provided in the props when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-bdnxRM kZOUyB"
+  />
+</DocumentFragment>
+`;
+
+exports[`Given the Button component and width is provided in the props when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-bdnxRM jlByMH"
+    width="50"
+  />
+</DocumentFragment>
+`;
+
+exports[`Given the ConnectionStatus component when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-iCoGMd edYesm"
+  />
+</DocumentFragment>
+`;
+
+exports[`Given the Container component when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-eCApnc juWvpr"
+  >
+    Children
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Given the FullBackgroundContainer component when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-jSFjdj fylwSA"
+  >
+    Children
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Given the InvisibleButton component when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-hKFxyN keWPab"
+  />
+</DocumentFragment>
+`;
+
+exports[`Given the LoadingSpinner component when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="loadingSpinner"
+  >
+    <svg>
+      <circle
+        cx="20"
+        cy="20"
+        r="20"
+      />
+    </svg>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Given the Panel component when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gKAaRy bhCpij"
+  />
+</DocumentFragment>
+`;

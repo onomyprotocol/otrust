@@ -5,7 +5,7 @@ import { borderRadius } from 'context/responsive/cssSizes'
 const DropDownContainer = styled("div")`
   width: 5em;
   margin: 0 auto;
-  
+
   &:hover {
     cursor: pointer;
   }
@@ -48,7 +48,7 @@ const ListItem = styled("li")`
   list-style: none;
   margin-bottom: 0.8em;
   &:hover {
-    color: ${props => props.theme.colors.headerBackground};;
+    color: ${props => props.theme.colors.headerBackground};
   }
 `;
 
@@ -56,7 +56,6 @@ const options = ["ETH", "NOM"];
 
 export default function Dropdown({denom, setDenom}) {
   const [isOpen, setIsOpen] = useState(false);
-  
 
   const toggling = () => setIsOpen(!isOpen);
 
@@ -67,14 +66,14 @@ export default function Dropdown({denom, setDenom}) {
 
   return (
     <DropDownContainer>
-        <DropDownHeader onClick={toggling}>
+        <DropDownHeader data-testid="dropdown-header" onClick={toggling}>
           {denom || "ETH"}
         </DropDownHeader>
         {isOpen && (
-          <DropDownListContainer>
+          <DropDownListContainer data-testid="dropdown-list-container">
             <DropDownList>
               {options.map(option => (
-                <ListItem onClick={onOptionClicked(option)} key={Math.random()}>
+                <ListItem onClick={onOptionClicked(option)} key={option} data-testid={option}>
                   {option}
                 </ListItem>
               ))}

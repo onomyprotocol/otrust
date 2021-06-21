@@ -48,18 +48,18 @@ export default function MenuButtons({onButtonChange, menuButtons}) {
     e.preventDefault()
     const clickedId = e.target.id;
     menuButtons.forEach((button, i) =>  {
-        i === parseInt(clickedId) - 1 ? button.status = true : button.status = false})    
+        i === parseInt(clickedId) - 1 ? button.status = true : button.status = false})
     onButtonChange(menuButtons, clickedId)
   }
 
   return (
     <MenuWrapper onClick={handleChartClicked}>
-      { 
-      menuButtons.map((button,i) => 
-        <MenuHeader id={i + 1} isClicked={button.status}>
+      {
+      menuButtons.map((button,i) =>
+        <MenuHeader key={button.text} id={i + 1} isClicked={button.status}>
         {button.text}
        </MenuHeader>
-      )}             
-    </MenuWrapper>    
+      )}
+    </MenuWrapper>
   );
 }

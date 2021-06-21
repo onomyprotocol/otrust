@@ -135,13 +135,14 @@ export const SecondaryButton = styled(PrimaryButton)`
 `;
 
 export const ExchangeResultDescription = styled.div`
+  margin-bottom: 10px;
+
   font-size: 12px;
-  opacity: 0.5;
-  margin-bottom: 15px;
+  color: ${(props) => props.theme.colors.textThirdly};
 `;
 
 export const ExchangeResult = styled.div`
-  padding: 32px;
+  padding: 24px;
   margin: 32px 0 24px;
 
   background-color: ${(props) => props.theme.colors.bgDarken};

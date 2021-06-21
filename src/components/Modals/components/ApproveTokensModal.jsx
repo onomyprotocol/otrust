@@ -6,6 +6,7 @@ import { Close } from "../Icons";
 import * as Modal from "../styles";
 import { responsive } from "theme/constants";
 import { useModal } from "context/modal/ModalContext";
+import { MaxBtn } from "components/Exchange/exchangeStyles";
 
 const Message = styled.div`
   margin: 32px 0 0;
@@ -21,21 +22,47 @@ const Caption = styled(Modal.Caption)`
   text-align: left;
 `;
 
-const FeeWrapper = styled.div`
+const ApproveTokensWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  margin-top: 16px;
+  padding: 12px;
+  margin-top: 24px;
 
-  color: ${(props) => props.theme.colors.textThirdly};
+  background-color: ${(props) => props.theme.colors.bgHighlightBorder};
+  border-radius: 8px;
 
-  strong {
+  > div {
+    margin-left: 8px;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
+    margin-bottom: 6px;
+
+    color: ${(props) => props.theme.colors.textThirdly};
+    font-size: 12px;
+  }
+
+  input {
+    display: block;
+
+    background: none;
+    border: none;
+
     color: ${(props) => props.theme.colors.textPrimary};
+    font-size: 18px;
+
+    &:focus {
+      outline: none;
+    }
   }
 `;
 
-export default function ApproveModal({ onApprove }) {
+export default function ApproveTokensModal({ onApprove }) {
   const [count, setCount] = useState(60);
   const [delay, setDelay] = useState(1000);
   const { handleModal } = useModal();
@@ -58,19 +85,21 @@ export default function ApproveModal({ onApprove }) {
       </Modal.CloseIcon>
 
       <main>
-        <Caption>Step1. Onomy confirmation</Caption>
+        <Caption>Approve Tokens</Caption>
 
         <Message>
-          Onomy blockchain requires access for selling
-          <strong>1234 wNOM</strong>. Please confirm you want to do it
+          You want to sell <strong>1600 wNOM</strong>, but you approved for sale
+          only 1000 wNOM. Would you like to approve the rest{" "}
+          <strong>600 (or more) wNOM</strong> and complete selling?
         </Message>
 
-        <FeeWrapper>
-          <span>Transaction fee</span>
-          <span>
-            <strong>$5.4</strong> (0.00032 ETH)
-          </span>
-        </FeeWrapper>
+        <ApproveTokensWrapper>
+          <div>
+            <label htmlFor="">Approve tokens (wNOM)</label>
+            <input type="text" placeholder="0.00" />
+          </div>
+          <MaxBtn>MAX</MaxBtn>
+        </ApproveTokensWrapper>
       </main>
       <footer>
         <Modal.FooterControls>

@@ -3,7 +3,7 @@ import styled, { ThemeProvider } from 'styled-components'
 import {dark, light} from 'Theme/theme'
 
 import { GlobalStyle } from 'Theme/GlobalStyle'
-import { FullBackgroundContainer } from 'Components/UI'
+import { FullBackgroundContainer } from '../../components/UI/Container'
 
 import landingImg from 'Assets/images/landing.svg'
 import hLogo from 'Assets/images/hlogo.svg'
@@ -14,7 +14,7 @@ const ButtonDiv = styled.div`
   align-items: center;
 `
 
-function ThemePage({ setTheme }) {
+export function ThemePage({ setTheme }) {
   return (
     <FullBackgroundContainer img={landingImg}>
       <img src={hLogo} />
@@ -39,18 +39,17 @@ export function HavenTheme({ children }) {
 
   useEffect(() => {
     let themeStorage = localStorage.getItem('theme')
-    
+
     if(themeStorage) {
       if(themeStorage == 'dark') { updateTheme(dark) } else { updateTheme(light) }
     } else updateTrigger(true)
   },[]
   )
-  
 
-  return (theme) ? 
+  return (theme) ?
     <ThemeProvider theme={theme}>
       <GlobalStyle/>
       {children}
     </ThemeProvider> : trigger ?
-    <ThemePage setTheme={setTheme} trigger={trigger}/> : null
+    <ThemePage setTheme={setTheme} trigger={trigger} data-testid='theme-page'/> : null
 }

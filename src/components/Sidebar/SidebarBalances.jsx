@@ -1,6 +1,7 @@
 import { PrimaryButton } from "components/Modals/styles";
 import React from "react";
 import styled from "styled-components";
+import { darken, lighten } from "polished";
 
 import { responsive } from "theme/constants";
 
@@ -19,14 +20,21 @@ const Balances = styled.div`
     padding: 24px;
   }
 
+  @media screen and (max-width: ${responsive.tablet}) {
+    flex-direction: row;
+    align-items: center;
+    grid-column: 1/3;
+    grid-row: 2/3;
+
+    border: none;
+  }
+
   @media screen and (max-width: ${responsive.tabletSmall}) {
     gap: 40px;
   }
 
   @media screen and (max-width: ${responsive.smartphoneLarge}) {
     padding: 20px;
-
-    border: none;
   }
 
   strong {
@@ -88,6 +96,20 @@ const SecondaryIcon = styled.a`
 
     font-size: 14px;
   }
+
+  @media screen and (max-width: ${responsive.tablet}) {
+    margin-left: 24px;
+  }
+
+  &:hover {
+    background-color: ${(props) =>
+      lighten(0.02, props.theme.colors.bgHighlightBorder)};
+  }
+
+  &:active {
+    background-color: ${(props) =>
+      darken(0.02, props.theme.colors.bgHighlightBorder)};
+  }
 `;
 
 const Approved = styled.div`
@@ -106,6 +128,10 @@ const Approved = styled.div`
   font-weight: 400;
   font-family: Poppins, sans-serif;
 
+  @media screen and (max-width: ${responsive.tablet}) {
+    margin: 0 0 0 12px;
+  }
+
   svg {
     position: absolute;
     right: 4px;
@@ -115,6 +141,15 @@ const Approved = styled.div`
     * {
       fill: currentColor;
     }
+  }
+`;
+
+const WithdrawBtnWrapper = styled.div`
+  margin-top: 20px;
+  min-width: 150px;
+
+  @media screen and (max-width: ${responsive.tablet}) {
+    margin: 0 0 0 auto;
   }
 `;
 
@@ -155,9 +190,9 @@ export default function SidebarBalances({
         </BalanceHint>
       </Balance>
 
-      <div style={{ marginTop: 20 }}>
+      <WithdrawBtnWrapper>
         <PrimaryButton style={{ width: "100%" }}>Withdraw wNOM</PrimaryButton>
-      </div>
+      </WithdrawBtnWrapper>
     </Balances>
   );
 }

@@ -1,9 +1,9 @@
 import React from "react";
-import { faCog, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { darken, lighten } from "polished";
 
 import { responsive } from "theme/constants";
+import { CogIcon, LogoutIcon } from "./SidebarIcons";
 
 const PrimaryIcon = styled.a`
   display: flex;
@@ -17,7 +17,10 @@ const PrimaryIcon = styled.a`
   border: 1px solid ${(props) => props.theme.colors.bgHighlightBorder};
   border-radius: 8px;
 
-  font-size: 16px;
+  svg {
+    width: 20px;
+    height: 20px;
+  }
   color: ${(props) => props.theme.colors.iconsNormal};
 
   cursor: pointer;
@@ -26,7 +29,10 @@ const PrimaryIcon = styled.a`
     width: 32px;
     height: 32px;
 
-    font-size: 12px;
+    svg {
+      width: 16px;
+      height: 16px;
+    }
   }
 
   @media screen and (max-width: ${responsive.tablet}) {
@@ -42,7 +48,18 @@ const PrimaryIcon = styled.a`
     width: 44px;
     height: 44px;
 
-    font-size: 16px;
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &:hover {
+    background-color: ${(props) => lighten(0.02, props.theme.colors.bgNormal)};
+  }
+
+  &:active {
+    background-color: ${(props) => darken(0.02, props.theme.colors.bgNormal)};
   }
 `;
 
@@ -168,11 +185,11 @@ export default function SidebarHeader({ account }) {
   return (
     <Header>
       <PrimaryIcon>
-        <FontAwesomeIcon icon={faCog} />
+        <CogIcon />
       </PrimaryIcon>
       <Avatar src="https://picsum.photos/72" alt="" />
       <PrimaryIcon>
-        <FontAwesomeIcon icon={faSignOutAlt} />
+        <LogoutIcon />
       </PrimaryIcon>
       <AccountNumber>
         <p>My Account</p>

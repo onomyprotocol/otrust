@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { ConnectionStatus } from "../UI";
 import { responsive } from "theme/constants";
 
-const Connection = styled.div`
+const ConnectionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -16,8 +16,12 @@ const Connection = styled.div`
   }
 
   @media screen and (max-width: ${responsive.tablet}) {
+    grid-column: 2/3;
+    grid-row: 1/2;
     flex-direction: row;
     gap: 40px;
+
+    border-bottom: 1px solid ${(props) => props.theme.colors.bgHighlightBorder};
   }
 
   @media screen and (max-width: ${responsive.smartphoneLarge}) {
@@ -52,7 +56,7 @@ export default function SidebarConnection({
   blockNumber,
 }) {
   return (
-    <Connection>
+    <ConnectionWrapper>
       <ConnectionRow>
         <strong>Connection</strong>
         <ConnectionStatus>
@@ -67,6 +71,6 @@ export default function SidebarConnection({
         <strong>Block Number</strong>
         <span>{blockNumber ? blockNumber.toFixed(0) : ""}</span>
       </ConnectionRow>
-    </Connection>
+    </ConnectionWrapper>
   );
 }

@@ -1,0 +1,207 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given the MainHeader component and supplyNOM, currentETHPrice are not of BigNumber type when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <header>
+    <div
+      class="sc-bdnxRM iNmwGW"
+    >
+      <header
+        class="sc-iCoGMd jReHeF"
+      >
+        <div
+          class="sc-fujyAs ipUnbt"
+        >
+          <img
+            alt="Onomy"
+            class="sc-pNWdM deYXhl"
+            src="logo.svg"
+          />
+          <div
+            class="sc-jrsJWt gBxFHt"
+          >
+            <strong>
+              Onomy
+            </strong>
+            <span>
+              Bonding curve
+            </span>
+          </div>
+        </div>
+        <div
+          class="sc-kEqXSa jsxILd"
+        >
+          <div
+            class="sc-crzoAE fyXMGr"
+          >
+            <div
+              class="sc-iqAclL gZIDje"
+            >
+              <strong>
+                NOM / USDT
+              </strong>
+              <div
+                class="sc-bqGGPW kekfhf"
+              >
+                <strong>
+                  $10.12
+                </strong>
+                <span
+                  class="sc-ksluID kvKAf"
+                  type="increase"
+                >
+                  24.2%
+                </span>
+              </div>
+            </div>
+            <div
+              class="sc-iqAclL gZIDje"
+            >
+              <strong>
+                NOM / ETH
+              </strong>
+              <div
+                class="sc-bqGGPW kekfhf"
+              >
+                <strong>
+                  <span>
+                    Loading
+                  </span>
+                </strong>
+              </div>
+            </div>
+          </div>
+          <div
+            class="sc-dIsUp ixoOJO"
+          >
+            <div
+              class="sc-iqAclL gZIDje"
+            >
+              <strong>
+                NOM Issued
+              </strong>
+              <div
+                class="sc-bqGGPW kekfhf"
+              >
+                <strong>
+                  <span>
+                    Loading
+                  </span>
+                </strong>
+                <span
+                  class="sc-ksluID iZHaat"
+                >
+                  / 1E8
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+  </header>
+</DocumentFragment>
+`;
+
+exports[`Given the MainHeader component and supplyNOM, currentETHPrice are of BigNumber type when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <header>
+    <div
+      class="sc-bdnxRM iNmwGW"
+    >
+      <header
+        class="sc-iCoGMd jReHeF"
+      >
+        <div
+          class="sc-fujyAs ipUnbt"
+        >
+          <img
+            alt="Onomy"
+            class="sc-pNWdM deYXhl"
+            src="logo.svg"
+          />
+          <div
+            class="sc-jrsJWt gBxFHt"
+          >
+            <strong>
+              Onomy
+            </strong>
+            <span>
+              Bonding curve
+            </span>
+          </div>
+        </div>
+        <div
+          class="sc-kEqXSa jsxILd"
+        >
+          <div
+            class="sc-crzoAE fyXMGr"
+          >
+            <div
+              class="sc-iqAclL gZIDje"
+            >
+              <strong>
+                NOM / USDT
+              </strong>
+              <div
+                class="sc-bqGGPW kekfhf"
+              >
+                <strong>
+                  $10.12
+                </strong>
+                <span
+                  class="sc-ksluID kvKAf"
+                  type="increase"
+                >
+                  24.2%
+                </span>
+              </div>
+            </div>
+            <div
+              class="sc-iqAclL gZIDje"
+            >
+              <strong>
+                NOM / ETH
+              </strong>
+              <div
+                class="sc-bqGGPW kekfhf"
+              >
+                <strong>
+                  <span>
+                    0
+                  </span>
+                </strong>
+              </div>
+            </div>
+          </div>
+          <div
+            class="sc-dIsUp ixoOJO"
+          >
+            <div
+              class="sc-iqAclL gZIDje"
+            >
+              <strong>
+                NOM Issued
+              </strong>
+              <div
+                class="sc-bqGGPW kekfhf"
+              >
+                <strong>
+                  <span>
+                    0
+                  </span>
+                </strong>
+                <span
+                  class="sc-ksluID iZHaat"
+                >
+                  / 1E8
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+  </header>
+</DocumentFragment>
+`;

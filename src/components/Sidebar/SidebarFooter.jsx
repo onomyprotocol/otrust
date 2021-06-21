@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { darken, lighten } from "polished";
 
 import { responsive } from "theme/constants";
 
-const Info = styled.footer`
+import { MediumIcon, TwitterIcon } from "./SidebarIcons";
+
+const SidebarFooterWrapper = styled.footer`
   display: flex;
   align-items: center;
   gap: 16px;
@@ -18,7 +19,12 @@ const Info = styled.footer`
   }
 
   @media screen and (max-width: ${responsive.tablet}) {
+    width: 100%;
     gap: 12px;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 
   @media screen and (max-width: ${responsive.smartphoneLarge}) {
@@ -34,6 +40,14 @@ const Link = styled.a`
 
   color: ${(props) => props.theme.colors.textSecondary};
   text-decoration: none;
+
+  &:hover {
+    color: ${(props) => lighten(0.02, props.theme.colors.textSecondary)};
+  }
+
+  &:active {
+    color: ${(props) => darken(0.02, props.theme.colors.textSecondary)};
+  }
 `;
 
 const SecondaryIcon = styled.a`
@@ -52,26 +66,48 @@ const SecondaryIcon = styled.a`
 
   cursor: pointer;
 
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
   @media screen and (max-width: ${responsive.laptop}) {
     width: 32px;
     height: 32px;
 
     font-size: 14px;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &:hover {
+    background-color: ${(props) =>
+      lighten(0.02, props.theme.colors.bgHighlightBorder)};
+  }
+
+  &:active {
+    background-color: ${(props) =>
+      darken(0.02, props.theme.colors.bgHighlightBorder)};
   }
 `;
 
 export default function SidebarFooter() {
   return (
-    <Info>
-      <Link href="/about">About Onomy</Link>
+    <SidebarFooterWrapper>
+      <Link href="https://onomy.io/" target="_blank">
+        About Onomy
+      </Link>
 
-      <SecondaryIcon>
-        <FontAwesomeIcon icon={faLinkedin} />
+      <SecondaryIcon href="https://medium.com/onomy-protocol" target="_blank">
+        <MediumIcon />
       </SecondaryIcon>
 
-      <SecondaryIcon>
-        <FontAwesomeIcon icon={faTwitter} />
+      <SecondaryIcon href="https://twitter.com/onomyprotocol" target="_blank">
+        <TwitterIcon />
       </SecondaryIcon>
-    </Info>
+    </SidebarFooterWrapper>
   );
 }

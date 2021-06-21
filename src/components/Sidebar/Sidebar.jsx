@@ -36,7 +36,7 @@ const SidebarLayout = styled.div`
   }
 `;
 
-export default function AcctDash() {
+export default function Sidebar() {
   const { active, error, chainId, account } = useWeb3React();
   const { blockNumber, strongBalance, weakBalance } = useChain();
   const { strong, weak } = useExchange();

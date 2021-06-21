@@ -13,7 +13,6 @@ import "components/Modals/loadingBar.css";
 import { useWeb3React } from "@web3-react/core";
 import { useExchange } from "context/exchange/ExchangeContext";
 
-
 const TransactionDetailsRow = styled.div`
   display: flex;
   align-items: center;
@@ -99,6 +98,20 @@ const OptionBtn = styled.button`
   }
 `;
 
+const FeeWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 16px;
+
+  color: ${(props) => props.theme.colors.textThirdly};
+
+  strong {
+    color: ${(props) => props.theme.colors.textPrimary};
+  }
+`;
+
 const limitOptions = [
   {
     id: 0,
@@ -139,7 +152,7 @@ const gasOptions = [
 
 export default function ConfirmTransactionModal({ submitTrans }) {
   const [slippage, setSlippage] = useState(0);
-  const [gasPriceChoice, setGasPriceChoice] = useState(2)
+  const [gasPriceChoice, setGasPriceChoice] = useState(2);
   const [gasPrice, setGasPrice] = useState(0);
   const { handleModal } = useModal();
   const { account } = useWeb3React();
@@ -158,22 +171,25 @@ export default function ConfirmTransactionModal({ submitTrans }) {
     }
   };
 
-
   const getGasPrices = useCallback(async () => {
-    const prices = await fetch('https://www.gasnow.org/api/v3/gas/price?utm_source=onomy');
+    const prices = await fetch(
+      "https://www.gasnow.org/api/v3/gas/price?utm_source=onomy"
+    );
     const result = await prices.json();
-    gasOptions[0].text = (result.data.standard / 1e9).toPrecision(4) + " (Standard)";
+    gasOptions[0].text =
+      (result.data.standard / 1e9).toPrecision(4) + " (Standard)";
     gasOptions[1].text = (result.data.fast / 1e9).toPrecision(4) + " (Fast)";
-    gasOptions[2].text = (result.data.rapid / 1e9).toPrecision(4) + " (Instant)";
-    gasOptions[0].gas = new BigNumber((result.data.standard).toString());
-    gasOptions[1].gas = new BigNumber((result.data.fast).toString());
-    gasOptions[2].gas = new BigNumber((result.data.rapid).toString());
-    setGasPrice(gasOptions[gasPriceChoice].gas)
-  },[gasPriceChoice])
+    gasOptions[2].text =
+      (result.data.rapid / 1e9).toPrecision(4) + " (Instant)";
+    gasOptions[0].gas = new BigNumber(result.data.standard.toString());
+    gasOptions[1].gas = new BigNumber(result.data.fast.toString());
+    gasOptions[2].gas = new BigNumber(result.data.rapid.toString());
+    setGasPrice(gasOptions[gasPriceChoice].gas);
+  }, [gasPriceChoice]);
 
   useEffect(() => {
     getGasPrices();
-  }, [getGasPrices])
+  }, [getGasPrices]);
 
   useInterval(increaseCount, delay);
 
@@ -241,6 +257,13 @@ export default function ConfirmTransactionModal({ submitTrans }) {
             <Metamask />
           </WalletIcon>
         </TransactionDetailsRow>
+
+        <FeeWrapper>
+          <span>Transaction fee</span>
+          <span>
+            <strong>$5.4</strong> (0.00032 ETH)
+          </span>
+        </FeeWrapper>
       </main>
       <OptionsWrapper>
         <OptionCaption>Gas Fee</OptionCaption>
@@ -249,12 +272,10 @@ export default function ConfirmTransactionModal({ submitTrans }) {
             <OptionBtn
               active={gasPrice === gasPriceOption.gas}
               key={gasPriceOption.gas}
-              onClick={() => 
-                {
-                  setGasPrice(gasPriceOption.gas)
-                  setGasPriceChoice(gasPriceOption.id)
-                }
-              }
+              onClick={() => {
+                setGasPrice(gasPriceOption.gas);
+                setGasPriceChoice(gasPriceOption.id);
+              }}
             >
               {gasPriceOption.text}
             </OptionBtn>

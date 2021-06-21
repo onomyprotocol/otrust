@@ -5,7 +5,8 @@
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}",
-      "!./src/utils/device.js"
+      "!./src/utils/device.js",
+      "!./src/theme/colors.js"
     ],
     "coverageReporters": [
       "text-summary",

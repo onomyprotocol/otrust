@@ -21,7 +21,8 @@ describe('Given randomInt util function', () => {
     it('should return correct value', () => {
       const result = randomInt(10, 20);
       expect(result).toBeGreaterThanOrEqual(10);
-      expect(result).toBeLessThan(20);
+      expect(result).toBeLessThanOrEqual(20);
+      expect((result).toString()).toMatch(new RegExp(/^[0-9]{2}$/))
     });
   });
 });

@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given the HavenTheme component when the component is rendered and localStorage includes the dark theme should match the snapshot 1`] = `
+<DocumentFragment>
+  Children
+</DocumentFragment>
+`;
+
+exports[`Given the ThemePage component when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gtsrHT cVUesm"
+  >
+    <img
+      src="hlogo.svg"
+    />
+    <div
+      style="margin-top: 40px;"
+    >
+      Welcome to Haven Social
+    </div>
+    <div
+      style="margin: 10px;"
+    >
+      Please choose light or dark setting
+    </div>
+    <div
+      class="sc-dlnjwi kKURHi"
+    >
+      <button
+        style="margin-right: 10px;"
+      >
+        light
+      </button>
+      <button
+        style="margin-left: 10px;"
+      >
+        dark
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given the MenuButtons component when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bdnxRM ebueYo"
+  >
+    <header
+      class="sc-gtsrHT kfBXSo"
+      id="1"
+    >
+      button1
+    </header>
+    <header
+      class="sc-gtsrHT kfBXSo"
+      id="2"
+    >
+      button2
+    </header>
+    <header
+      class="sc-gtsrHT kfBXSo"
+      id="3"
+    >
+      button3
+    </header>
+  </div>
+</DocumentFragment>
+`;

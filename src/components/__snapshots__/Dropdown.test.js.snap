@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given the Dropdown component when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bdnxRM fMyXwL"
+  >
+    <div
+      class="sc-gtsrHT bsxfee"
+      data-testid="dropdown-header"
+    >
+      DENOM
+    </div>
+  </div>
+</DocumentFragment>
+`;
