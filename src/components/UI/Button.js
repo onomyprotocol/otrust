@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 const StyledButton = styled.button`
   height: 2.25rem;
@@ -21,8 +21,7 @@ const StyledButton = styled.button`
 
     color: ${props => props.theme.colors.textLight};
   }
-`
-
+`;
 
 export const AccentButton = styled.button`
   height: 2.25rem;
@@ -45,34 +44,32 @@ export const AccentButton = styled.button`
 
     color: #fff;
   }
-`
+`;
 export const SupportButton = styled(StyledButton)`
-  border-radius: .5rem;
-  background-color: #FFE598;
-  
-  font-size: .75rem;
+  border-radius: 0.5rem;
+  background-color: #ffe598;
+
+  font-size: 0.75rem;
   font-weight: 600;
-  color: #36364B;
+  color: #36364b;
 
   outline: none;
-`
+`;
 
 export const StyledInvisibleButton = styled.button`
   padding: 0;
 
   background-color: transparent;
   border: none;
-  outline:none;
+  outline: none;
 
   cursor: pointer;
-`
+`;
 
 export function Button({ width, children }) {
-  return <StyledButton width={width}>{children}</StyledButton>
+  return <StyledButton width={width}>{children}</StyledButton>;
 }
 
-
-
 export function InvisibleButton({ children }) {
-  return <StyledInvisibleButton>{children}</StyledInvisibleButton>
+  return <StyledInvisibleButton>{children}</StyledInvisibleButton>;
 }

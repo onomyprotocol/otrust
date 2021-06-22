@@ -5,7 +5,7 @@ import { renderWithTheme } from '../utils/testing';
 
 const testProps = {
   setDenom: jest.fn(),
-  denom: 'DENOM'
+  denom: 'DENOM',
 };
 
 describe('Given the Dropdown component', () => {
@@ -23,7 +23,7 @@ describe('Given the Dropdown component', () => {
     });
 
     it('should include ETH value in the header if denom was not provided in the props', () => {
-      const { getByText } = renderWithTheme(Dropdown, {...testProps, denom: undefined});
+      const { getByText } = renderWithTheme(Dropdown, { ...testProps, denom: undefined });
       expect(getByText('ETH')).toBeInTheDocument();
     });
 
@@ -40,8 +40,7 @@ describe('Given the Dropdown component', () => {
       });
 
       describe('and user clicks on dropdown item', () => {
-        it('should call setDenom function with option value in function params and hide dropdown-list-container',
-        async () => {
+        it('should call setDenom function with option value in function params and hide dropdown-list-container', async () => {
           const { queryByTestId } = renderWithTheme(Dropdown, testProps);
           fireEvent.click(queryByTestId('dropdown-header'));
           fireEvent.click(queryByTestId('ETH'));

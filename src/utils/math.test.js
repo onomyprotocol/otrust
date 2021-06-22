@@ -1,4 +1,5 @@
-import { BigNumber } from 'bignumber.js'
+import { BigNumber } from 'bignumber.js';
+
 import { chopFloat, randomInt, truncate, format18, parse18, isNumber } from './math';
 
 describe('Given chopFloat util function', () => {
@@ -22,7 +23,7 @@ describe('Given randomInt util function', () => {
       const result = randomInt(10, 20);
       expect(result).toBeGreaterThanOrEqual(10);
       expect(result).toBeLessThanOrEqual(20);
-      expect((result).toString()).toMatch(new RegExp(/^[0-9]{2}$/))
+      expect(result.toString()).toMatch(new RegExp(/^[0-9]{2}$/));
     });
   });
 });
@@ -45,8 +46,8 @@ describe('Given truncate util function', () => {
 describe('Given format18 util function', () => {
   describe('when the function is called', () => {
     it('should return correct value', () => {
-      const result1 = format18(new BigNumber(10**36));
-      expect(JSON.stringify(result1)).toContain("999999999999999900");
+      const result1 = format18(new BigNumber(10 ** 36));
+      expect(JSON.stringify(result1)).toContain('999999999999999900');
     });
   });
 });
@@ -55,7 +56,7 @@ describe('Given parse18 util function', () => {
   describe('when the function is called', () => {
     it('should return correct value', () => {
       const result1 = parse18(new BigNumber(10));
-      expect(JSON.stringify(result1)).toContain("10000000000000000000");
+      expect(JSON.stringify(result1)).toContain('10000000000000000000');
     });
   });
 });

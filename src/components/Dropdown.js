@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { borderRadius } from 'context/responsive/cssSizes'
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
-const DropDownContainer = styled("div")`
+import { borderRadius } from 'context/responsive/cssSizes';
+
+const DropDownContainer = styled('div')`
   width: 5em;
   margin: 0 auto;
 
@@ -11,7 +12,7 @@ const DropDownContainer = styled("div")`
   }
 `;
 
-const DropDownHeader = styled("div")`
+const DropDownHeader = styled('div')`
   height: 2rem;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
   font-weight: 500;
@@ -23,13 +24,13 @@ const DropDownHeader = styled("div")`
   border-radius: ${borderRadius};
 `;
 
-const DropDownListContainer = styled("div")`
+const DropDownListContainer = styled('div')`
   position: absolute;
   z-index: 100;
   width: 10.5em;
 `;
 
-const DropDownList = styled("ul")`
+const DropDownList = styled('ul')`
   padding: 0;
   margin: 0;
   padding-left: 1em;
@@ -44,7 +45,7 @@ const DropDownList = styled("ul")`
   }
 `;
 
-const ListItem = styled("li")`
+const ListItem = styled('li')`
   list-style: none;
   margin-bottom: 0.8em;
   &:hover {
@@ -52,9 +53,9 @@ const ListItem = styled("li")`
   }
 `;
 
-const options = ["ETH", "NOM"];
+const options = ['ETH', 'NOM'];
 
-export default function Dropdown({denom, setDenom}) {
+export default function Dropdown({ denom, setDenom }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggling = () => setIsOpen(!isOpen);
@@ -66,20 +67,20 @@ export default function Dropdown({denom, setDenom}) {
 
   return (
     <DropDownContainer>
-        <DropDownHeader data-testid="dropdown-header" onClick={toggling}>
-          {denom || "ETH"}
-        </DropDownHeader>
-        {isOpen && (
-          <DropDownListContainer data-testid="dropdown-list-container">
-            <DropDownList>
-              {options.map(option => (
-                <ListItem onClick={onOptionClicked(option)} key={option} data-testid={option}>
-                  {option}
-                </ListItem>
-              ))}
-            </DropDownList>
-          </DropDownListContainer>
-        )}
+      <DropDownHeader data-testid="dropdown-header" onClick={toggling}>
+        {denom || 'ETH'}
+      </DropDownHeader>
+      {isOpen && (
+        <DropDownListContainer data-testid="dropdown-list-container">
+          <DropDownList>
+            {options.map(option => (
+              <ListItem onClick={onOptionClicked(option)} key={option} data-testid={option}>
+                {option}
+              </ListItem>
+            ))}
+          </DropDownList>
+        </DropDownListContainer>
+      )}
     </DropDownContainer>
   );
 }

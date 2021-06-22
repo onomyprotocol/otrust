@@ -1,9 +1,9 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 
-import BebasNeueBold from 'assets/fonts/BebasNeueBold.ttf'
-import BebasNeueBook from 'assets/fonts/BebasNeueBook.ttf'
-import BebasNeueRegular from 'assets/fonts/BebasNeueRegular.ttf'
-import { responsive } from './constants'
+import BebasNeueBold from 'assets/fonts/BebasNeueBold.ttf';
+import BebasNeueBook from 'assets/fonts/BebasNeueBook.ttf';
+import BebasNeueRegular from 'assets/fonts/BebasNeueRegular.ttf';
+import { responsive } from './constants';
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -20,12 +20,12 @@ export const GlobalStyle = createGlobalStyle`
     color: ${props => props.theme.colors.textPrimary};
     font-size: 14px;
     font-family: 'Poppins', sans-serif;
-  
+
     @media screen and (max-width: ${responsive.laptop}) {
       font-size: 12px;
     }
   }
-  
+
   html, body {
     min-height: 100%;
   }
@@ -49,7 +49,7 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     src: url('${BebasNeueRegular}') format('truetype');
   }
-  
+
   @font-face {
     font-family: 'Bebas Neue';
     font-weight: 600;
@@ -61,4 +61,4 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-`
+`;

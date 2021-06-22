@@ -1,26 +1,25 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
-import { AccentButton } from 'components/UI/Button'
-import logo from '../assets/images/onomy.png'
-import rightCursor from '../assets/images/rightCursor.png'
-import metamask from '../assets/images/metamask.png'
-import ledger from '../assets/images/ledger.png'
-import coinbase from '../assets/images/coinbase.png'
-import walletConnect from '../assets/images/walletConnect.png'
+import { AccentButton } from 'components/UI/Button';
+import logo from '../assets/images/onomy.png';
+import rightCursor from '../assets/images/rightCursor.png';
+import metamask from '../assets/images/metamask.png';
+import ledger from '../assets/images/ledger.png';
+import coinbase from '../assets/images/coinbase.png';
+import walletConnect from '../assets/images/walletConnect.png';
 import { SUPPORTED_WALLETS } from '../connectors';
-
 
 export const wallets = [
   { title: 'Metamask', img: metamask },
   { title: 'Ledger', img: ledger },
   { title: 'Wallet Connect', img: walletConnect },
   { title: 'Coinbase Wallet', img: coinbase },
-]
+];
 
 const Wrapper = styled.div`
   text-align: center;
-`
+`;
 
 const StyledHeader = styled.header`
   background-color: ${props => props.theme.colors.bgNormal};
@@ -29,7 +28,7 @@ const StyledHeader = styled.header`
   flex-direction: column;
   font-size: calc(10px + 2vmin);
   color: white;
-`
+`;
 
 const StyledTopPart = styled.div`
   display: flex;
@@ -51,7 +50,7 @@ const StyledLogoText = styled.span`
   text-align: left;
   font: normal normal bold 40px/21px 'Bebas Neue';
   letter-spacing: 1.6px;
-  color: #E1DFEB;
+  color: #e1dfeb;
   opacity: 1;
 `;
 
@@ -109,26 +108,22 @@ const RightIcon = styled.img`
   width: 24px;
 `;
 
-export default function Landing({connectWallet}) {
-  
-  const onWalletClick = (wallet) => {
-    Object.values(SUPPORTED_WALLETS).forEach(
-      sWallet => {
-        if (sWallet.name === wallet.title) {
-            if(sWallet.name === 'Injected') {
-              if (typeof web3 !== 'undefined') {
-                connectWallet(sWallet.connector)
-              } else {
-                window.open('https://metamask.io/download.html');
-              }
-            } else {
-              connectWallet(sWallet.connector)
-            }
+export default function Landing({ connectWallet }) {
+  const onWalletClick = wallet => {
+    Object.values(SUPPORTED_WALLETS).forEach(sWallet => {
+      if (sWallet.name === wallet.title) {
+        if (sWallet.name === 'Injected') {
+          if (typeof web3 !== 'undefined') {
+            connectWallet(sWallet.connector);
+          } else {
+            window.open('https://metamask.io/download.html');
+          }
+        } else {
+          connectWallet(sWallet.connector);
         }
       }
-    )
-  }
-    
+    });
+  };
 
   return (
     <Wrapper>
@@ -139,20 +134,20 @@ export default function Landing({connectWallet}) {
         </StyledTopPart>
         <StyledBottomPart>
           <BottomTitleText>Connect Your Wallet</BottomTitleText>
-          <BottomDescriptionText>To participate bonding curve process and buy NOM tokens you need to connect your Eth wallet</BottomDescriptionText>
-          {
-            wallets.map(wallet => (
-              <WalletWrapper key={wallet.title} onClick={() => onWalletClick(wallet)}>
-                <IconWrapper>
-                  <WalletIcon alt={`${wallet.title} Icon`} src={wallet.img} />
-                </IconWrapper>
-                <WalletText>{wallet.title}</WalletText>
-                <RightIcon alt="Right Cursor" src={rightCursor} />
-              </WalletWrapper>
-            ))
-          }
+          <BottomDescriptionText>
+            To participate bonding curve process and buy NOM tokens you need to connect your Eth wallet
+          </BottomDescriptionText>
+          {wallets.map(wallet => (
+            <WalletWrapper key={wallet.title} onClick={() => onWalletClick(wallet)}>
+              <IconWrapper>
+                <WalletIcon alt={`${wallet.title} Icon`} src={wallet.img} />
+              </IconWrapper>
+              <WalletText>{wallet.title}</WalletText>
+              <RightIcon alt="Right Cursor" src={rightCursor} />
+            </WalletWrapper>
+          ))}
         </StyledBottomPart>
       </StyledHeader>
     </Wrapper>
-  )
+  );
 }

@@ -1,13 +1,12 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+import { BigNumber } from 'bignumber.js';
 
-import logo from "assets/logo.svg";
-import { Container } from "./UI";
-import { responsive } from "theme/constants";
-import { format18 } from 'utils/math'
-import { BigNumber } from 'bignumber.js'
-
-import { useChain } from 'context/chain/ChainContext'
+import logo from 'assets/logo.svg';
+import { Container } from './UI';
+import { responsive } from 'theme/constants';
+import { format18 } from 'utils/math';
+import { useChain } from 'context/chain/ChainContext';
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -25,7 +24,7 @@ const HeaderWrapper = styled.header`
     height: auto;
     padding: 20px;
 
-    background-color: ${(props) => props.theme.colors.bgNormal};
+    background-color: ${props => props.theme.colors.bgNormal};
   }
 `;
 
@@ -53,8 +52,8 @@ const LogoText = styled.div`
   > strong {
     margin-bottom: 5px;
 
-    color: ${(props) => props.theme.colors.textPrimary};
-    font-family: "Bebas Neue", sans-serif;
+    color: ${props => props.theme.colors.textPrimary};
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 32px;
     font-weight: 600;
     line-height: 1;
@@ -66,7 +65,7 @@ const LogoText = styled.div`
   }
 
   > span {
-    color: ${(props) => props.theme.colors.textThirdly};
+    color: ${props => props.theme.colors.textThirdly};
     line-height: 1;
   }
 `;
@@ -93,7 +92,7 @@ const HeaderInfoItem = styled.div`
   }
 
   > strong {
-    color: ${(props) => props.theme.colors.textThirdly};
+    color: ${props => props.theme.colors.textThirdly};
     font-weight: 400;
 
     @media screen and (max-width: ${responsive.smartphoneLarge}) {
@@ -113,7 +112,7 @@ const ExchangeRate = styled.div`
 
 const Issued = styled.div`
   padding-left: 56px;
-  border-left: 1px solid ${(props) => props.theme.colors.bgHighlightBorder};
+  border-left: 1px solid ${props => props.theme.colors.bgHighlightBorder};
 
   @media screen and (max-width: ${responsive.laptop}) {
     padding-left: 32px;
@@ -137,8 +136,8 @@ const HeaderInfoItemValue = styled.div`
   > strong {
     margin-right: 12px;
 
-    color: ${(props) => props.theme.colors.textPrimary};
-    font-family: "Bebas Neue", sans-serif;
+    color: ${props => props.theme.colors.textPrimary};
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 24px;
 
     @media screen and (max-width: ${responsive.laptop}) {
@@ -152,11 +151,11 @@ const HeaderInfoItemValue = styled.div`
 `;
 
 const Details = styled.span`
-  color: ${(props) => {
+  color: ${props => {
     switch (props.type) {
-      case "increase":
+      case 'increase':
         return props.theme?.colors.highlightGreen;
-      case "decrease":
+      case 'decrease':
         return props.theme?.colors.highlightRed;
       default:
         return props.theme?.colors.textPrimary;
@@ -164,8 +163,8 @@ const Details = styled.span`
   }};
 `;
 
-export default function MainHeader(props) {
-  const { supplyNOM, currentETHPrice } = useChain()
+export default function MainHeader() {
+  const { supplyNOM, currentETHPrice } = useChain();
 
   return (
     <header>
@@ -192,13 +191,11 @@ export default function MainHeader(props) {
                 <strong>NOM / ETH</strong>
                 <HeaderInfoItemValue>
                   <strong>
-                  <span>
-                    {
-                      BigNumber.isBigNumber(currentETHPrice)
+                    <span>
+                      {BigNumber.isBigNumber(currentETHPrice)
                         ? `${Math.round(format18(currentETHPrice).toNumber())}`
-                        : "Loading"
-                    }
-                  </span>
+                        : 'Loading'}
+                    </span>
                   </strong>
                 </HeaderInfoItemValue>
               </HeaderInfoItem>
@@ -209,11 +206,7 @@ export default function MainHeader(props) {
                 <HeaderInfoItemValue>
                   <strong>
                     <span>
-                      {
-                        BigNumber.isBigNumber(supplyNOM)
-                          ? `${Math.round(format18(supplyNOM).toNumber())}`
-                          : "Loading"
-                      }
+                      {BigNumber.isBigNumber(supplyNOM) ? `${Math.round(format18(supplyNOM).toNumber())}` : 'Loading'}
                     </span>
                   </strong>
                   <Details>/ 1E8</Details>

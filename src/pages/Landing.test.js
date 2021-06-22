@@ -4,7 +4,7 @@ import Landing, { wallets } from './Landing';
 import { renderWithTheme } from '../utils/testing';
 
 const testProps = {
-  connectWallet: jest.fn()
+  connectWallet: jest.fn(),
 };
 
 describe('Given the Landing component', () => {
@@ -34,7 +34,6 @@ describe('Given the Landing component', () => {
         fireEvent.click(getByText(wallets[3].title));
 
         expect(testProps.connectWallet).toHaveBeenCalledTimes(4);
-
       });
     });
   });

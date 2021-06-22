@@ -8,15 +8,15 @@ import { ConnectionStatus } from './ConnectionStatus';
 import { renderWithTheme } from '../../utils/testing';
 
 const testProps = {
-  width: 50
-}
+  width: 50,
+};
 
 describe('Given the AccentButton component and width is provided in the props', () => {
   describe('when the component is rendered', () => {
     afterEach(cleanup);
 
     it('should match the snapshot', () => {
-      const { asFragment } = renderWithTheme(AccentButton , testProps);
+      const { asFragment } = renderWithTheme(AccentButton, testProps);
       expect(asFragment()).toMatchSnapshot();
     });
   });

@@ -1,10 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import { darken, lighten } from "polished";
+import React from 'react';
+import styled from 'styled-components';
+import { darken, lighten } from 'polished';
 
-import { responsive } from "theme/constants";
-
-import { MediumIcon, TwitterIcon } from "./SidebarIcons";
+import { responsive } from 'theme/constants';
+import { MediumIcon, TwitterIcon } from './SidebarIcons';
 
 const Info = styled.footer`
   display: flex;
@@ -25,7 +24,7 @@ const Info = styled.footer`
   @media screen and (max-width: ${responsive.smartphoneLarge}) {
     padding: 24px 20px;
 
-    background-color: ${(props) => props.theme.colors.bgDarken};
+    background-color: ${props => props.theme.colors.bgDarken};
   }
 `;
 
@@ -33,15 +32,15 @@ const Link = styled.a`
   display: block;
   margin-right: auto;
 
-  color: ${(props) => props.theme.colors.textSecondary};
+  color: ${props => props.theme.colors.textSecondary};
   text-decoration: none;
 
   &:hover {
-    color: ${(props) => lighten(0.02, props.theme.colors.textSecondary)};
+    color: ${props => lighten(0.02, props.theme.colors.textSecondary)};
   }
 
   &:active {
-    color: ${(props) => darken(0.02, props.theme.colors.textSecondary)};
+    color: ${props => darken(0.02, props.theme.colors.textSecondary)};
   }
 `;
 
@@ -53,11 +52,11 @@ const SecondaryIcon = styled.a`
   height: 40px;
   width: 40px;
 
-  background-color: ${(props) => props.theme.colors.bgHighlightBorder};
+  background-color: ${props => props.theme.colors.bgHighlightBorder};
   border-radius: 8px;
 
   font-size: 20px;
-  color: ${(props) => props.theme.colors.iconsSecondary};
+  color: ${props => props.theme.colors.iconsSecondary};
 
   cursor: pointer;
 
@@ -79,13 +78,11 @@ const SecondaryIcon = styled.a`
   }
 
   &:hover {
-    background-color: ${(props) =>
-      lighten(0.02, props.theme.colors.bgHighlightBorder)};
+    background-color: ${props => lighten(0.02, props.theme.colors.bgHighlightBorder)};
   }
 
   &:active {
-    background-color: ${(props) =>
-      darken(0.02, props.theme.colors.bgHighlightBorder)};
+    background-color: ${props => darken(0.02, props.theme.colors.bgHighlightBorder)};
   }
 `;
 

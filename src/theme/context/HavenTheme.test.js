@@ -5,18 +5,18 @@ import { renderWithTheme } from '../../utils/testing';
 
 const testProps = {
   setTheme: jest.fn(),
-}
+};
 
 describe('Given the HavenTheme component', () => {
   describe('when the component is rendered and localStorage includes the dark theme', () => {
     afterEach(cleanup);
     beforeEach(() => {
-      Object.defineProperty(window, "localStorage", {
+      Object.defineProperty(window, 'localStorage', {
         value: {
           getItem: jest.fn(() => 'dark'),
-          setItem: jest.fn(() => null)
+          setItem: jest.fn(() => null),
         },
-        writable: true
+        writable: true,
       });
     });
 

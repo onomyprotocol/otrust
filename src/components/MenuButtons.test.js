@@ -6,10 +6,10 @@ import { renderWithTheme } from '../utils/testing';
 const testProps = {
   onButtonChange: jest.fn(),
   menuButtons: [
-    {status: false, text:'button1'},
-    {status: false, text:'button2'},
-    {status: false, text:'button3'}
-  ]
+    { status: false, text: 'button1' },
+    { status: false, text: 'button2' },
+    { status: false, text: 'button3' },
+  ],
 };
 
 describe('Given the MenuButtons component', () => {
@@ -32,12 +32,11 @@ describe('Given the MenuButtons component', () => {
       it('should call onButtonChange function and change status of clicked button', async () => {
         const { getByText } = renderWithTheme(MenuButtons, testProps);
         let updatedMenuButtons = testProps.menuButtons.slice();
-        updatedMenuButtons[2].status=true;
+        updatedMenuButtons[2].status = true;
 
         fireEvent.click(getByText(testProps.menuButtons[2].text));
         expect(testProps.onButtonChange).toHaveBeenCalled();
-        expect(testProps.onButtonChange).toHaveBeenCalledWith(updatedMenuButtons, "3");
-
+        expect(testProps.onButtonChange).toHaveBeenCalledWith(updatedMenuButtons, '3');
       });
     });
 
@@ -49,7 +48,6 @@ describe('Given the MenuButtons component', () => {
         fireEvent.click(getByText(testProps.menuButtons[1].text));
         fireEvent.click(getByText(testProps.menuButtons[2].text));
         expect(testProps.onButtonChange).toHaveBeenCalledTimes(3);
-
       });
     });
   });
