@@ -2,7 +2,7 @@ import React, { useReducer, useEffect, createContext, useContext } from 'react'
 import { useWeb3React } from "@web3-react/core"
 import ApolloClient, { InMemoryCache } from 'apollo-boost'
 import { ApolloProvider } from '@apollo/client'
-import { BondingCont, NOMCont, contAddrs } from 'context/chain/contracts'
+import { BondingCont, NOMCont, UniSwapCont, contAddrs } from 'context/chain/contracts'
 import { BigNumber } from 'bignumber.js'
 import { reducer } from 'context/chain/ChainReducer'
 
@@ -17,6 +17,7 @@ function ChainProvider({ theme, children }) {
     const { account, library } = useWeb3React()
     const bondContract = BondingCont(library)
     const NOMContract = NOMCont(library)
+    const uniswapUsdcContract = UniSwapCont(library)
     const [state, dispatch] = useReducer(reducer, { 
         blockNumber: new BigNumber(0),
         currentETHPrice: new BigNumber(0),
@@ -53,9 +54,9 @@ function ChainProvider({ theme, children }) {
                             bondContract.getSupplyNOM(),
                             // Weak Balance (May need to move these to Exchange)
                             NOMContract.balanceOf(account),
-                            number
                             // UniSwap Pricing
-                            // UniSwapCont.getReserves(),
+                            uniswapUsdcContract.getReserves(),
+                            number
                         ]
                     ).then(values => {
                         let update = new Map()
@@ -103,7 +104,21 @@ function ChainProvider({ theme, children }) {
 
                                 case 5:
                                     update = update.set(
-                                        'blockNumber', 
+                                        'currentNOMPrice',
+                                        (
+                                            (
+                                                (new BigNumber(values[5][0].toString()))
+                                                    .div(new BigNumber(values[5][1].toString()))
+                                            )
+                                                .multipliedBy(1e12)
+                                        )
+                                            .div(new BigNumber(values[0].toString()))
+                                    )
+                                    break
+
+                                case 6:
+                                    update = update.set(
+                                        'blockNumber',
                                         new BigNumber(number.toString())
                                     )
                                     break
