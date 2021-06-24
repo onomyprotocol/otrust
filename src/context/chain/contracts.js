@@ -4,7 +4,7 @@ const BondingContractJSON = require('./BondingNOM.json')
 const UniswapContractJSON = require('./UniSwap.json')
 
 export const contAddrs = require('./NOMAddrs.json')
-const uniswapUsdcAddress = "0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc";
+const uniswapUsdcAddress = "0xB4e16d0168e52d35CaCD2c6185b44281Ec28C9Dc";
 /**
  * NOM ERC20 Contract instance
  */
