@@ -4,7 +4,7 @@ import ApolloClient, { InMemoryCache } from 'apollo-boost';
 import { ApolloProvider } from '@apollo/client';
 import { BigNumber } from 'bignumber.js';
 
-import { BondingCont, NOMCont, contAddrs } from 'context/chain/contracts';
+import { BondingCont, NOMCont, UniSwapCont, contAddrs } from 'context/chain/contracts';
 import { reducer } from 'context/chain/ChainReducer';
 
 export const ChainContext = createContext();
@@ -17,6 +17,7 @@ function ChainProvider({ theme, children }) {
   const { account, library } = useWeb3React();
   const bondContract = BondingCont(library);
   const NOMContract = NOMCont(library);
+  const UniSwapContract = UniSwapCont(library);
   const [state, dispatch] = useReducer(reducer, {
     blockNumber: new BigNumber(0),
     currentETHPrice: new BigNumber(0),
@@ -52,17 +53,15 @@ function ChainProvider({ theme, children }) {
             bondContract.getSupplyNOM(),
             // Weak Balance (May need to move these to Exchange)
             NOMContract.balanceOf(account),
-            number,
             // UniSwap Pricing
-            // UniSwapCont.getReserves(),
+            UniSwapContract.getReserves(),
+            number,
           ]).then(values => {
             let update = new Map();
             for (let i = 0; i < values.length; i++) {
               switch (i) {
                 case 0:
                   update = update.set('currentETHPrice', new BigNumber(values[0].toString()));
-
-                  update = update.set('currentNOMPrice', new BigNumber(1).div(new BigNumber(values[0].toString())));
                   break;
 
                 case 1:
@@ -82,6 +81,16 @@ function ChainProvider({ theme, children }) {
                   break;
 
                 case 5:
+                  update = update.set(
+                    'currentNOMPrice',
+                    new BigNumber(values[5][0].toString())
+                      .div(new BigNumber(values[5][1].toString()))
+                      .div(new BigNumber(values[0].toString()))
+                      .multipliedBy(1e12),
+                  );
+                  break;
+
+                case 6:
                   update = update.set('blockNumber', new BigNumber(number.toString()));
                   break;
                 default:

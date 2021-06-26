@@ -164,7 +164,7 @@ const Details = styled.span`
 `;
 
 export default function MainHeader() {
-  const { supplyNOM, currentETHPrice } = useChain();
+  const { supplyNOM, currentETHPrice, currentNOMPrice } = useChain();
 
   return (
     <header>
@@ -183,8 +183,14 @@ export default function MainHeader() {
               <HeaderInfoItem>
                 <strong>NOM / USDT</strong>
                 <HeaderInfoItemValue>
-                  <strong>$10.12</strong>
-                  <Details type="increase">24.2%</Details>
+                  <strong>
+                    <span>
+                      {BigNumber.isBigNumber(currentNOMPrice)
+                        ? `${Math.round(format18(currentNOMPrice).toNumber())}`
+                        : 'Loading'}
+                    </span>
+                  </strong>
+                  {/* <Details type="increase">24.2%</Details> */}
                 </HeaderInfoItemValue>
               </HeaderInfoItem>
               <HeaderInfoItem>
