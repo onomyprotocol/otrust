@@ -37,14 +37,23 @@ const SidebarLayout = styled.div`
 `;
 
 export default function Sidebar() {
-  const { active, error, chainId, account } = useWeb3React();
+  const { active, error, chainId, account, deactivate } = useWeb3React();
   const { blockNumber, strongBalance, weakBalance } = useChain();
   const { strong, weak } = useExchange();
+
+  const disconnectWallet = () => {
+    try {
+      deactivate();
+    } catch (e) {
+      alert('Failed to disconnect.');
+      console.error(e);
+    }
+  };
 
   return (
     <Panel>
       <SidebarLayout>
-        <SidebarHeader account={account} />
+        <SidebarHeader account={account} onLogout={disconnectWallet} />
         <SidebarBalances
           strong={strong}
           weak={weak}

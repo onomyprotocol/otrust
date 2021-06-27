@@ -181,14 +181,14 @@ const AccountNumber = styled.div`
   }
 `;
 
-export default function SidebarHeader({ account }) {
+export default function SidebarHeader({ account, onLogout }) {
   return (
     <Header>
       <PrimaryIcon>
         <CogIcon />
       </PrimaryIcon>
       <Avatar src="https://picsum.photos/72" alt="" />
-      <PrimaryIcon>
+      <PrimaryIcon onClick={onLogout}>
         <LogoutIcon />
       </PrimaryIcon>
       <AccountNumber>
