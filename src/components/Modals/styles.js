@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { darken, lighten } from 'polished';
 
 import { responsive } from 'theme/constants';
 
@@ -80,7 +79,7 @@ export const CloseIcon = styled.button`
 
   &:hover {
     svg {
-      fill: ${props => lighten(0.1, props.theme.colors.textThirdly)};
+      fill: ${props => props.theme.colors.textThirdly_lighten};
     }
   }
 `;
@@ -123,11 +122,11 @@ export const SecondaryButton = styled(PrimaryButton)`
   color: ${props => props.theme.colors.textPrimary};
 
   &:hover {
-    background-color: ${props => lighten(0.05, props.theme.colors.bgHighlightBorder)};
+    background-color: ${props => props.theme.colors.bgHighlightBorder_lighten};
   }
 
   &:active {
-    background-color: ${props => darken(0.05, props.theme.colors.bgHighlightBorder)};
+    background-color: ${props => props.theme.colors.bgHighlightBorder_darken};
   }
 `;
 

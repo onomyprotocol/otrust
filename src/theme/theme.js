@@ -107,13 +107,15 @@ export const darkNew = {
     bgDarken: '#1a1823',
     bgDarkest: '#06060f',
 
-    bgHighlightBorder_darken: darken(0.02, '#302E3D'),
-    bgHighlightBorder_lighten: lighten(0.02, '#302E3D'),
+    bgHighlightBorder_darken: darken(0.1, '#302E3D'),
+    bgHighlightBorder_lighten: lighten(0.1, '#302E3D'),
     bgNormal_darken: darken(0.02, '#201d2a'),
     bgNormal_lighten: lighten(0.02, '#201d2a'),
     textPrimary_darken: darken(0.02, '#e1dfeb'),
     textPrimary_lighten: lighten(0.02, '#e1dfeb'),
     textSecondary_darken: darken(0.02, '#9895a6'),
     textSecondary_lighten: lighten(0.02, '#9895a6'),
+    textThirdly_darken: darken(0.1, '#656273'),
+    textThirdly_lighten: lighten(0.1, '#656273'),
   },
 };

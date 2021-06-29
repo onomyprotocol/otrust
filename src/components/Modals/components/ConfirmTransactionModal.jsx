@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { lighten } from 'polished';
 import useInterval from '@use-it/interval';
 // import LoadingBar from 'components/Modals/LoadingBar'
 import { BigNumber } from 'bignumber.js';
@@ -84,11 +83,11 @@ const OptionBtn = styled.button`
   color: ${props => (props.active ? props.theme.colors.textPrimary : props.theme.colors.textSecondary)};
 
   &:hover {
-    background-color: ${props => lighten(0.1, props.theme.colors.bgHighlightBorder)};
+    background-color: ${props => props.theme.colors.bgHighlightBorder_lighten};
   }
 
   &:active {
-    background-color: ${props => lighten(0.1, props.theme.colors.bgHighlightBorder)};
+    background-color: ${props => props.theme.colors.bgHighlightBorder_lighten};
   }
 `;
 
