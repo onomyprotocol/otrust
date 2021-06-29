@@ -3,7 +3,7 @@
 exports[`Given the AccentButton component and width is not provided in the props when the component is rendered should match the snapshot 1`] = `
 <DocumentFragment>
   <button
-    class="sc-gtsrHT fPQymE"
+    class="sc-gtsrHT cyZncv"
   />
 </DocumentFragment>
 `;
@@ -11,7 +11,7 @@ exports[`Given the AccentButton component and width is not provided in the props
 exports[`Given the AccentButton component and width is provided in the props when the component is rendered should match the snapshot 1`] = `
 <DocumentFragment>
   <button
-    class="sc-gtsrHT kDVoAK"
+    class="sc-gtsrHT kpLgTl"
     width="50"
   />
 </DocumentFragment>
@@ -20,7 +20,7 @@ exports[`Given the AccentButton component and width is provided in the props whe
 exports[`Given the Button component and width is not provided in the props when the component is rendered should match the snapshot 1`] = `
 <DocumentFragment>
   <button
-    class="sc-bdnxRM kZOUyB"
+    class="sc-bdnxRM gLKfsM"
   />
 </DocumentFragment>
 `;
@@ -28,7 +28,7 @@ exports[`Given the Button component and width is not provided in the props when 
 exports[`Given the Button component and width is provided in the props when the component is rendered should match the snapshot 1`] = `
 <DocumentFragment>
   <button
-    class="sc-bdnxRM jlByMH"
+    class="sc-bdnxRM fPQjMu"
     width="50"
   />
 </DocumentFragment>
@@ -37,7 +37,7 @@ exports[`Given the Button component and width is provided in the props when the 
 exports[`Given the ConnectionStatus component when the component is rendered should match the snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="sc-iCoGMd iruQKK"
+    class="sc-iCoGMd kkpqdJ"
   />
 </DocumentFragment>
 `;
@@ -89,7 +89,7 @@ exports[`Given the LoadingSpinner component when the component is rendered shoul
 exports[`Given the Panel component when the component is rendered should match the snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="sc-gKAaRy bhCpij"
+    class="sc-gKAaRy bAUKSe"
   />
 </DocumentFragment>
 `;

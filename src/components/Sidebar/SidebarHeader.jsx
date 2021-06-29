@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { darken, lighten } from 'polished';
 
 import { responsive } from 'theme/constants';
 import { CogIcon, LogoutIcon } from './SidebarIcons';
@@ -55,11 +54,11 @@ const PrimaryIcon = styled.a`
   }
 
   &:hover {
-    background-color: ${props => lighten(0.02, props.theme.colors.bgNormal)};
+    background-color: ${props => props.theme.colors.bgNormal_lighten};
   }
 
   &:active {
-    background-color: ${props => darken(0.02, props.theme.colors.bgNormal)};
+    background-color: ${props => props.theme.colors.bgNormal_darken};
   }
 `;
 

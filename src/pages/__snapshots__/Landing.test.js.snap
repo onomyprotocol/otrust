@@ -6,10 +6,10 @@ exports[`Given the Landing component when the component is rendered should match
     class="sc-eCApnc fLcWfp"
   >
     <header
-      class="sc-jSFjdj iyASRo"
+      class="sc-jSFjdj hxpqMV"
     >
       <div
-        class="sc-gKAaRy fbmxSj"
+        class="sc-gKAaRy ZgfvY"
       >
         <img
           alt="logo"
@@ -36,7 +36,7 @@ exports[`Given the Landing component when the component is rendered should match
           To participate bonding curve process and buy NOM tokens you need to connect your Eth wallet
         </span>
         <button
-          class="sc-gtsrHT sc-iqAclL fPQymE jvgtYJ"
+          class="sc-gtsrHT sc-iqAclL cyZncv VYyzG"
         >
           <div
             class="sc-crzoAE bQuOpk"
@@ -59,7 +59,7 @@ exports[`Given the Landing component when the component is rendered should match
           />
         </button>
         <button
-          class="sc-gtsrHT sc-iqAclL fPQymE jvgtYJ"
+          class="sc-gtsrHT sc-iqAclL cyZncv VYyzG"
         >
           <div
             class="sc-crzoAE bQuOpk"
@@ -82,7 +82,7 @@ exports[`Given the Landing component when the component is rendered should match
           />
         </button>
         <button
-          class="sc-gtsrHT sc-iqAclL fPQymE jvgtYJ"
+          class="sc-gtsrHT sc-iqAclL cyZncv VYyzG"
         >
           <div
             class="sc-crzoAE bQuOpk"
@@ -105,7 +105,7 @@ exports[`Given the Landing component when the component is rendered should match
           />
         </button>
         <button
-          class="sc-gtsrHT sc-iqAclL fPQymE jvgtYJ"
+          class="sc-gtsrHT sc-iqAclL cyZncv VYyzG"
         >
           <div
             class="sc-crzoAE bQuOpk"

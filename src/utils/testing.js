@@ -4,7 +4,7 @@ import { ApolloProvider } from '@apollo/client';
 import { render } from '@testing-library/react';
 import { BigNumber } from 'bignumber.js';
 
-import { dark } from 'Theme/theme';
+import { darkNew } from 'Theme/theme';
 import { ChainContext } from '../context/chain/ChainContext';
 import { ExchangeContext } from '../context/exchange/ExchangeContext';
 
@@ -16,13 +16,13 @@ const client = new ApolloClient({
 export const renderWithTheme = (Component, props, children) => {
   if (children) {
     return render(
-      <ThemeProvider theme={dark}>
+      <ThemeProvider theme={darkNew}>
         <Component {...props}>{children}</Component>
       </ThemeProvider>,
     );
   }
   return render(
-    <ThemeProvider theme={dark}>
+    <ThemeProvider theme={darkNew}>
       <Component {...props} />
     </ThemeProvider>,
   );
@@ -30,9 +30,9 @@ export const renderWithTheme = (Component, props, children) => {
 
 export const renderWithContext = (Component, props) => {
   return render(
-    <ThemeProvider theme={dark}>
+    <ThemeProvider theme={darkNew}>
       <ApolloProvider client={client}>
-        <ChainContext.Provider value={{ supplyNOM: new BigNumber(0), theme: dark }}>
+        <ChainContext.Provider value={{ supplyNOM: new BigNumber(0), theme: darkNew }}>
           <ExchangeContext.Provider value={{ askAmount: 0, bidAmount: 0, bidDenom: 'strong' }}>
             <Component {...props} />
           </ExchangeContext.Provider>

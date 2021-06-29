@@ -109,11 +109,11 @@ export const PrimaryButton = styled.button`
   }
 
   &:hover {
-    background-color: ${props => lighten(0.1, props.theme.colors.textPrimary)};
+    background-color: ${props => props.theme.colors.textPrimary_lighten};
   }
 
   &:active {
-    background-color: ${props => darken(0.1, props.theme.colors.textPrimary)};
+    background-color: ${props => props.theme.colors.textPrimary_darken};
   }
 `;
 
@@ -280,11 +280,11 @@ export const DetailsButton = styled.button`
   }
 
   &:hover {
-    color: ${props => lighten(0.05, props.theme.colors.textSecondary)};
+    color: ${props => props.theme.colors.textSecondary_lighten};
   }
 
   &:active {
-    color: ${props => darken(0.05, props.theme.colors.textSecondary)};
+    color: ${props => props.theme.colors.textSecondary_darken};
   }
 `;
 

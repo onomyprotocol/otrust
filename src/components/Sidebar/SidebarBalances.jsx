@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { darken, lighten } from 'polished';
 
 import { PrimaryButton } from 'components/Modals/styles';
 import { responsive } from 'theme/constants';
@@ -101,11 +100,11 @@ const SecondaryIcon = styled.a`
   }
 
   &:hover {
-    background-color: ${props => lighten(0.02, props.theme.colors.bgHighlightBorder)};
+    background-color: ${props => props.theme.colors.bgHighlightBorder_lighten};
   }
 
   &:active {
-    background-color: ${props => darken(0.02, props.theme.colors.bgHighlightBorder)};
+    background-color: ${props => props.theme.colors.bgHighlightBorder_darken};
   }
 `;
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { darken, lighten } from 'polished';
 
 import { responsive } from 'theme/constants';
 import { MediumIcon, TwitterIcon } from './SidebarIcons';
@@ -41,11 +40,11 @@ const Link = styled.a`
   text-decoration: none;
 
   &:hover {
-    color: ${props => lighten(0.02, props.theme.colors.textSecondary)};
+    color: ${props => props.theme.colors.textSecondary_lighten};
   }
 
   &:active {
-    color: ${props => darken(0.02, props.theme.colors.textSecondary)};
+    color: ${props => props.theme.colors.textSecondary_darken};
   }
 `;
 
@@ -83,11 +82,11 @@ const SecondaryIcon = styled.a`
   }
 
   &:hover {
-    background-color: ${props => lighten(0.02, props.theme.colors.bgHighlightBorder)};
+    background-color: ${props => props.theme.colors.bgHighlightBorder_lighten};
   }
 
   &:active {
-    background-color: ${props => darken(0.02, props.theme.colors.bgHighlightBorder)};
+    background-color: ${props => props.theme.colors.bgHighlightBorder_darken};
   }
 `;
 

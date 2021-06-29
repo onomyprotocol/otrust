@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given the SidebarConnection component when the component is rendered and active is true should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-iCoGMd dWpZnl"
+  >
+    <div
+      class="sc-fujyAs chjQuE"
+    >
+      <strong>
+        Connection
+      </strong>
+      <div
+        class="sc-gKAaRy hGDlOd"
+      >
+        Connected
+      </div>
+    </div>
+    <div
+      class="sc-fujyAs chjQuE"
+    >
+      <strong>
+        Chain Id
+      </strong>
+      <span>
+        123
+      </span>
+    </div>
+    <div
+      class="sc-fujyAs chjQuE"
+    >
+      <strong>
+        Block Number
+      </strong>
+      <span>
+        123456
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Given the SidebarConnection component when the component is rendered and error is true should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-iCoGMd dWpZnl"
+  >
+    <div
+      class="sc-fujyAs chjQuE"
+    >
+      <strong>
+        Connection
+      </strong>
+      <div
+        class="sc-gKAaRy hGDlOd"
+      >
+        Connected
+      </div>
+    </div>
+    <div
+      class="sc-fujyAs chjQuE"
+    >
+      <strong>
+        Chain Id
+      </strong>
+      <span>
+        123
+      </span>
+    </div>
+    <div
+      class="sc-fujyAs chjQuE"
+    >
+      <strong>
+        Block Number
+      </strong>
+      <span>
+        123456
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Given the SidebarConnection component when the component is rendered has inactive state and has no errors should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-iCoGMd dWpZnl"
+  >
+    <div
+      class="sc-fujyAs chjQuE"
+    >
+      <strong>
+        Connection
+      </strong>
+      <div
+        class="sc-gKAaRy hGDlOd"
+      >
+        Loading
+      </div>
+    </div>
+    <div
+      class="sc-fujyAs chjQuE"
+    >
+      <strong>
+        Chain Id
+      </strong>
+      <span />
+    </div>
+    <div
+      class="sc-fujyAs chjQuE"
+    >
+      <strong>
+        Block Number
+      </strong>
+      <span />
+    </div>
+  </div>
+</DocumentFragment>
+`;
