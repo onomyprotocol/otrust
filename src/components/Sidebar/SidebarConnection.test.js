@@ -11,21 +11,27 @@ const testProps = {
 };
 
 describe('Given the SidebarConnection component', () => {
-  describe('when the component is rendered and active is true', () => {
+  describe('when the component is rendered and active property is true', () => {
     afterEach(cleanup);
 
     it('should match the snapshot', () => {
-      const { asFragment } = renderWithTheme(SidebarConnection, testProps);
+      const { asFragment, getByText } = renderWithTheme(SidebarConnection, testProps);
       expect(asFragment()).toMatchSnapshot();
+      expect(getByText('Connected')).toBeInTheDocument();
     });
   });
 
-  describe('when the component is rendered and error is true', () => {
+  describe('when the component is rendered and active is false, error is true', () => {
     afterEach(cleanup);
 
     it('should match the snapshot', () => {
-      const { asFragment } = renderWithTheme(SidebarConnection, { ...testProps, error: true });
+      const { asFragment, getByText } = renderWithTheme(SidebarConnection, {
+        ...testProps,
+        active: false,
+        error: true,
+      });
       expect(asFragment()).toMatchSnapshot();
+      expect(getByText('Error')).toBeInTheDocument();
     });
   });
 
@@ -33,13 +39,14 @@ describe('Given the SidebarConnection component', () => {
     afterEach(cleanup);
 
     it('should match the snapshot', () => {
-      const { asFragment } = renderWithTheme(SidebarConnection, {
+      const { asFragment, getByText } = renderWithTheme(SidebarConnection, {
         ...testProps,
         active: false,
         blockNumber: undefined,
         chainId: null,
       });
       expect(asFragment()).toMatchSnapshot();
+      expect(getByText('Loading')).toBeInTheDocument();
     });
   });
 });

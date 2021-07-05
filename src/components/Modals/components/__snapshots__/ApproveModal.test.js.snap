@@ -48,19 +48,6 @@ exports[`Given the ApproveModal component when the component is rendered should 
         </strong>
         . Please confirm you want to do it
       </div>
-      <div
-        class="sc-hiKfDv dxdUML"
-      >
-        <span>
-          Transaction fee
-        </span>
-        <span>
-          <strong>
-            $5.4
-          </strong>
-           (0.00032 ETH)
-        </span>
-      </div>
     </main>
     <footer>
       <div

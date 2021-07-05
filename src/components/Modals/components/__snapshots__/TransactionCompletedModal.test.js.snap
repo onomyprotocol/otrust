@@ -1,5 +1,117 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Given the TransactionCompletedModal component when the component is rendered and confirmations > 0 should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bdnxRM leVZfT"
+  >
+    <button
+      class="sc-dlnjwi cSfPnY"
+      data-testid="completed-modal-close-icon"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g
+          opacity="0.5"
+        >
+          <g
+            transform="translate(-.453 .555)"
+          >
+            <path
+              class="cls-3"
+              d="M8.762.384a1.311 1.311 0 011.981 1.707l-.127.147-8.378 8.378A1.311 1.311 0 01.257 8.909l.127-.147z"
+              transform="translate(6.453 6.445)"
+            />
+            <path
+              class="cls-3"
+              d="M.384.384A1.311 1.311 0 012.09.257l.147.127 8.379 8.38a1.31 1.31 0 01-1.706 1.98l-.147-.127L.384 2.236a1.31 1.31 0 010-1.852z"
+              transform="translate(6.453 6.445)"
+            />
+          </g>
+        </g>
+      </svg>
+    </button>
+    <main>
+      <div
+        class="sc-kEqXSa djnybU"
+      >
+        <svg
+          viewBox="0 0 35.222 35.222"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M24.754 10.961a1.747 1.747 0 012.5 0 1.82 1.82 0 01.171 2.34l-.171.2-11.188 11.375a1.746 1.746 0 01-2.3.174l-.2-.174-5.594-5.686a1.819 1.819 0 010-2.542 1.746 1.746 0 012.3-.175l.2.174 4.342 4.415z"
+            fill="#1f1d29"
+          />
+        </svg>
+      </div>
+      <h3
+        class="sc-pNWdM ipkocU"
+      >
+        Transaction Completed!
+      </h3>
+      <div
+        class="sc-gKAaRy efKcla"
+        data-testid="completed-modal-exchange-result"
+      >
+        + 0.00000000 
+        <sup>
+          NOM
+        </sup>
+        <div
+          class="sc-crzoAE NaURL"
+        >
+          - 0.00000000 
+          <sup>
+            ETH
+          </sup>
+        </div>
+      </div>
+      <div
+        class="sc-iCoGMd fcyUIo"
+        data-testid="completed-modal-exchange-rate"
+      >
+        <span>
+          Exchange Rate
+        </span>
+        <strong>
+          1 NOM = NaN ETH
+        </strong>
+      </div>
+    </main>
+    <footer>
+      <div
+        class="sc-gtsrHT hEKbJi"
+      >
+        <button
+          class="sc-iqAclL hzNtIB"
+          data-testid="completed-modal-details-button"
+        >
+          View Details 
+          <svg
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5.151 7.342a.507.507 0 01.669-.054l.058.054L10 11.546l4.122-4.204a.507.507 0 01.67-.054l.058.051a.533.533 0 01.05.686l-.051.063-4.485 4.571a.507.507 0 01-.67.051l-.058-.051-4.485-4.571a.532.532 0 010-.746z"
+              fill="#8d89a3"
+            />
+          </svg>
+        </button>
+        <button
+          class="sc-hKFxyN fFAwxg"
+          data-testid="completed-modal-primary-button"
+        >
+          Done
+        </button>
+      </div>
+    </footer>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`Given the TransactionCompletedModal component when the component is rendered should match the snapshot 1`] = `
 <DocumentFragment>
   <div

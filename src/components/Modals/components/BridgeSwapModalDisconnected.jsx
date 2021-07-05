@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { Close } from '../Icons';
 import * as Modal from '../styles';
 import { responsive } from 'theme/constants';
-import oneWayBridgeImg from './assets/one-way-bridge.svg';
-import whyBridgeImg from './assets/why-bridge.svg';
-import bridgeCurveImg from './assets/icon-bridge-curve.svg';
+import oneWayBridgeImg from '../assets/one-way-bridge.svg';
+import whyBridgeImg from '../assets/why-bridge.svg';
+import bridgeCurveImg from '../assets/icon-bridge-curve.svg';
 
 const ConnectWalletWrapper = styled.div`
   display: flex;

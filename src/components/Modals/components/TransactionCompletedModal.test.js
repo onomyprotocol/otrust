@@ -55,6 +55,23 @@ describe('Given the TransactionCompletedModal component', () => {
       expect(asFragment()).toMatchSnapshot();
     });
 
+    describe('and confirmations > 0', () => {
+      it('should match the snapshot', () => {
+        const testPropsConfirmationOne = JSON.parse(JSON.stringify(testProps));
+        testPropsConfirmationOne.tx.confirmations = 1;
+        const { asFragment } = render(
+          UpdateExchangeContextWrapper(
+            ExchangeContextWrapper(
+              ModalContextWrapper(ThemeWrapper(TransactionCompletedModal, testPropsConfirmationOne)),
+              testExchangeContext,
+            ),
+            testUpdateExchangeContext,
+          ),
+        );
+        expect(asFragment()).toMatchSnapshot();
+      });
+    });
+
     describe('and status in useExchange context is not APPROVE and bidDenom is strong', () => {
       it('should show ExchangeResult, ExchangeRateWrapper and do not show ExchangeApproveText, FooterDetails', () => {
         const { queryByTestId } = render(
@@ -111,6 +128,43 @@ describe('Given the TransactionCompletedModal component', () => {
     });
 
     describe('and user clicks on CloseIcon', () => {
+      it('should call objDispatch from useUpdateExchange context with correct parameters', () => {
+        let objUpdate = new Map();
+        objUpdate.set('askAmount', new BigNumber(0));
+        objUpdate.set('bidAmount', new BigNumber(0));
+
+        let strUpdate = new Map();
+        strUpdate.set('input', '');
+        strUpdate.set('output', '');
+
+        const { queryByTestId } = render(
+          UpdateExchangeContextWrapper(
+            ExchangeContextWrapper(
+              ModalContextWrapper(ThemeWrapper(TransactionCompletedModal, testProps), testModalContext),
+              testExchangeContext,
+            ),
+            testUpdateExchangeContext,
+          ),
+        );
+        fireEvent.click(queryByTestId('completed-modal-close-icon'));
+
+        expect(testUpdateExchangeContext.objDispatch).toHaveBeenCalled();
+        expect(testUpdateExchangeContext.strDispatch).toHaveBeenCalled();
+        expect(testModalContext.handleModal).toHaveBeenCalled();
+
+        expect(testUpdateExchangeContext.objDispatch).toHaveBeenCalledWith({
+          type: 'update',
+          value: objUpdate,
+        });
+
+        expect(testUpdateExchangeContext.strDispatch).toHaveBeenCalledWith({
+          type: 'update',
+          value: strUpdate,
+        });
+      });
+    });
+
+    describe('and user clicks on PrimaryButton', () => {
       it('should call objDispatch from useUpdateExchange context with correct parameters', () => {
         let objUpdate = new Map();
         objUpdate.set('askAmount', new BigNumber(0));

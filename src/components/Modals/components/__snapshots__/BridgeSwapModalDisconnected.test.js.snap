@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given the BridgeSwapModalDisconnected component when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bdnxRM sc-fFSPTT leVZfT jvmFKX"
+  >
+    <button
+      class="sc-dlnjwi cSfPnY"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g
+          opacity="0.5"
+        >
+          <g
+            transform="translate(-.453 .555)"
+          >
+            <path
+              class="cls-3"
+              d="M8.762.384a1.311 1.311 0 011.981 1.707l-.127.147-8.378 8.378A1.311 1.311 0 01.257 8.909l.127-.147z"
+              transform="translate(6.453 6.445)"
+            />
+            <path
+              class="cls-3"
+              d="M.384.384A1.311 1.311 0 012.09.257l.147.127 8.379 8.38a1.31 1.31 0 01-1.706 1.98l-.147-.127L.384 2.236a1.31 1.31 0 010-1.852z"
+              transform="translate(6.453 6.445)"
+            />
+          </g>
+        </g>
+      </svg>
+    </button>
+    <div
+      class="sc-cxNHIi fvYRQH"
+    >
+      <main>
+        <h3
+          class="sc-pNWdM sc-ezzafa ipkocU jLFTFE"
+        >
+          Onomy Bridge
+        </h3>
+        <div
+          class="sc-bYwzuL iwiYWN"
+        >
+          <div
+            class="sc-dIvrsQ etHfzy"
+          >
+            <div
+              class="sc-kfYoZR dvduFO"
+            >
+              <img
+                alt=""
+                src="icon-bridge-curve.svg"
+              />
+            </div>
+            <div
+              class="sc-fKgJPI eDdDGW"
+            >
+              <strong>
+                Onomy Bonding Curve
+              </strong>
+              <span>
+                0x526..123sdas8b
+              </span>
+            </div>
+            <div
+              class="sc-bCwfaz ihjfKQ"
+            >
+              <strong>
+                wNOM Balance
+              </strong>
+              <span>
+                10,429.22
+              </span>
+            </div>
+          </div>
+          <div
+            class="sc-iwajpm evHmlW"
+          >
+            Onomy wallet is not connected
+          </div>
+          <div
+            class="sc-kLojOw kCZAEw"
+          >
+            <button
+              class="sc-hKFxyN sc-giAqHp fFAwxg ArcId"
+            >
+              Connect Onomy Wallet
+            </button>
+          </div>
+        </div>
+      </main>
+      <aside
+        class="sc-bkbkJK bgKCAf"
+      >
+        <h2>
+          What is Onomy Bridge?
+        </h2>
+        <p
+          class="sc-lmgQwP BhXWF"
+        >
+          The Onomy Bonding Curve platform is a gateway into the Onomy Network. This is achieved by participants purchasing wrapped-NOM, an ERC-20 token on the Ethereum Network, and swapping for NOM on the Onomy Network.
+        </p>
+        <section
+          class="sc-iemWCZ WLZut"
+        >
+          <div>
+            <h3
+              class="sc-dlMDgC jZLQwU"
+            >
+              One Way Bridge
+            </h3>
+            <p
+              class="sc-lmgQwP BhXWF"
+            >
+              Choose to bridge when you are ready to do so to finalize your purchase of NOM! 
+              <strong>
+                After bridging, you can no longer sell back to the bonding curve or bridge back for wNOM.
+              </strong>
+               There are no guarantees of liquid markets.
+            </p>
+          </div>
+          <img
+            alt=""
+            src="one-way-bridge.svg"
+          />
+        </section>
+        <section
+          class="sc-iemWCZ WLZut"
+        >
+          <div>
+            <h3
+              class="sc-dlMDgC jZLQwU"
+            >
+              Why Bridge?
+            </h3>
+            <ol
+              class="sc-iJCRrE kFRqKf"
+            >
+              <li>
+                You must hold NOM to participate in the Onomy Network. 
+              </li>
+              <li>
+                Early stakers of NOM take advantage of larger staking yield. 
+              </li>
+              <li>
+                NOM is used for governance, staking, and collateral to mint stablecoins.
+              </li>
+              <li>
+                All bridged wNOM is burned from the bonding curve supply. 
+              </li>
+              <li>
+                NOM would be listed on exchanges rather than wNOM. 
+              </li>
+            </ol>
+          </div>
+          <div
+            class="sc-hHEiqL gfOyyu"
+          >
+            <img
+              alt=""
+              src="why-bridge.svg"
+            />
+          </div>
+        </section>
+      </aside>
+    </div>
+  </div>
+</DocumentFragment>
+`;

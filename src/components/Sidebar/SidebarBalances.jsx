@@ -82,13 +82,13 @@ const SecondaryIcon = styled.button`
   height: 40px;
   width: 40px;
 
-  background-color: ${props => (props.active ? props.theme.colors.iconsNormal : props.theme.colors.bgHighlightBorder)};
+  background-color: ${props => props.theme.colors.bgHighlightBorder};
   border-radius: 8px;
   border: none;
 
   font-size: 20px;
   font-weight: 500;
-  color: ${props => (props.active ? props.theme.colors.bgDarken : props.theme.colors.iconsSecondary)};
+  color: ${props => props.theme.colors.iconsSecondary};
 
   cursor: pointer;
   user-select: none;
@@ -105,8 +105,8 @@ const SecondaryIcon = styled.button`
   }
 
   &:hover {
-    background-color: ${props => props.theme.colors.bgHighlightBorder_lighten};
-    color: ${props => props.theme.colors.textSecondary};
+    background-color: ${props => props.theme.colors.iconsNormal};
+    color: ${props => props.theme.colors.bgDarken};
   }
 
   &:active {
@@ -205,7 +205,7 @@ function Hint({ children }) {
   const [active, setActive] = useState(false);
 
   return (
-    <BalanceHint onClick={() => setActive(!active)}>
+    <BalanceHint onPointerOver={() => setActive(true)} onPointerLeave={() => setActive(false)}>
       <TooltipWrapper active={active}>{children}</TooltipWrapper>
       <SecondaryIcon active={active}>i</SecondaryIcon>
     </BalanceHint>

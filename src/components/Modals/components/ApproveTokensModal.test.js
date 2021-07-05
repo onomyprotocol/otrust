@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render } from '@testing-library/react';
+import { cleanup, fireEvent, render, waitFor } from '@testing-library/react';
 
 import ApproveTokensModal from './ApproveTokensModal';
 import { ThemeWrapper, ModalContextWrapper, renderWithContext } from '../../../utils/testing';
@@ -15,9 +15,19 @@ describe('Given the ApproveTokensModal component', () => {
   describe('when the component is rendered', () => {
     afterEach(cleanup);
 
+    beforeEach(() => {
+      jest.useFakeTimers();
+    });
+
     it('should match the snapshot', () => {
       const { asFragment } = renderWithContext(ApproveTokensModal, testProps);
       expect(asFragment()).toMatchSnapshot();
+    });
+
+    it('should not call handleModal from the useModal context', async () => {
+      render(ModalContextWrapper(ThemeWrapper(ApproveTokensModal, testProps), testModalContext));
+
+      await waitFor(() => expect(testModalContext.handleModal).not.toHaveBeenCalled());
     });
 
     describe('and user clicks on CloseIcon', () => {

@@ -6,10 +6,10 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 import { responsive } from 'theme/constants';
 import { Sending, ExchangeInput, MaxBtn } from '../../Exchange/exchangeStyles';
-import { ConnectionStatus } from '../../Sidebar/Sidebar';
+import ConnectionStatus from '../../Sidebar/Sidebar';
 import * as Modal from '../styles';
-import oneWayBridgeImg from './assets/one-way-bridge.svg';
-import whyBridgeImg from './assets/why-bridge.svg';
+import oneWayBridgeImg from '../assets/one-way-bridge.svg';
+import whyBridgeImg from '../assets/why-bridge.svg';
 
 const BridgeSwapModalWrapper = styled.div`
   @media screen and (min-width: 701px) {
@@ -142,7 +142,7 @@ export default function BridgeSwapMobile() {
 
   return (
     <BridgeSwapModalWrapper>
-      <ReactModal isOpen={infoModal} style={modalOverride}>
+      <ReactModal isOpen={infoModal} style={modalOverride} data-testid="bridge-mobile-info-modal">
         <BridgeSwapModal>
           <ModalHeader>
             <ModalBtn
@@ -150,6 +150,7 @@ export default function BridgeSwapMobile() {
                 setSwapModal(true);
                 setInfoModal(false);
               }}
+              data-testid="bridge-mobile-info-modal-button"
             >
               <FontAwesomeIcon icon={faChevronLeft} />
             </ModalBtn>
@@ -206,11 +207,12 @@ export default function BridgeSwapMobile() {
       <ReactModal
         isOpen={swapModal}
         style={modalOverride}
+        data-testid="bridge-mobile-swap-modal"
         // onRequestClose={() => {}}
       >
         <BridgeSwapModal>
           <ModalHeader>
-            <ModalBtn onClick={() => setSwapModal(false)}>
+            <ModalBtn onClick={() => setSwapModal(false)} data-testid="bridge-mobile-header-button">
               <FontAwesomeIcon icon={faChevronLeft} />
             </ModalBtn>
             <h6>Onomy Bridge</h6>
@@ -252,6 +254,7 @@ export default function BridgeSwapMobile() {
                 setInfoModal(true);
                 setSwapModal(false);
               }}
+              data-testid="bridge-mobile-secondary-button"
             >
               What is Onomy Bridge?
             </Modal.SecondaryButton>

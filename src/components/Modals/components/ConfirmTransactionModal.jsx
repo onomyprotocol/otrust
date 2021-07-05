@@ -184,7 +184,7 @@ export default function ConfirmTransactionModal({ submitTrans }) {
 
   return (
     <Modal.Wrapper>
-      <Modal.CloseIcon onClick={() => handleModal()}>
+      <Modal.CloseIcon onClick={() => handleModal()} data-testid="confirm-modal-close-icon">
         <Close />
       </Modal.CloseIcon>
 
@@ -200,13 +200,11 @@ export default function ConfirmTransactionModal({ submitTrans }) {
         <TransactionDetailsRow>
           <span>Current Exchange Rate</span>
           <strong>
-            {bidDenom ? (
+            {bidDenom && (
               <>
                 1 {bidDenom === 'strong' ? strong : weak} ={' '}
                 {BigNumber.isBigNumber(bidAmount) ? format18(askAmount.div(bidAmount)).toFixed(6) : 'Loading'}
               </>
-            ) : (
-              <></>
             )}{' '}
             {bidDenom === 'strong' ? weak : strong}
           </strong>
@@ -250,7 +248,7 @@ export default function ConfirmTransactionModal({ submitTrans }) {
           {gasOptions.map(gasPriceOption => (
             <OptionBtn
               active={gasPrice === gasPriceOption.gas}
-              key={gasPriceOption.gas}
+              key={gasPriceOption.text}
               onClick={() => {
                 setGasPrice(gasPriceOption.gas);
                 setGasPriceChoice(gasPriceOption.id);
@@ -279,8 +277,15 @@ export default function ConfirmTransactionModal({ submitTrans }) {
       </OptionsWrapper>
       <footer>
         <Modal.FooterControls>
-          <Modal.SecondaryButton onClick={() => handleModal()}>Cancel</Modal.SecondaryButton>
-          <Modal.PrimaryButton onClick={() => submitTrans(slippage, gasPrice)}>Confirm ({count})</Modal.PrimaryButton>
+          <Modal.SecondaryButton onClick={() => handleModal()} data-testid="confirm-modal-secondary-button">
+            Cancel
+          </Modal.SecondaryButton>
+          <Modal.PrimaryButton
+            onClick={() => submitTrans(slippage, gasPrice)}
+            data-testid="confirm-modal-primary-button"
+          >
+            Confirm ({count})
+          </Modal.PrimaryButton>
         </Modal.FooterControls>
       </footer>
     </Modal.Wrapper>

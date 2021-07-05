@@ -57,7 +57,7 @@ export const dark = {
     surface: '#fafafc',
     textBody: '#E9EAEC',
     textLight: '#333333',
-    textPrimary: '##4877C1',
+    textPrimary: '#4877C1',
     white: '#ffffff',
     bgDarken: '#1A1723', //from here below, color for new design
     bgNormal: '#1F1D29',

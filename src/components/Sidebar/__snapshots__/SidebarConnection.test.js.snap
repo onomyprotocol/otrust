@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Given the SidebarConnection component when the component is rendered and active is true should match the snapshot 1`] = `
+exports[`Given the SidebarConnection component when the component is rendered and active is false, error is true should match the snapshot 1`] = `
 <DocumentFragment>
   <div
     class="sc-iCoGMd dWpZnl"
@@ -14,7 +14,7 @@ exports[`Given the SidebarConnection component when the component is rendered an
       <div
         class="sc-gKAaRy hGDlOd"
       >
-        Connected
+        Error
       </div>
     </div>
     <div
@@ -41,7 +41,7 @@ exports[`Given the SidebarConnection component when the component is rendered an
 </DocumentFragment>
 `;
 
-exports[`Given the SidebarConnection component when the component is rendered and error is true should match the snapshot 1`] = `
+exports[`Given the SidebarConnection component when the component is rendered and active property is true should match the snapshot 1`] = `
 <DocumentFragment>
   <div
     class="sc-iCoGMd dWpZnl"

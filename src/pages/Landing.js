@@ -112,6 +112,7 @@ export default function Landing({ connectWallet }) {
   const onWalletClick = wallet => {
     Object.values(SUPPORTED_WALLETS).forEach(sWallet => {
       if (sWallet.name === wallet.title) {
+        // This part of code never can be executed with SUPPORTED_WALLETS constants. Can it be deleted?
         if (sWallet.name === 'Injected') {
           if (typeof web3 !== 'undefined') {
             connectWallet(sWallet.connector);
