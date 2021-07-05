@@ -1,17 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useWeb3React, UnsupportedChainIdError } from '@web3-react/core';
 
 import Landing from '../pages/Landing';
-import { useEagerConnect } from '../hooks/useEagerConnect';
-import { useInactiveListener } from '../hooks/useInactiveListener';
+// import { useEagerConnect } from '../hooks/useEagerConnect';
+// import { useInactiveListener } from '../hooks/useInactiveListener';
 
 export function AutoLogin({ children }) {
-  const {
-    activate,
-    active,
-    // account,
-    connector,
-  } = useWeb3React();
+  const { activate, active, connector } = useWeb3React();
 
   const connectWallet = con => {
     try {
@@ -30,18 +25,18 @@ export function AutoLogin({ children }) {
   };
 
   // handle logic to recognize the connector currently being activated
-  const [activatingConnector, setActivatingConnector] = React.useState();
+  // const [activatingConnector, setActivatingConnector] = React.useState();
 
-  useEffect(() => {
-    console.log('activating connector: ', activatingConnector);
-    if (activatingConnector && activatingConnector === connector) {
-      setActivatingConnector(undefined);
-    }
-  }, [activatingConnector, connector]);
+  // useEffect(() => {
+  //   console.log('activating connector: ', activatingConnector);
+  //   if (activatingConnector && activatingConnector === connector) {
+  //     setActivatingConnector(undefined);
+  //   }
+  // }, [activatingConnector, connector]);
 
-  // mount only once or face issues :P
-  const triedEager = useEagerConnect();
-  useInactiveListener(!triedEager || !!activatingConnector);
+  // // mount only once or face issues :P
+  // const triedEager = useEagerConnect();
+  // useInactiveListener(!triedEager || !!activatingConnector);
 
   /**
     const connectKeplr = async () => {
