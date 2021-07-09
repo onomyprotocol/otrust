@@ -1,7 +1,11 @@
 import styled from 'styled-components';
+import { BigNumber } from 'bignumber.js';
+import { useWeb3React } from '@web3-react/core';
 import LoadingSpinner from 'components/UI/LoadingSpinner';
 import { Metamask } from 'components/Modals/Icons';
 
+import { useExchange } from 'context/exchange/ExchangeContext';
+import { format18 } from 'utils/math';
 import * as Modal from '../styles';
 
 const TransactionDetailsRow = styled.div`
@@ -53,31 +57,52 @@ const WalletIcon = styled.div`
 //   }
 // `;
 
-export default function PendingModal() {
+export default function PendingModal({ isApproving }) {
+  const { account } = useWeb3React();
+  const { input, approve, bidDenom, strong, weak, bidAmount, askAmount } = useExchange();
+
   return (
     <Modal.Wrapper>
       <main>
         <Modal.PendingCaption>Transaction pending...</Modal.PendingCaption>
 
         <Modal.ExchangeResult>
-          <Modal.ExchangeResultDescription>You're selling</Modal.ExchangeResultDescription>
-          1239 <sup>wNOM</sup>
+          <Modal.ExchangeResultDescription>
+            You're {isApproving ? 'approving' : bidDenom === 'strong' ? 'buying' : 'selling'}
+          </Modal.ExchangeResultDescription>
+          {isApproving ? approve : input} <sup>wNOM</sup>
         </Modal.ExchangeResult>
 
         <TransactionDetailsRow>
           <span>Current Exchange Rate</span>
-          <strong>1 wNOM = 0.07102 ETH</strong>
+          <strong>
+            {bidDenom && (
+              <>
+                1 {bidDenom === 'strong' ? strong : weak} ={' '}
+                {BigNumber.isBigNumber(bidAmount) ? format18(askAmount.div(bidAmount)).toFixed(6) : 'Loading'}
+              </>
+            )}{' '}
+            {bidDenom === 'strong' ? weak : strong}
+          </strong>
         </TransactionDetailsRow>
         <TransactionDetailsRow>
-          <span>You're Sending</span>
-          <strong>~0.15 ETH</strong>
+          <span>{isApproving ? "You're approving" : "You're receiving"}</span>
+          <strong>
+            {isApproving ? approve : format18(bidAmount).toFixed(6)} {bidDenom === 'strong' ? strong : weak}
+          </strong>
         </TransactionDetailsRow>
         <TransactionDetailsRow>
           <div>
             <span>Wallet</span>
 
             <div>
-              <strong>0x293s92dsd3h4gh9bvn61...931</strong>
+              <strong>
+                {account === null
+                  ? '-'
+                  : account
+                  ? `${account.substring(0, 10)}...${account.substring(account.length - 4)}`
+                  : ''}
+              </strong>
             </div>
           </div>
 

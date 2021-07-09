@@ -143,14 +143,14 @@ const gasOptions = [
   },
 ];
 
-export default function ConfirmTransactionModal({ submitTrans }) {
+export default function ConfirmTransactionModal({ isApproving, submitTrans }) {
   const [slippage, setSlippage] = useState(0);
   const [gasPriceChoice, setGasPriceChoice] = useState(2);
   const [gasPrice, setGasPrice] = useState(0);
   const { handleModal } = useModal();
   const { account } = useWeb3React();
 
-  const { askAmount, bidAmount, bidDenom, strong, weak } = useExchange();
+  const { askAmount, bidAmount, bidDenom, strong, weak, approve } = useExchange();
 
   const [count, setCount] = useState(60);
   const [delay, setDelay] = useState(1000);
@@ -192,9 +192,11 @@ export default function ConfirmTransactionModal({ submitTrans }) {
         <Modal.Caption>Confirm Transaction</Modal.Caption>
 
         <Modal.ExchangeResult>
-          <Modal.ExchangeResultDescription>You're receiving</Modal.ExchangeResultDescription>~{' '}
-          {BigNumber.isBigNumber(askAmount) ? format18(askAmount).toFixed(6) : ''}
-          <sup>{bidDenom === 'strong' ? 'wNOM' : 'ETH'}</sup>
+          <Modal.ExchangeResultDescription>
+            {isApproving ? "You're approving" : "You're receiving"}
+          </Modal.ExchangeResultDescription>
+          ~ {isApproving ? approve : BigNumber.isBigNumber(askAmount) ? format18(askAmount).toFixed(6) : ''}{' '}
+          <sup>{isApproving ? 'wNOM' : bidDenom === 'strong' ? 'wNOM' : 'ETH'}</sup>
         </Modal.ExchangeResult>
 
         <TransactionDetailsRow>
@@ -210,9 +212,9 @@ export default function ConfirmTransactionModal({ submitTrans }) {
           </strong>
         </TransactionDetailsRow>
         <TransactionDetailsRow>
-          <span>You're Sending</span>
+          <span>{isApproving ? "You're approving" : "You're receiving"}</span>
           <strong>
-            {format18(bidAmount).toFixed(6)} {bidDenom === 'strong' ? strong : weak}
+            {isApproving ? approve : format18(bidAmount).toFixed(6)} {bidDenom === 'strong' ? strong : weak}
           </strong>
         </TransactionDetailsRow>
         <TransactionDetailsRow>
@@ -281,7 +283,7 @@ export default function ConfirmTransactionModal({ submitTrans }) {
             Cancel
           </Modal.SecondaryButton>
           <Modal.PrimaryButton
-            onClick={() => submitTrans(slippage, gasPrice)}
+            onClick={() => submitTrans(isApproving, slippage, gasPrice)}
             data-testid="confirm-modal-primary-button"
           >
             Confirm ({count})

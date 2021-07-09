@@ -27,6 +27,13 @@ export function exchStringReducer(state, action) {
         console.log(e);
       }
       break;
+    case 'approve':
+      try {
+        update = stringReducerCallback(state[action.type], action.type, action.value, update);
+      } catch (e) {
+        console.log(e);
+      }
+      break;
     case 'status':
       try {
         update = stringReducerCallback(state[action.type], action.type, action.value, update);
@@ -68,6 +75,14 @@ export function exchStringReducer(state, action) {
             break;
 
           case 'output':
+            try {
+              update = stringReducerCallback(state[key], key, value, update);
+            } catch (e) {
+              console.log(e);
+            }
+            break;
+
+          case 'approve':
             try {
               update = stringReducerCallback(state[key], key, value, update);
             } catch (e) {
@@ -131,6 +146,13 @@ export function exchObjReducer(state, action) {
         console.log(e);
       }
       break;
+    case 'approveAmount':
+      try {
+        update = bnReducerCallback(state[action.type], action.type, action.value, update);
+      } catch (e) {
+        console.log(e);
+      }
+      break;
     case 'pendingTx':
       try {
         update = objReducerCallback(state[action.type], action.type, action.value, update);
@@ -165,6 +187,13 @@ export function exchObjReducer(state, action) {
               break;
 
             case 'bidAmount':
+              try {
+                update = bnReducerCallback(state[key], key, value, update);
+              } catch (e) {
+                console.log(e);
+              }
+              break;
+            case 'approveAmount':
               try {
                 update = bnReducerCallback(state[key], key, value, update);
               } catch (e) {

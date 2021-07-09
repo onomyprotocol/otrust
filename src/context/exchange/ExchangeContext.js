@@ -15,6 +15,7 @@ function ExchangeProvider({ children }) {
   const [objState, objDispatch] = useReducer(exchObjReducer, {
     askAmount: new BigNumber(0),
     bidAmount: new BigNumber(0),
+    approveAmount: new BigNumber(0),
     pendingTx: null,
     slippage: new BigNumber(0),
     txPending: false,
@@ -24,6 +25,7 @@ function ExchangeProvider({ children }) {
     bidDenom: 'strong',
     input: '',
     output: '',
+    approve: '',
     status: '',
     strong: 'ETH',
     weak: 'wNOM',

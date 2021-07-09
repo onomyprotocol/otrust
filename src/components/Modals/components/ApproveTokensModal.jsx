@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import useInterval from '@use-it/interval';
+import { BigNumber } from 'bignumber.js';
 
 import { Close } from '../Icons';
 import * as Modal from '../styles';
 import { responsive } from 'theme/constants';
 import { useModal } from 'context/modal/ModalContext';
 import { MaxBtn } from 'components/Exchange/exchangeStyles';
+import { useChain } from 'context/chain/ChainContext';
+import { useExchange, useUpdateExchange } from 'context/exchange/ExchangeContext';
+import { format18, parse18 } from 'utils/math';
+import RequestFailedModal from './RequestFailedModal';
 
 const Message = styled.div`
   margin: 32px 0 0;
@@ -62,10 +67,16 @@ const ApproveTokensWrapper = styled.div`
   }
 `;
 
-export default function ApproveTokensModal({ onApprove }) {
+export default function ApproveTokensModal({ onConfirmApprove }) {
   const [count, setCount] = useState(60);
   const [delay, setDelay] = useState(1000);
   const { handleModal } = useModal();
+  const { NOMallowance, weakBalance } = useChain();
+  const { approve, bidAmount, input } = useExchange();
+
+  const { objDispatch, strDispatch } = useUpdateExchange();
+
+  const initialApproveAmount = bidAmount.minus(NOMallowance);
 
   const increaseCount = () => {
     if (count === 0) {
@@ -78,6 +89,63 @@ export default function ApproveTokensModal({ onApprove }) {
 
   useInterval(increaseCount, delay);
 
+  const onTextChange = async event => {
+    event.preventDefault();
+
+    console.log('Approve Amount:-approve ', approve);
+
+    const floatRegExp = new RegExp(/(^(?=.+)(?:[1-9]\d*|0)?(?:\.\d+)?$)|(^\d\.$)/);
+
+    if (floatRegExp.test(event.target.value.toString())) {
+      console.log('Approve Amount:-pass ', approve);
+
+      const approvalAmount = parse18(new BigNumber(parseFloat(event.target.value).toString()));
+
+      let objUpdate = new Map();
+      objUpdate = objUpdate.set('approveAmount', approvalAmount);
+
+      objDispatch({
+        type: 'update',
+        value: objUpdate,
+      });
+
+      let strUpdate = new Map();
+      strUpdate = strUpdate.set('approve', format18(approvalAmount).toString());
+
+      strDispatch({
+        type: 'update',
+        value: strUpdate,
+      });
+    } else {
+      console.log('Text Change: ', 'regex failed');
+      handleModal(<RequestFailedModal error="Please enter numbers only. Thank you!" />);
+    }
+  };
+
+  const onMax = () => {
+    const approvalAmount = weakBalance.minus(NOMallowance);
+
+    let objUpdate = new Map();
+    objUpdate = objUpdate.set('approveAmount', approvalAmount);
+
+    objDispatch({
+      type: 'update',
+      value: objUpdate,
+    });
+
+    let strUpdate = new Map();
+    strUpdate = strUpdate.set('approve', format18(approvalAmount).toString());
+
+    strDispatch({
+      type: 'update',
+      value: strUpdate,
+    });
+  };
+
+  useEffect(() => {
+    console.log('Approve Amount; string updated', approve);
+  }, [approve]);
+
   return (
     <Modal.Wrapper>
       <Modal.CloseIcon onClick={() => handleModal()} data-testid="approve-tokens-modal-close-icon">
@@ -88,16 +156,17 @@ export default function ApproveTokensModal({ onApprove }) {
         <Caption>Approve Tokens</Caption>
 
         <Message>
-          You want to sell <strong>1600 wNOM</strong>, but you approved for sale only 1000 wNOM. Would you like to
-          approve the rest <strong>600 (or more) wNOM</strong> and complete selling?
+          You want to sell <strong>{input} wNOM</strong>, but you approved for sale only{' '}
+          {parseFloat(format18(NOMallowance).toFixed(8)).toString()} wNOM. To sell this amount, please approve{' '}
+          <strong>{parseFloat(format18(initialApproveAmount).toFixed(8)).toString()} wNOM</strong> or more.
         </Message>
 
         <ApproveTokensWrapper>
           <div>
             <label htmlFor="">Approve tokens (wNOM)</label>
-            <input type="text" placeholder="0.00" />
+            <input type="text" placeholder="0.00" value={approve} onChange={onTextChange} />
           </div>
-          <MaxBtn>MAX</MaxBtn>
+          <MaxBtn onClick={onMax}>MAX</MaxBtn>
         </ApproveTokensWrapper>
       </main>
       <footer>
@@ -105,7 +174,7 @@ export default function ApproveTokensModal({ onApprove }) {
           <Modal.SecondaryButton onClick={() => handleModal()} data-testid="approve-tokens-modal-secondary-button">
             Cancel
           </Modal.SecondaryButton>
-          <Modal.PrimaryButton onClick={onApprove} data-testid="approve-tokens-modal-primary-button">
+          <Modal.PrimaryButton onClick={onConfirmApprove} data-testid="approve-tokens-modal-primary-button">
             Approve ({count})
           </Modal.PrimaryButton>
         </Modal.FooterControls>
