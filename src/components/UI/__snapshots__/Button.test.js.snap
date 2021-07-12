@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given the AccentButton component and width is provided in the props when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-gtsrHT kpLgTl"
+    width="50"
+  />
+</DocumentFragment>
+`;
+
+exports[`Given the Button component and width is not provided in the props when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-bdnxRM gLKfsM"
+  />
+</DocumentFragment>
+`;
+
+exports[`Given the Button component and width is provided in the props when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-bdnxRM fPQjMu"
+    width="50"
+  />
+</DocumentFragment>
+`;
+
+exports[`Given the InvisibleButton component when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-hKFxyN kTRXmr"
+  />
+</DocumentFragment>
+`;

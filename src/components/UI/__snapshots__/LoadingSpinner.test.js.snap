@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given the LoadingSpinner component when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="loadingSpinner"
+  >
+    <svg>
+      <circle
+        cx="20"
+        cy="20"
+        r="20"
+      />
+    </svg>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given the Container component when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bdnxRM ieWfsG"
+  />
+</DocumentFragment>
+`;
+
+exports[`Given the FullBackgroundContainer component when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gtsrHT dgHCoh"
+  >
+    Children
+  </div>
+</DocumentFragment>
+`;

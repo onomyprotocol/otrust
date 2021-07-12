@@ -66,10 +66,14 @@ export const StyledInvisibleButton = styled.button`
   cursor: pointer;
 `;
 
-export function Button({ width, children }) {
-  return <StyledButton width={width}>{children}</StyledButton>;
+export function Button({ width, children, ...rest }) {
+  return (
+    <StyledButton width={width} {...rest}>
+      {children}
+    </StyledButton>
+  );
 }
 
-export function InvisibleButton({ children }) {
-  return <StyledInvisibleButton>{children}</StyledInvisibleButton>;
+export function InvisibleButton({ children, ...rest }) {
+  return <StyledInvisibleButton {...rest}>{children}</StyledInvisibleButton>;
 }
