@@ -11,7 +11,7 @@ const uniswapUsdcAddress = '0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc';
  */
 export function NOMCont(library) {
   const ABI = NomContractJSON.abi;
-  return new Contract(contAddrs.NOMERC20, ABI, library.getSigner());
+  return new Contract(contAddrs.NOMERC20, ABI, library?.getSigner());
 }
 
 /**
@@ -19,7 +19,7 @@ export function NOMCont(library) {
  */
 export function BondingCont(library) {
   const ABI = BondingContractJSON.abi;
-  return new Contract(contAddrs.BondingNOM, ABI, library.getSigner());
+  return new Contract(contAddrs.BondingNOM, ABI, library?.getSigner());
 }
 
 /**
@@ -27,5 +27,5 @@ export function BondingCont(library) {
  */
 export function UniSwapCont(library) {
   const ABI = UniswapContractJSON;
-  return new Contract(uniswapUsdcAddress, ABI, library.getSigner());
+  return new Contract(uniswapUsdcAddress, ABI, library?.getSigner());
 }

@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given an ExchangeModals component when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-iqAclL kSpCPQ"
+  >
+    <button
+      class="sc-fujyAs eEqRnA"
+      data-testid="exchanges-modals-buy-button"
+    >
+      Buy NOM
+    </button>
+    <button
+      class="sc-fujyAs sc-pNWdM eEqRnA fktmDR"
+      data-testid="exchanges-modals-sell-button"
+    >
+      Sell NOM
+    </button>
+  </div>
+</DocumentFragment>
+`;

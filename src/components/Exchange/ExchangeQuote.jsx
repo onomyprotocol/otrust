@@ -309,16 +309,19 @@ export default function ExchangeQuote({ strength }) {
         <strong>I'm bidding</strong>
         <ExchangeInput
           type="text"
+          data-testid="exchange-strong-balance-input"
           onChange={evt => onTextChange(evt, strength)}
           value={bidDenom === strength ? input : ''}
           placeholder="0.00"
         />
         {strength === 'strong' ? strong : weak}
-        <MaxBtn onClick={() => onMax()}>Max</MaxBtn>
+        <MaxBtn data-testid="max-value-button" onClick={() => onMax()}>
+          Max
+        </MaxBtn>
       </Sending>
       <Receiving>
         <strong>I'm asking</strong>
-        <ReceivingValue>
+        <ReceivingValue data-testid="exchange-weak-balance">
           {strength === bidDenom ? output : ''} {strength === 'strong' ? weak : strong}
         </ReceivingValue>
       </Receiving>

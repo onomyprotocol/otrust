@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given an ExchangeQuote component when the component is rendered should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-khIgEk hOVrQw"
+  >
+    <strong>
+      Bid NOM
+    </strong>
+    <div
+      class="sc-hTRkXV buJMih"
+    >
+      <strong>
+        I'm bidding
+      </strong>
+      <input
+        class="sc-laZMeE fEFLDL"
+        data-testid="exchange-strong-balance-input"
+        placeholder="0.00"
+        type="text"
+        value=""
+      />
+      NOM
+      <button
+        class="sc-gSYDnn jPcBbV"
+        data-testid="max-value-button"
+      >
+        Max
+      </button>
+    </div>
+    <div
+      class="sc-jgPyTC bvwgWF"
+    >
+      <strong>
+        I'm asking
+      </strong>
+      <span
+        class="sc-iNiQyp irsaWO"
+        data-testid="exchange-weak-balance"
+      >
+         ETH
+      </span>
+    </div>
+    <button
+      class="sc-jffHpj sc-eJocfa fXjZsS colzYt"
+    >
+       Input Value 
+    </button>
+  </div>
+</DocumentFragment>
+`;

@@ -39,7 +39,9 @@ describe('Given the Sidebar component and strongBalance, weakBalance are NOT of 
     it('should match the snapshot', () => {
       const { asFragment } = render(
         <ThemeProvider theme={dark}>
-          <ChainContext.Provider value={{ blockNumber: 12345678, strongBalance: 0, weakBalance: 10 }}>
+          <ChainContext.Provider
+            value={{ blockNumber: 12345678, strongBalance: 0, weakBalance: 10, allowance: 'Loading' }}
+          >
             <ExchangeContext.Provider value={{ strong: 'ETH', weak: 'wNOM' }}>
               <Sidebar />
             </ExchangeContext.Provider>
